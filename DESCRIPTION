@@ -4,6 +4,37 @@ Title: Analysis of Single-Cell Viral Growth Curves
 Version: 0.2.3.9900
 Authors@R: c( 
     person(
+      given = "Johanna",
+      family = "Hardin",
+      role = c("aut", "cre"),
+      email = "jo.hardin@pomona.edu",
+      comment = c(ORCID = "0000-0001-6251-1955")
+    ),
+    person(
+      given = "Samuel",
+      family = "Butler",
+      role = c("aut"),
+      email = "swbe2022@mymail.pomona.edu"
+    ),
+    person(
+      given = "Phineus",
+      family = "Choi",
+      role = c("aut"),
+      email = "pchm2023@mymail.pomona.edu"
+    ),
+    person(
+      given = "Thomas",
+      family = "Matheis",
+      role = c("aut"),
+      email = "tomp2024@mymail.pomona.edu"
+    ),
+    person(
+      given = "Mira",
+      family = "Terdiman",
+      role = c("aut"),
+      email = "mterdiman@berkeley.edu"
+    )
+    person(
       given = "M. Umut",
       family = "Caglar",
       role = c("aut"),
@@ -12,11 +43,11 @@ Authors@R: c(
     person(
       given = "Claus O.",
       family = "Wilke",
-      role = c("aut", "cre"),
+      role = c("aut"),
       email = "wilke@austin.utexas.edu",
       comment = c(ORCID = "0000-0002-7470-9261")
     )
-  )   
+  )  
 Description:
     Aims to quantify time intensity data by using sigmoidal and
     double sigmoidal curves. It fits straight lines, sigmoidal, 

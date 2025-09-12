@@ -188,9 +188,9 @@ we must directly call the <code>_h0</code> counterparts of each
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mn>0</mn></msub><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">h_0 = 2</annotation></semantics></math>),
 so now we can normalize the data.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">normalizedInput_free</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeData_h0.html">normalizeData_h0</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">dataInput</span>, </span>
+<code class="sourceCode R"><span><span class="va">normalizedInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeData_h0.html">normalizeData_h0</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">dataInput</span>, </span>
 <span>                                 dataInputName <span class="op">=</span> <span class="st">"doubleSigmoidalSample"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">normalizedInput_free</span><span class="op">$</span><span class="va">timeIntensityData</span><span class="op">)</span> <span class="co"># the normalized time and intensity data</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">normalizedInput</span><span class="op">$</span><span class="va">timeIntensityData</span><span class="op">)</span> <span class="co"># the normalized time and intensity data</span></span></code></pre></div>
 <pre><code><span><span class="co">##         time   intensity</span></span>
 <span><span class="co">## 1 0.04166667 0.009226536</span></span>
 <span><span class="co">## 2 0.06250000 0.008663863</span></span>
@@ -203,16 +203,16 @@ be fitted, calculating additional parameters using
 <code><a href="../reference/parameterCalculation_h0.html">parameterCalculation_h0()</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit the double-sigmoidal model</span></span>
-<span><span class="va">doubleSigmoidalModel_free</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multipleFitFunction_h0.html">multipleFitFunction_h0</a></span><span class="op">(</span>dataInput<span class="op">=</span><span class="va">normalizedInput_free</span>,</span>
+<span><span class="va">doubleSigmoidalModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multipleFitFunction_h0.html">multipleFitFunction_h0</a></span><span class="op">(</span>dataInput<span class="op">=</span><span class="va">normalizedInput</span>,</span>
 <span>                                            model<span class="op">=</span><span class="st">"doublesigmoidal"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">doubleSigmoidalModel_free</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parameterCalculation_h0.html">parameterCalculation_h0</a></span><span class="op">(</span><span class="va">doubleSigmoidalModel_free</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">doubleSigmoidalModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parameterCalculation_h0.html">parameterCalculation_h0</a></span><span class="op">(</span><span class="va">doubleSigmoidalModel</span><span class="op">)</span></span></code></pre></div>
 <p>Now that we have obtained a fit, we can use
 <code><a href="../reference/figureModelCurves.html">figureModelCurves()</a></code> to plot it:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># double-sigmoidal fit</span></span>
-<span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">normalizedInput_free</span>,</span>
-<span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">doubleSigmoidalModel_free</span>,</span>
+<span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">normalizedInput</span>,</span>
+<span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">doubleSigmoidalModel</span>,</span>
 <span>                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  use_h0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="h0_functions_files/figure-html/plot_raw_fit-1.png" width="576"></p>
@@ -221,7 +221,7 @@ be fitted, calculating additional parameters using
 <h2 id="model-parameters">Model parameters<a class="anchor" aria-label="anchor" href="#model-parameters"></a>
 </h2>
 <p>Recall that the original model parameters (which generated the data)
-are given as
+were given as
 <code>finalAsymptoteIntensityRatio = 0.3, maximum = 10, slope1Param = 1, midPoint1Param = 7, slope2Param = 1, midPointDistanceParam = 8, h0 = 2</code>.</p>
 <p>We can recover the parameter estimates from both of the
 <code>doubleSigmoidalModel</code> objects created above.

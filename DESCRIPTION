@@ -1,7 +1,7 @@
 Package: sicegar
 Type: Package
 Title: Analysis of Single-Cell Viral Growth Curves
-Version: 0.2.3.9900
+Version: 0.3.0
 Authors@R: c( 
     person(
       given = "Johanna",
@@ -33,7 +33,7 @@ Authors@R: c(
       family = "Terdiman",
       role = c("aut"),
       email = "mterdiman@berkeley.edu"
-    )
+    ),
     person(
       given = "M. Umut",
       family = "Caglar",
@@ -57,7 +57,7 @@ Description:
     in the context of single-cell viral growth analysis (for
     details, see Caglar et al. (2018) <doi:10.7717/peerj.4251>),
     and the package name stands for "SIngle CEll Growth Analysis in R".
-URL: https://github.com/wilkelab/sicegar
+URL: https://hardin47.github.io/sicegar
 Imports:
     dplyr,
     minpack.lm,
@@ -72,7 +72,7 @@ Suggests:
     testthat,
     knitr
 VignetteBuilder: knitr
-BugReports: https://github.com/wilkelab/sicegar/issues
+BugReports: https://hardin47.github.io/sicegar/issues
 Collate:
     'categorize.R'
     'mainFunctions.R'

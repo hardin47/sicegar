@@ -59,7 +59,6 @@ Description:
     and the package name stands for "SIngle CEll Growth Analysis in R".
 URL: https://github.com/wilkelab/sicegar, https://hardin47.github.io/sicegar
 Imports:
-    dplyr,
     minpack.lm,
     fBasics,
     ggplot2,
@@ -71,7 +70,8 @@ Suggests:
     cowplot,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    dplyr
 VignetteBuilder: knitr
 BugReports: https://hardin47.github.io/sicegar/issues
 Collate:

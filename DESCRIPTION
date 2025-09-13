@@ -85,6 +85,6 @@ Collate:
     'dataInputCheck.R'
     'parameterCalculation.R'
     'figureGeneration.R'
-Roxygen: list(collate = TRUE)
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Encoding: UTF-8

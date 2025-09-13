@@ -705,7 +705,8 @@ f_slope_doublesigmoidal <- function(x, parameterDf, timeStep = 0.00001){
 doublesigmoidalRenormalizeParameters <- function(parameterDF, isalist)
 {
   if(isalist){
-    parameterDF$finalAsymptoteIntensityRatio_Estimate <- parameterDF$finalAsymptoteIntensityRatio_N_Estimate
+    parameterDF$finalAsymptoteIntensityRatio_Estimate <- (parameterDF$finalAsymptoteIntensityRatio_N_Estimate * parameterDF$maximum_N_Estimate * parameterDF$dataScalingParameters.intensityRange + parameterDF$dataScalingParameters.intensityMin) /
+                                                              (parameterDF$maximum_N_Estimate  * parameterDF$dataScalingParameters.intensityRange + parameterDF$dataScalingParameters.intensityMin)
     parameterDF$maximum_Estimate <- parameterDF$maximum_N_Estimate * parameterDF$dataScalingParameters.intensityRange + parameterDF$dataScalingParameters.intensityMin
     parameterDF$slope1Param_Estimate <- parameterDF$slope1Param_N_Estimate / parameterDF$dataScalingParameters.timeRange
     parameterDF$midPoint1Param_Estimate <- parameterDF$midPoint1Param_N_Estimate * parameterDF$dataScalingParameters.timeRange

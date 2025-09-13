@@ -25,6 +25,7 @@
 #' @param stepSize Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.
 #' @param showDetails Logical if TRUE prints details of intermediate steps of individual fits (Default is FALSE).
 #' @param dataInputName Name of data set (Default is 'NA').
+#' @param use_h0 Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)
 #' @param ... All other arguments that model functions ("sigmoidalFitFunction" and, "doublesigmoidalFitFunction") may need.
 #'
 #' @description Fits the sigmoidal and double-sigmoidal models to the data and then categorizes the data according to which model fits best.
@@ -91,7 +92,11 @@ fitAndCategorize <-
            threshold_dsm_tmax_IntensityRatio = 0.75,
            threshold_AIC = -10,
            threshold_t0_max_int = 1E10,
-           stepSize = 0.00001, ...){
+           stepSize = 0.00001,
+           use_h0 = FALSE,
+           ...){
+
+    if(!use_h0){
 
     normalizedInput = sicegar::normalizeData(dataInput = dataInput, dataInputName = dataInputName)
     preDecisionProcess = sicegar::preCategorize(normalizedInput = normalizedInput,
@@ -233,4 +238,163 @@ fitAndCategorize <-
                   summaryVector = summaryVector))
 
     }
-  }
+
+
+    }else{
+
+      normalizedInput = sicegar::normalizeData_h0(dataInput = dataInput,
+                                                  dataInputName = dataInputName)
+      preDecisionProcess = sicegar::preCategorize_h0(normalizedInput = normalizedInput,
+                                                  threshold_intensity_range = threshold_intensity_range,
+                                                  threshold_minimum_for_intensity_maximum = threshold_minimum_for_intensity_maximum)
+
+
+
+      if(showDetails){
+        utils::str(preDecisionProcess)
+      }
+
+      if(preDecisionProcess$decision == "no_signal"){
+
+        summaryVector <- c()
+
+        if(!is.na(normalizedInput$dataInputName)){
+          summaryVector$dataInputName <- as.vector(normalizedInput$dataInputName)
+        } else{
+          summaryVector$dataInputName <- NA
+        }
+
+        summaryVector$decision <- "no_signal"
+
+
+        return(list(normalizedInput = normalizedInput,
+                    sigmoidalModel = NA,
+                    doubleSigmoidalModel = NA,
+                    decisionProcess = preDecisionProcess,
+                    summaryVector = summaryVector))
+      }
+
+      if(preDecisionProcess$decision == "not_no_signal"){
+
+        # Fit sigmoidal model
+        sigmoidalModel <- sicegar::multipleFitFunction_h0(dataInput = normalizedInput,
+                                                       model = "sigmoidal",
+                                                       n_runs_min = n_runs_min_sm,
+                                                       n_runs_max = n_runs_max_sm,
+                                                       showDetails = showDetails,
+                                                       startList = startList_sm,
+                                                       lowerBounds = lowerBounds_sm,
+                                                       upperBounds = upperBounds_sm,
+                                                       min_Factor = min_Factor_sm,
+                                                       n_iterations = n_iterations_sm)
+
+        # Fit double sigmoidal model
+        doubleSigmoidalModel <- sicegar::multipleFitFunction_h0(dataInput = normalizedInput,
+                                                             model = "doublesigmoidal",
+                                                             n_runs_min = n_runs_min_dsm,
+                                                             n_runs_max = n_runs_max_dsm,
+                                                             showDetails = showDetails,
+                                                             startList = startList_dsm,
+                                                             lowerBounds = lowerBounds_dsm,
+                                                             upperBounds = upperBounds_dsm,
+                                                             min_Factor = min_Factor_dsm,
+                                                             n_iterations = n_iterations_dsm)
+
+        # Parameter Calculations
+        sigmoidalModel <- sicegar::parameterCalculation_h0(parameterVector = sigmoidalModel,
+                                                           stepSize = stepSize)
+        doubleSigmoidalModel <- sicegar::parameterCalculation_h0(parameterVector = doubleSigmoidalModel,
+                                                                 stepSize = stepSize)
+        # Categorization
+        decisionProcess <- sicegar::categorize_h0(parameterVectorSigmoidal = sigmoidalModel,
+                                               parameterVectorDoubleSigmoidal = doubleSigmoidalModel,
+                                               threshold_intensity_range = threshold_intensity_range,
+                                               threshold_minimum_for_intensity_maximum = threshold_minimum_for_intensity_maximum,
+                                               threshold_bonus_sigmoidal_AIC = threshold_bonus_sigmoidal_AIC,
+                                               threshold_sm_tmax_IntensityRatio = threshold_sm_tmax_IntensityRatio,
+                                               threshold_dsm_tmax_IntensityRatio = threshold_dsm_tmax_IntensityRatio,
+                                               threshold_AIC = threshold_AIC,
+                                               threshold_t0_max_int = threshold_t0_max_int,
+                                               showDetails = showDetails)
+
+        # Summary
+        summaryVector <- c()
+        if(decisionProcess$decision == "sigmoidal"){
+
+          summaryVector$dataInputName <- decisionProcess$dataInputName
+          summaryVector$decision <- "sigmoidal"
+          summaryVector$maximum_x <- sigmoidalModel$maximum_x
+          summaryVector$maximum_y <- sigmoidalModel$maximum_y
+          summaryVector$midPoint_x <- sigmoidalModel$midPoint_x
+          summaryVector$midPoint_y <- sigmoidalModel$midPoint_y
+          summaryVector$slope <- sigmoidalModel$slope
+          summaryVector$incrementTime <- sigmoidalModel$incrementTime
+          summaryVector$startPoint_x <- sigmoidalModel$startPoint_x
+          summaryVector$startPoint_y <- sigmoidalModel$startPoint_y
+          summaryVector$reachMaximum_x <- sigmoidalModel$reachMaximum_x
+          summaryVector$reachMaximum_y <- sigmoidalModel$reachMaximum_y
+        }
+
+        if(decisionProcess$decision == "double_sigmoidal"){
+
+          summaryVector$dataInputName <- decisionProcess$dataInputName
+          summaryVector$decision <- "double_sigmoidal"
+          summaryVector$maximum_x <- doubleSigmoidalModel$maximum_x
+          summaryVector$maximum_y <- doubleSigmoidalModel$maximum_y
+          summaryVector$midPoint1_x <- doubleSigmoidalModel$midPoint1_x
+          summaryVector$midPoint1_y <- doubleSigmoidalModel$midPoint1_y
+          summaryVector$midPoint2_x <- doubleSigmoidalModel$midPoint2_x
+          summaryVector$midPoint2_y <- doubleSigmoidalModel$midPoint2_y
+          summaryVector$slope1 <- doubleSigmoidalModel$slope1
+          summaryVector$slope2 <- doubleSigmoidalModel$slope2
+          summaryVector$finalAsymptoteIntensity <- doubleSigmoidalModel$finalAsymptoteIntensity
+          summaryVector$incrementTime <- doubleSigmoidalModel$incrementTime
+          summaryVector$startPoint_x <- doubleSigmoidalModel$startPoint_x
+          summaryVector$startPoint_y <- doubleSigmoidalModel$startPoint_y
+          summaryVector$reachMaximum_x <- doubleSigmoidalModel$reachMaximum_x
+          summaryVector$reachMaximum_y <- doubleSigmoidalModel$reachMaximum_y
+          summaryVector$decrementTime <- doubleSigmoidalModel$decrementTime
+          summaryVector$startDeclinePoint_x <- doubleSigmoidalModel$startDeclinePoint_x
+          summaryVector$startDeclinePoint_y <- doubleSigmoidalModel$startDeclinePoint_y
+          summaryVector$endDeclinePoint_x <- doubleSigmoidalModel$endDeclinePoint_x
+          summaryVector$endDeclinePoint_y <- doubleSigmoidalModel$endDeclinePoint_y
+        }
+
+        if(decisionProcess$decision == "no_signal"){
+
+          summaryVector$dataInputName <- decisionProcess$dataInputName
+          summaryVector$decision <- "no_signal"
+        }
+
+        if(decisionProcess$decision == "ambiguous"){
+
+          summaryVector$dataInputName <- decisionProcess$dataInputName
+          summaryVector$decision <- "ambiguous"
+        }
+
+        if(showDetails){
+          utils::str(decisionProcess)
+        }
+
+        return(list(normalizedInput = normalizedInput,
+                    sigmoidalModel = sigmoidalModel,
+                    doubleSigmoidalModel = doubleSigmoidalModel,
+                    decisionProcess = decisionProcess,
+                    summaryVector = summaryVector))
+
+      }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -8,6 +8,7 @@
 #' @param ylabelText the y-axis name; with default "intensity"
 #' @param fittedXmin the minimum of the fitted data that will be plotted (Default 0)
 #' @param fittedXmax the maximum of the fitted data that will be plotted (Default timeRange)
+#' @param use_h0 Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)
 #'
 #' @description Generates figures using ggplot that shows the input data and the fitted curves.
 #' @return Returns infection curve figures.
@@ -51,8 +52,14 @@ figureModelCurves <- function(dataInput,
                               sigmoidalFitVector = NULL,
                               doubleSigmoidalFitVector = NULL,
                               showParameterRelatedLines = FALSE,
-                              xlabelText = "time", ylabelText = "intensity",
-                              fittedXmin = 0, fittedXmax = NA){
+                              xlabelText = "time",
+                              ylabelText = "intensity",
+                              fittedXmin = 0,
+                              fittedXmax = NA,
+                              use_h0 = FALSE){
+
+
+  if(!use_h0){
 
   # get data from data input
   dataOutputVariable <- dataCheck(dataInput) # check if the data structure is correct
@@ -305,7 +312,265 @@ figureModelCurves <- function(dataInput,
 
 
   return(output)
-}
+
+
+  }else{
+
+    # get data from data input
+    dataOutputVariable <- dataCheck(dataInput) # check if the data structure is correct
+    sameSourceDataCheck(dataInput,
+                        sigmoidalFitVector,
+                        doubleSigmoidalFitVector) # check if all data comes from same source
+
+    # get data from data structure
+    isalist <- (is.list(dataInput) & !is.data.frame(dataInput))
+    if (isalist){
+      dataInput <- unnormalizeData(dataInput)
+      dataFrameInput <- dataInput$timeIntensityData
+    }
+    isadataframe = (is.data.frame(dataInput))
+    if (isadataframe){
+      dataFrameInput <- dataInput
+    }
+
+
+
+    # SIGMOIDAL
+    if (!is.null(sigmoidalFitVector)){
+      if (!sigmoidalFitVector$model == "sigmoidal"){
+        stop("provided sigmoidalFitVector is not a sigmoidal fit vector")
+      }
+      if (!sigmoidalFitVector$isThisaFit){
+        warning("provided sigmoidal fit vector does not include a fit!")
+      }
+      if (sigmoidalFitVector$isThisaFit){
+        # Extract Parameters from the sigmoidalFitVector
+        maximum_x <- sigmoidalFitVector$maximum_x
+        maximum_y <- sigmoidalFitVector$maximum_y
+        midPoint_x <- sigmoidalFitVector$midPoint_x
+        midPoint_y <- sigmoidalFitVector$midPoint_y
+        slope <- sigmoidalFitVector$slope
+        slopeParam <- sigmoidalFitVector$slopeParam_Estimate
+        incrementTime <- sigmoidalFitVector$incrementTime
+        startPoint_x <- sigmoidalFitVector$startPoint_x
+        startPoint_y <- sigmoidalFitVector$startPoint_y
+        reachMaximum_x <- sigmoidalFitVector$reachMaximum_x
+        reachMaximum_y <- sigmoidalFitVector$reachMaximum_y
+
+        # Generate the Time Series for Fitted Data
+        if (is.na(fittedXmax)){
+          fittedXmax_sigmoidal <- sigmoidalFitVector$dataScalingParameters.timeRange
+        }
+        if (!is.na(fittedXmax)){
+          fittedXmax_sigmoidal <- fittedXmax
+        }
+        if (fittedXmin == 0){
+          fittedXmin_sigmoidal <- 0
+        }
+        if (fittedXmin != 0){
+          fittedXmin_sigmoidal <- fittedXmin
+        }
+
+        time <- seq(fittedXmin_sigmoidal,
+                    fittedXmax_sigmoidal,
+                    fittedXmax_sigmoidal / 1000)
+
+        intensityTheoreticalSigmoidal <- sicegar::sigmoidalFitFormula_h0(time,
+                                                                      maximum = maximum_y,
+                                                                      slopeParam = slopeParam,
+                                                                      midPoint = midPoint_x)
+        intensityTheoreticalSigmoidalDf <- data.frame(time, intensityTheoreticalSigmoidal)
+      }
+    }
+
+
+
+    # DOUBLE SIGMOIDAL
+    if (!is.null(doubleSigmoidalFitVector))
+    {
+      if(!doubleSigmoidalFitVector$model=="doublesigmoidal"){
+        stop("provided doubleSigmoidalFitVector is not a double sigmoidal fit vector")
+      }
+      if(!doubleSigmoidalFitVector$isThisaFit){
+        warning("provided double sigmoidal fit vector does not include a fit!")
+      }
+      if(doubleSigmoidalFitVector$isThisaFit){
+        # Extract Parameters from the sigmoidalFitVector
+        maximum_x <- doubleSigmoidalFitVector$maximum_x
+        maximum_y <- doubleSigmoidalFitVector$maximum_y
+
+        midPoint1_x <- doubleSigmoidalFitVector$midPoint1_x
+        midPoint1_y <- doubleSigmoidalFitVector$midPoint1_y
+        midPoint1Param <- doubleSigmoidalFitVector$midPoint1Param_Estimate
+        midPoint2_x <- doubleSigmoidalFitVector$midPoint2_x
+        midPoint2_y <- doubleSigmoidalFitVector$midPoint2_y
+        midPointDistanceParam <- doubleSigmoidalFitVector$midPointDistanceParam_Estimate
+
+        slope1 <- doubleSigmoidalFitVector$slope1
+        slope1Param <- doubleSigmoidalFitVector$slope1Param_Estimate
+        slope2 <- doubleSigmoidalFitVector$slope2
+        slope2Param <- doubleSigmoidalFitVector$slope2Param_Estimate
+
+        finalAsymptoteIntensity <- doubleSigmoidalFitVector$finalAsymptoteIntensity
+        finalAsymptoteIntensityRatio <- doubleSigmoidalFitVector$finalAsymptoteIntensityRatio_Estimate
+
+        incrementTime <- doubleSigmoidalFitVector$incrementTime
+        startPoint_x <- doubleSigmoidalFitVector$startPoint_x
+        startPoint_y <- doubleSigmoidalFitVector$startPoint_y
+        reachMaximum_x <- doubleSigmoidalFitVector$reachMaximum_x
+        reachMaximum_y <- doubleSigmoidalFitVector$reachMaximum_y
+
+        decrementTime <- doubleSigmoidalFitVector$decrementTime
+        startDeclinePoint_x <- doubleSigmoidalFitVector$startDeclinePoint_x
+        startDeclinePoint_y <- doubleSigmoidalFitVector$startDeclinePoint_y
+        endDeclinePoint_x <- doubleSigmoidalFitVector$endDeclinePoint_x
+        endDeclinePoint_y <- doubleSigmoidalFitVector$endDeclinePoint_y
+
+        # Generate the Time Series for Fitted Data
+        if(is.na(fittedXmax)){
+          fittedXmax_doublesigmoidal <- doubleSigmoidalFitVector$dataScalingParameters.timeRange
+        }
+        if(!is.na(fittedXmax)){
+          fittedXmax_doublesigmoidal = fittedXmax
+        }
+
+        if(fittedXmin == 0){
+          fittedXmin_doublesigmoidal <- 0
+        }
+        if(fittedXmin != 0)
+        {fittedXmin_doublesigmoidal <- fittedXmin}
+
+        time <- seq(fittedXmin_doublesigmoidal,
+                    fittedXmax_doublesigmoidal,
+                    fittedXmax_doublesigmoidal / 1000)
+
+        intensityTheoreticalDoubleSigmoidal <- doublesigmoidalFitFormula_h0(time,
+                                                                         finalAsymptoteIntensityRatio = finalAsymptoteIntensityRatio,
+                                                                         maximum = maximum_y,
+                                                                         slope1Param = slope1Param,
+                                                                         midPoint1Param = midPoint1Param,
+                                                                         slope2Param = slope2Param,
+                                                                         midPointDistanceParam = midPointDistanceParam)
+        intensityTheoreticalDoubleSigmoidalDf <- data.frame(time,intensityTheoreticalDoubleSigmoidal)
+      }
+    }
+
+    output <- ggplot2::ggplot(dataFrameInput) +
+      ggplot2::geom_point(ggplot2::aes_(x=~time, y=~intensity)) +
+      ggplot2::expand_limits(x = 0, y = 0) +
+      ggplot2::theme_bw() +
+      ggplot2::theme(panel.grid.minor = ggplot2::element_blank()) +
+      ggplot2::xlab(xlabelText) + ggplot2::ylab(ylabelText)
+
+    if(!is.null(sigmoidalFitVector)){
+
+      if(sigmoidalFitVector$isThisaFit){
+
+        if(showParameterRelatedLines){
+
+          if(!sigmoidalFitVector$additionalParameters){
+            stop("to show parameter related lines one needs to run sicegar::parameterCalculation_h0 for sigmoidalModel ")
+          }
+          if(sigmoidalFitVector$additionalParameters){
+
+            # Lines related with the sigmoidal fit line
+            output <- output +
+              ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_hline(yintercept = maximum_y,
+                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_segment(x = startPoint_x,
+                                    y = startPoint_y,
+                                    xend = reachMaximum_x,
+                                    yend = reachMaximum_y,
+                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash")
+          }
+        }
+
+        output <- output +
+          ggplot2::geom_point(data = dataFrameInput, ggplot2::aes_(x = ~time, y = ~intensity)) +
+          ggplot2::geom_line(data = intensityTheoreticalSigmoidalDf,
+                             ggplot2::aes_(x = ~time, y = ~intensityTheoreticalSigmoidal), color = "orange", size = 1.5)
+
+        if(showParameterRelatedLines){
+
+          if(sigmoidalFitVector$additionalParameters){
+
+            # Points related with the sigmoidal fit line
+            output <- output +
+              ggplot2::geom_point(x = midPoint_x,
+                                  y = midPoint_y,
+                                  colour = "red", size = 6, shape = 13)
+          }
+        }
+      }
+    }
+
+    if(!is.null(doubleSigmoidalFitVector)){
+
+      if(doubleSigmoidalFitVector$isThisaFit){
+
+        if(showParameterRelatedLines){
+
+          if(!doubleSigmoidalFitVector$additionalParameters ){
+            stop("to show parameter related lines one needs to run sicegar::parameterCalculation_h0 for doubleSigmoidalModel ")
+          }
+
+          if(doubleSigmoidalFitVector$additionalParameters){
+
+            # Lines related with the double sigmoidal fit line (with numerical correction)
+            output <- output +
+              ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_hline(yintercept = maximum_y,
+                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_segment(x = maximum_x,
+                                    y = finalAsymptoteIntensity,
+                                    xend = Inf,
+                                    yend = finalAsymptoteIntensity,
+                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_segment(x = startPoint_x,
+                                    y = startPoint_y,
+                                    xend = reachMaximum_x,
+                                    yend = reachMaximum_y,
+                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_segment(x = startDeclinePoint_x,
+                                    y = startDeclinePoint_y,
+                                    xend = endDeclinePoint_x,
+                                    yend = endDeclinePoint_y,
+                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash")
+          }
+        }
+
+        output <- output +
+          ggplot2::geom_point(data = dataFrameInput, ggplot2::aes_(x = ~time, y = ~intensity)) +
+          ggplot2::geom_line(data = intensityTheoreticalDoubleSigmoidalDf,
+                             ggplot2::aes_(x = ~time, y = ~intensityTheoreticalDoubleSigmoidal), color = "orange", size = 1.5)
+
+        if(showParameterRelatedLines){
+
+          if(doubleSigmoidalFitVector$additionalParameters){
+
+            # Points related with the double sigmoidal fit line (with numerical correction)
+            output <- output +
+              ggplot2::geom_point(x = maximum_x, y = maximum_y,
+                                  colour = "red", size = 6, shape = 13) +
+              ggplot2::geom_point(x = midPoint1_x, y = midPoint1_y,
+                                  colour = "red", size = 6, shape = 13) +
+              ggplot2::geom_point(x = midPoint2_x, y = midPoint2_y,
+                                  colour = "red", size = 6, shape = 13)
+
+          }
+        }
+      }
+    }
+
+    # data should contain same source
+
+
+    return(output)
+
+  }
+
+  }
 
 #' @title Check is data came from the same source.
 #'
@@ -363,5 +628,8 @@ sameSourceDataCheck <- function(dataInput,
       stop("all data need to come from same source!")
     }
   }
+
+
 }
+
 

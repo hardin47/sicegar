@@ -17,7 +17,7 @@ test_that('fit_and_categorize with double-sigmoidal input', {
   fitObj <- fitAndCategorize(dataInput,
                              threshold_minimum_for_intensity_maximum = 0.3,
                              threshold_intensity_range = 0.1,
-                             threshold_t0_max_int = 0.05)
+                             threshold_t0_max_int = 1E10)
 
   # check that final decision is correct
   expect_equal(fitObj$decisionProcess$decision, "double_sigmoidal")

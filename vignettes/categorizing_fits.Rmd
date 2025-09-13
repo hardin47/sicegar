@@ -100,7 +100,7 @@ Clearly the sigmoidal fit is not appropriate but the double-sigmoidal one is. Ne
 # now we can categorize the fits
 decisionProcess <- categorize(threshold_minimum_for_intensity_maximum = 0.3,
                                       threshold_intensity_range = 0.1,
-                                      threshold_t0_max_int = 0.05,
+                                      threshold_t0_max_int = 1E10,
                                       parameterVectorSigmoidal = sigmoidalModel,
                                       parameterVectorDoubleSigmoidal = doubleSigmoidalModel)
 ```

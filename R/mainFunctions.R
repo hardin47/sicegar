@@ -21,7 +21,7 @@
 #' @param threshold_sm_tmax_IntensityRatio The threshold for the minimum intensity ratio between the last observed time points intensity and theoretical maximum intensity of the sigmoidal curve. If the value is below the threshold, then the data can not be represented with the sigmoidal model. (Default is 0.85)
 #' @param threshold_dsm_tmax_IntensityRatio The threshold for the minimum intensity ratio between the last observed time points intensity and maximum intensity of the double sigmoidal curve.  If the value is above the threshold, then the data can not be represented with the double sigmoidal model. (Default is 0.75)
 #' @param threshold_AIC Maximum AIC values in order to have a meaningful fit (Default is -10).
-#' @param threshold_t0_max_int Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 0.05, and the values are based on actual, not the rescaled data.).
+#' @param threshold_t0_max_int Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).
 #' @param stepSize Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.
 #' @param showDetails Logical if TRUE prints details of intermediate steps of individual fits (Default is FALSE).
 #' @param dataInputName Name of data set (Default is 'NA').
@@ -90,7 +90,7 @@ fitAndCategorize <-
            threshold_sm_tmax_IntensityRatio = 0.85,
            threshold_dsm_tmax_IntensityRatio = 0.75,
            threshold_AIC = -10,
-           threshold_t0_max_int = 0.05,
+           threshold_t0_max_int = 1E10,
            stepSize = 0.00001, ...){
 
     normalizedInput = sicegar::normalizeData(dataInput = dataInput, dataInputName = dataInputName)

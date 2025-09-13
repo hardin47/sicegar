@@ -76,7 +76,7 @@ We can now fit the two models to the data and determine which is the better fit.
 fitObj <- fitAndCategorize(dataInput,
                            threshold_minimum_for_intensity_maximum = 0.3,
                            threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05)
+                           threshold_t0_max_int = 1E10)
 ```
 The two fitted curves can be visualized with the function `figureModelCurves()`, which returns a **ggplot2** plot.
 

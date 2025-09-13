@@ -66,7 +66,7 @@ threshold_intensity_range = 0.1
 threshold_minimum_for_intensity_maximum = 0.3
 
 threshold_startPoint = 0
-threshold_t0_max_int = 0.05
+threshold_t0_max_int = 1E10
 
 threshold_sm_tmax_IntensityRatio = 0.85
 threshold_dsm_tmax_IntensityRatio = 0.75

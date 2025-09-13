@@ -135,7 +135,7 @@ process”).</p>
 <code class="sourceCode R"><span><span class="co"># now we can categorize the fits</span></span>
 <span><span class="va">decisionProcess</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categorize.html">categorize</a></span><span class="op">(</span>threshold_minimum_for_intensity_maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>                                      threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>                                      threshold_t0_max_int <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>                                      threshold_t0_max_int <span class="op">=</span> <span class="fl">1E10</span>,</span>
 <span>                                      parameterVectorSigmoidal <span class="op">=</span> <span class="va">sigmoidalModel</span>,</span>
 <span>                                      parameterVectorDoubleSigmoidal <span class="op">=</span> <span class="va">doubleSigmoidalModel</span><span class="op">)</span></span></code></pre></div>
 <p>The object returned by <code><a href="../reference/categorize.html">categorize()</a></code> contains extensive

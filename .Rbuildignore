@@ -8,3 +8,6 @@
 ^CRAN-RELEASE$
 ^doc$
 ^Meta$
+^docs$
+^pkgdown$
+^_pkgdown\.yml$

@@ -57,7 +57,7 @@ Description:
     in the context of single-cell viral growth analysis (for
     details, see Caglar et al. (2018) <doi:10.7717/peerj.4251>),
     and the package name stands for "SIngle CEll Growth Analysis in R".
-URL: https://hardin47.github.io/sicegar
+URL: https://github.com/wilkelab/sicegar, https://hardin47.github.io/sicegar
 Imports:
     dplyr,
     minpack.lm,
@@ -70,7 +70,8 @@ Suggests:
     covr,
     cowplot,
     testthat,
-    knitr
+    knitr,
+    rmarkdown
 VignetteBuilder: knitr
 BugReports: https://hardin47.github.io/sicegar/issues
 Collate:
@@ -84,4 +85,6 @@ Collate:
     'dataInputCheck.R'
     'parameterCalculation.R'
     'figureGeneration.R'
-RoxygenNote: 6.1.1
+Roxygen: list(collate = TRUE)
+RoxygenNote: 7.3.2
+Encoding: UTF-8

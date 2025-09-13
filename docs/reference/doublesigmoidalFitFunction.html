@@ -46,17 +46,18 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">doublesigmoidalFitFunction</span><span class="op">(</span><span class="va">dataInput</span>, <span class="va">tryCounter</span>,</span>
-<span>  startList <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  slope1Param <span class="op">=</span> <span class="fl">1</span>, midPoint1Param <span class="op">=</span> <span class="fl">0.33</span>, slope2Param <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  midPointDistanceParam <span class="op">=</span> <span class="fl">0.29</span><span class="op">)</span>,</span>
-<span>  lowerBounds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  slope1Param <span class="op">=</span> <span class="fl">0.01</span>, midPoint1Param <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span>, slope2Param <span class="op">=</span> <span class="fl">0.01</span>,</span>
-<span>  midPointDistanceParam <span class="op">=</span> <span class="fl">0.04</span><span class="op">)</span>,</span>
-<span>  upperBounds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">1</span>, maximum <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span>  slope1Param <span class="op">=</span> <span class="fl">180</span>, midPoint1Param <span class="op">=</span> <span class="fl">1.15</span>, slope2Param <span class="op">=</span> <span class="fl">180</span>,</span>
-<span>  midPointDistanceParam <span class="op">=</span> <span class="fl">0.63</span><span class="op">)</span>, min_Factor <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">20</span>,</span>
-<span>  n_iterations <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">doublesigmoidalFitFunction</span><span class="op">(</span></span>
+<span>  <span class="va">dataInput</span>,</span>
+<span>  <span class="va">tryCounter</span>,</span>
+<span>  startList <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">1</span>, slope1Param <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    midPoint1Param <span class="op">=</span> <span class="fl">0.33</span>, slope2Param <span class="op">=</span> <span class="fl">1</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.29</span><span class="op">)</span>,</span>
+<span>  lowerBounds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">0.3</span>, slope1Param <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>    midPoint1Param <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span>, slope2Param <span class="op">=</span> <span class="fl">0.01</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.04</span><span class="op">)</span>,</span>
+<span>  upperBounds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">1</span>, maximum <span class="op">=</span> <span class="fl">1.5</span>, slope1Param <span class="op">=</span> <span class="fl">180</span>,</span>
+<span>    midPoint1Param <span class="op">=</span> <span class="fl">1.15</span>, slope2Param <span class="op">=</span> <span class="fl">180</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.63</span><span class="op">)</span>,</span>
+<span>  min_Factor <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">20</span>,</span>
+<span>  n_iterations <span class="op">=</span> <span class="fl">1000</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">

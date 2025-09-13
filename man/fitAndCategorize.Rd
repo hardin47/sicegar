@@ -4,27 +4,37 @@
 \alias{fitAndCategorize}
 \title{Fit and categorize.}
 \usage{
-fitAndCategorize(dataInput, dataInputName = NA, n_runs_min_sm = 20,
-  n_runs_max_sm = 500, n_runs_min_dsm = 20, n_runs_max_dsm = 500,
-  showDetails = FALSE, startList_sm = list(maximum = 1, slopeParam = 1,
-  midPoint = 0.33), lowerBounds_sm = c(maximum = 0.3, slopeParam = 0.01,
-  midPoint = -0.52), upperBounds_sm = c(maximum = 1.5, slopeParam = 180,
-  midPoint = 1.15), min_Factor_sm = 1/2^20, n_iterations_sm = 1000,
-  startList_dsm = list(finalAsymptoteIntensityRatio = 0, maximum = 1,
-  slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1,
-  midPointDistanceParam = 0.29),
-  lowerBounds_dsm = c(finalAsymptoteIntensityRatio = 0, maximum = 0.3,
-  slope1Param = 0.01, midPoint1Param = -0.52, slope2Param = 0.01,
-  midPointDistanceParam = 0.04),
-  upperBounds_dsm = c(finalAsymptoteIntensityRatio = 1, maximum = 1.5,
-  slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180,
-  midPointDistanceParam = 0.63), min_Factor_dsm = 1/2^20,
-  n_iterations_dsm = 1000, threshold_intensity_range = 0.1,
+fitAndCategorize(
+  dataInput,
+  dataInputName = NA,
+  n_runs_min_sm = 20,
+  n_runs_max_sm = 500,
+  n_runs_min_dsm = 20,
+  n_runs_max_dsm = 500,
+  showDetails = FALSE,
+  startList_sm = list(maximum = 1, slopeParam = 1, midPoint = 0.33),
+  lowerBounds_sm = c(maximum = 0.3, slopeParam = 0.01, midPoint = -0.52),
+  upperBounds_sm = c(maximum = 1.5, slopeParam = 180, midPoint = 1.15),
+  min_Factor_sm = 1/2^20,
+  n_iterations_sm = 1000,
+  startList_dsm = list(finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1,
+    midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam = 0.29),
+  lowerBounds_dsm = c(finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param =
+    0.01, midPoint1Param = -0.52, slope2Param = 0.01, midPointDistanceParam = 0.04),
+  upperBounds_dsm = c(finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180,
+    midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63),
+  min_Factor_dsm = 1/2^20,
+  n_iterations_dsm = 1000,
+  threshold_intensity_range = 0.1,
   threshold_minimum_for_intensity_maximum = 0.3,
   threshold_bonus_sigmoidal_AIC = 0,
   threshold_sm_tmax_IntensityRatio = 0.85,
-  threshold_dsm_tmax_IntensityRatio = 0.75, threshold_AIC = -10,
-  threshold_t0_max_int = 0.05, stepSize = 1e-05, ...)
+  threshold_dsm_tmax_IntensityRatio = 0.75,
+  threshold_AIC = -10,
+  threshold_t0_max_int = 1e+10,
+  stepSize = 1e-05,
+  ...
+)
 }
 \arguments{
 \item{dataInput}{Un_normalized input data that will be fitted transferred into related functions}
@@ -73,7 +83,7 @@ fitAndCategorize(dataInput, dataInputName = NA, n_runs_min_sm = 20,
 
 \item{threshold_AIC}{Maximum AIC values in order to have a meaningful fit (Default is -10).}
 
-\item{threshold_t0_max_int}{Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 0.05, and the values are based on actual, not the rescaled data.).}
+\item{threshold_t0_max_int}{Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).}
 
 \item{stepSize}{Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.}
 

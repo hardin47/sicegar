@@ -46,27 +46,37 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fitAndCategorize</span><span class="op">(</span><span class="va">dataInput</span>, dataInputName <span class="op">=</span> <span class="cn">NA</span>, n_runs_min_sm <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>  n_runs_max_sm <span class="op">=</span> <span class="fl">500</span>, n_runs_min_dsm <span class="op">=</span> <span class="fl">20</span>, n_runs_max_dsm <span class="op">=</span> <span class="fl">500</span>,</span>
-<span>  showDetails <span class="op">=</span> <span class="cn">FALSE</span>, startList_sm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">1</span>, slopeParam <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  midPoint <span class="op">=</span> <span class="fl">0.33</span><span class="op">)</span>, lowerBounds_sm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">0.3</span>, slopeParam <span class="op">=</span> <span class="fl">0.01</span>,</span>
-<span>  midPoint <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span><span class="op">)</span>, upperBounds_sm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">1.5</span>, slopeParam <span class="op">=</span> <span class="fl">180</span>,</span>
-<span>  midPoint <span class="op">=</span> <span class="fl">1.15</span><span class="op">)</span>, min_Factor_sm <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">20</span>, n_iterations_sm <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  startList_dsm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  slope1Param <span class="op">=</span> <span class="fl">1</span>, midPoint1Param <span class="op">=</span> <span class="fl">0.33</span>, slope2Param <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  midPointDistanceParam <span class="op">=</span> <span class="fl">0.29</span><span class="op">)</span>,</span>
-<span>  lowerBounds_dsm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  slope1Param <span class="op">=</span> <span class="fl">0.01</span>, midPoint1Param <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span>, slope2Param <span class="op">=</span> <span class="fl">0.01</span>,</span>
-<span>  midPointDistanceParam <span class="op">=</span> <span class="fl">0.04</span><span class="op">)</span>,</span>
-<span>  upperBounds_dsm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">1</span>, maximum <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span>  slope1Param <span class="op">=</span> <span class="fl">180</span>, midPoint1Param <span class="op">=</span> <span class="fl">1.15</span>, slope2Param <span class="op">=</span> <span class="fl">180</span>,</span>
-<span>  midPointDistanceParam <span class="op">=</span> <span class="fl">0.63</span><span class="op">)</span>, min_Factor_dsm <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">20</span>,</span>
-<span>  n_iterations_dsm <span class="op">=</span> <span class="fl">1000</span>, threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fitAndCategorize</span><span class="op">(</span></span>
+<span>  <span class="va">dataInput</span>,</span>
+<span>  dataInputName <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  n_runs_min_sm <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  n_runs_max_sm <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  n_runs_min_dsm <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  n_runs_max_dsm <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  showDetails <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  startList_sm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">1</span>, slopeParam <span class="op">=</span> <span class="fl">1</span>, midPoint <span class="op">=</span> <span class="fl">0.33</span><span class="op">)</span>,</span>
+<span>  lowerBounds_sm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">0.3</span>, slopeParam <span class="op">=</span> <span class="fl">0.01</span>, midPoint <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span><span class="op">)</span>,</span>
+<span>  upperBounds_sm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">1.5</span>, slopeParam <span class="op">=</span> <span class="fl">180</span>, midPoint <span class="op">=</span> <span class="fl">1.15</span><span class="op">)</span>,</span>
+<span>  min_Factor_sm <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">20</span>,</span>
+<span>  n_iterations_sm <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  startList_dsm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">1</span>, slope1Param <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    midPoint1Param <span class="op">=</span> <span class="fl">0.33</span>, slope2Param <span class="op">=</span> <span class="fl">1</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.29</span><span class="op">)</span>,</span>
+<span>  lowerBounds_dsm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">0.3</span>, slope1Param <span class="op">=</span></span>
+<span>    <span class="fl">0.01</span>, midPoint1Param <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span>, slope2Param <span class="op">=</span> <span class="fl">0.01</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.04</span><span class="op">)</span>,</span>
+<span>  upperBounds_dsm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">1</span>, maximum <span class="op">=</span> <span class="fl">1.5</span>, slope1Param <span class="op">=</span> <span class="fl">180</span>,</span>
+<span>    midPoint1Param <span class="op">=</span> <span class="fl">1.15</span>, slope2Param <span class="op">=</span> <span class="fl">180</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.63</span><span class="op">)</span>,</span>
+<span>  min_Factor_dsm <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">20</span>,</span>
+<span>  n_iterations_dsm <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>  threshold_minimum_for_intensity_maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  threshold_bonus_sigmoidal_AIC <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  threshold_sm_tmax_IntensityRatio <span class="op">=</span> <span class="fl">0.85</span>,</span>
-<span>  threshold_dsm_tmax_IntensityRatio <span class="op">=</span> <span class="fl">0.75</span>, threshold_AIC <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>,</span>
-<span>  threshold_t0_max_int <span class="op">=</span> <span class="fl">0.05</span>, stepSize <span class="op">=</span> <span class="fl">1e-05</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span>  threshold_dsm_tmax_IntensityRatio <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  threshold_AIC <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>,</span>
+<span>  threshold_t0_max_int <span class="op">=</span> <span class="fl">1e+10</span>,</span>
+<span>  stepSize <span class="op">=</span> <span class="fl">1e-05</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -166,7 +176,7 @@
 
 
 <dt id="arg-threshold-t-max-int">threshold_t0_max_int<a class="anchor" aria-label="anchor" href="#arg-threshold-t-max-int"></a></dt>
-<dd><p>Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 0.05, and the values are based on actual, not the rescaled data.).</p></dd>
+<dd><p>Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).</p></dd>
 
 
 <dt id="arg-stepsize">stepSize<a class="anchor" aria-label="anchor" href="#arg-stepsize"></a></dt>

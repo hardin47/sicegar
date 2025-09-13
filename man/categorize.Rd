@@ -4,13 +4,18 @@
 \alias{categorize}
 \title{Categorize input data by comparing the AIC values of the three fitted models.}
 \usage{
-categorize(parameterVectorSigmoidal, parameterVectorDoubleSigmoidal,
+categorize(
+  parameterVectorSigmoidal,
+  parameterVectorDoubleSigmoidal,
   threshold_intensity_range = 0.1,
   threshold_minimum_for_intensity_maximum = 0.3,
   threshold_bonus_sigmoidal_AIC = 0,
   threshold_sm_tmax_IntensityRatio = 0.85,
-  threshold_dsm_tmax_IntensityRatio = 0.75, threshold_AIC = -10,
-  threshold_t0_max_int = 0.05, showDetails = FALSE)
+  threshold_dsm_tmax_IntensityRatio = 0.75,
+  threshold_AIC = -10,
+  threshold_t0_max_int = 1e+10,
+  showDetails = FALSE
+)
 }
 \arguments{
 \item{parameterVectorSigmoidal}{Output of the sigmoidalFitFunction.}
@@ -29,7 +34,7 @@ categorize(parameterVectorSigmoidal, parameterVectorDoubleSigmoidal,
 
 \item{threshold_AIC}{Maximum AIC values in order to have a meaningful fit (Default is -10).}
 
-\item{threshold_t0_max_int}{Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 0.05, and the values are based on actual, not the rescaled data.).}
+\item{threshold_t0_max_int}{Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).}
 
 \item{showDetails}{Logical to chose if we want to see details or not. Default is "FALSE"}
 }

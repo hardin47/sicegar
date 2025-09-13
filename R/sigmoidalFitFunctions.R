@@ -83,7 +83,7 @@ sigmoidalFitFunction <- function(dataInput,
                                         upper = upperBounds,
                                         trace = F), silent = TRUE)
 
-  if(class(theFitResult) != "try-error"){
+  if(!inherits(theFitResult, "try-error")){
 
     parameterMatrix <- summary(theFitResult)$parameters
     colnames(parameterMatrix) <- c("Estimate", "Std_Error", "t_value", "Pr_t")
@@ -117,7 +117,7 @@ sigmoidalFitFunction <- function(dataInput,
 
   }
 
-  if(class(theFitResult) == "try-error"){
+  if(inherits(theFitResult, "try-error")){
 
     parameterVector=rep(NA, 12)
     names(parameterVector) <- c("maximum_N_Estimate", "maximum_Std_Error", "maximum_t_value", "maximum_Pr_t",

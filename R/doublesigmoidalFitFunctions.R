@@ -116,7 +116,7 @@ doublesigmoidalFitFunction <- function(dataInput,
                                         upper = upperBounds,
                                         trace=F), silent = TRUE)
 
-  if(class(theFitResult) != "try-error")
+  if(!inherits(theFitResult, "try-error"))
   {
     parameterMatrix <- summary(theFitResult)$parameters
     colnames(parameterMatrix) <- c("Estimate", "Std_Error", "t_value", "Pr_t")
@@ -150,7 +150,7 @@ doublesigmoidalFitFunction <- function(dataInput,
 
   }
 
-  if(class(theFitResult) == "try-error")
+  if(inherits(theFitResult, "try-error"))
   {
     parameterVector <- rep(NA, 24)
     names(parameterVector) <- c("finalAsymptoteIntensityRatio_N_Estimate", "finalAsymptoteIntensityRatio_Std_Error", "finalAsymptoteIntensityRatio_t_value", "finalAsymptoteIntensityRatio_Pr_t",
@@ -459,11 +459,11 @@ f_mid1_doublesigmoidal <- function(parameterDf){
                                      M1 = parameterDf$midPoint1Param_Estimate,
                                      B2 = parameterDf$slope2Param_Estimate,
                                      L = parameterDf$midPointDistanceParam_Estimate, const = constt), silent = TRUE);
-  if(class(mid1x) == "try-error")
+  if(inherits(mid1x, "try-error"))
   {
     rangeList <- seq(-1,30)
     rangeListCounter <- -1
-    while(class(mid1x) == "try-error" & rangeListCounter <= 30)
+    while(inherits(mid1x, "try-error") && rangeListCounter <= 30)
     {
       #print(rangeListCounter)
       rangeListSelection <- rangeList[rangeListCounter + 2];
@@ -552,10 +552,10 @@ f_mid2_doublesigmoidal <- function(parameterDf){
                               B2 = parameterDf$slope2Param_Estimate,
                               L = parameterDf$midPointDistanceParam_Estimate, const=constt), silent = TRUE);
 
-  if(class(mid2x) == "try-error"){
+  if(inherits(mid2x, "try-error")){
     rangeList <- seq(-1,30)
     rangeListCounter <- -1
-    while(class(mid2x) == "try-error" & rangeListCounter <= 30){
+    while(inherits(mid2x, "try-error") && rangeListCounter <= 30){
       rangeListSelection <- rangeList[rangeListCounter + 2];
       mid2x <- try(stats::uniroot(f0mid,
                                   interval = c(argumentt, max_x * (2^rangeListSelection)),

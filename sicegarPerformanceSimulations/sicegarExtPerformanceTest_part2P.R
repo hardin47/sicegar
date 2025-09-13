@@ -244,7 +244,7 @@ main_function <- function(condition_vector, error_mode_ = FALSE)
 {
 
   try((main_function_sub(condition_vector, error_mode = error_mode_))) -> p_model_parameters
-  if (class(p_model_parameters) == "try-error")
+  if (inherits(p_model_parameters, "try-error"))
   {
     p_model_parameters = c()
     p_model_parameters$error = 1

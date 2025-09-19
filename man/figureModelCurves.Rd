@@ -12,7 +12,8 @@ figureModelCurves(
   xlabelText = "time",
   ylabelText = "intensity",
   fittedXmin = 0,
-  fittedXmax = NA
+  fittedXmax = NA,
+  use_h0 = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ figureModelCurves(
 \item{fittedXmin}{the minimum of the fitted data that will be plotted (Default 0)}
 
 \item{fittedXmax}{the maximum of the fitted data that will be plotted (Default timeRange)}
+
+\item{use_h0}{Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)}
 }
 \value{
 Returns infection curve figures.

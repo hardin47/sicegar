@@ -33,6 +33,7 @@ fitAndCategorize(
   threshold_AIC = -10,
   threshold_t0_max_int = 1e+10,
   stepSize = 1e-05,
+  use_h0 = FALSE,
   ...
 )
 }
@@ -86,6 +87,8 @@ fitAndCategorize(
 \item{threshold_t0_max_int}{Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).}
 
 \item{stepSize}{Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.}
+
+\item{use_h0}{Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)}
 
 \item{...}{All other arguments that model functions ("sigmoidalFitFunction" and, "doublesigmoidalFitFunction") may need.}
 }

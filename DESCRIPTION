@@ -76,14 +76,18 @@ VignetteBuilder: knitr
 BugReports: https://hardin47.github.io/sicegar/issues
 Collate:
     'categorize.R'
+    'categorize_h0.R'
     'mainFunctions.R'
     'multipleFitFunction.R'
+    'multipleFitFunction_h0.R'
     'sigmoidalFitFunctions.R'
+    'sigmoidalFitFunctions_h0.R'
     'doublesigmoidalFitFunctions.R'
     'normalizationFunction.R'
     'sicegar.R'
     'dataInputCheck.R'
     'parameterCalculation.R'
+    'parameterCalculation_h0.R'
     'figureGeneration.R'
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

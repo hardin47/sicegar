@@ -75,6 +75,7 @@
 <span>  threshold_AIC <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>,</span>
 <span>  threshold_t0_max_int <span class="op">=</span> <span class="fl">1e+10</span>,</span>
 <span>  stepSize <span class="op">=</span> <span class="fl">1e-05</span>,</span>
+<span>  use_h0 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -181,6 +182,10 @@
 
 <dt id="arg-stepsize">stepSize<a class="anchor" aria-label="anchor" href="#arg-stepsize"></a></dt>
 <dd><p>Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.</p></dd>
+
+
+<dt id="arg-use-h-">use_h0<a class="anchor" aria-label="anchor" href="#arg-use-h-"></a></dt>
+<dd><p>Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

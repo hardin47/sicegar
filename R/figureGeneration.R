@@ -356,6 +356,7 @@ figureModelCurves <- function(dataInput,
         startPoint_y <- sigmoidalFitVector$startPoint_y
         reachMaximum_x <- sigmoidalFitVector$reachMaximum_x
         reachMaximum_y <- sigmoidalFitVector$reachMaximum_y
+        h0 <- sigmoidalFitVetor$h0_Estimate
 
         # Generate the Time Series for Fitted Data
         if (is.na(fittedXmax)){
@@ -378,7 +379,8 @@ figureModelCurves <- function(dataInput,
         intensityTheoreticalSigmoidal <- sicegar::sigmoidalFitFormula_h0(time,
                                                                       maximum = maximum_y,
                                                                       slopeParam = slopeParam,
-                                                                      midPoint = midPoint_x)
+                                                                      midPoint = midPoint_x,
+                                                                      h0 = h0)
         intensityTheoreticalSigmoidalDf <- data.frame(time, intensityTheoreticalSigmoidal)
       }
     }
@@ -426,6 +428,8 @@ figureModelCurves <- function(dataInput,
         endDeclinePoint_x <- doubleSigmoidalFitVector$endDeclinePoint_x
         endDeclinePoint_y <- doubleSigmoidalFitVector$endDeclinePoint_y
 
+        h0 <- doubleSigmoidalFitVector$h0_Estiamte
+
         # Generate the Time Series for Fitted Data
         if(is.na(fittedXmax)){
           fittedXmax_doublesigmoidal <- doubleSigmoidalFitVector$dataScalingParameters.timeRange
@@ -450,7 +454,8 @@ figureModelCurves <- function(dataInput,
                                                                          slope1Param = slope1Param,
                                                                          midPoint1Param = midPoint1Param,
                                                                          slope2Param = slope2Param,
-                                                                         midPointDistanceParam = midPointDistanceParam)
+                                                                         midPointDistanceParam = midPointDistanceParam,
+                                                                         h0 = h0)
         intensityTheoreticalDoubleSigmoidalDf <- data.frame(time,intensityTheoreticalDoubleSigmoidal)
       }
     }

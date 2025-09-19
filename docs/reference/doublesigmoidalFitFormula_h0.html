@@ -112,17 +112,13 @@
 <span class="r-in"><span>                                      slope1Param <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>                                      midPoint1Param <span class="op">=</span> <span class="fl">7</span>,</span></span>
 <span class="r-in"><span>                                      slope2Param <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>                                      midPointDistanceParam <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in doublesigmoidalFitFormula_h0(time, finalAsymptoteIntensityRatio = 0.3,     maximum = 4, slope1Param = 1, midPoint1Param = 7, slope2Param = 1,     midPointDistanceParam = 8):</span> argument "h0" is missing, with no default</span>
+<span class="r-in"><span>                                      midPointDistanceParam <span class="op">=</span> <span class="fl">8</span>,</span></span>
+<span class="r-in"><span>                                      h0 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">intensity</span> <span class="op">&lt;-</span> <span class="va">intensity</span> <span class="op">+</span> <span class="va">intensity_noise</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'intensity' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dataInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>intensity <span class="op">=</span> <span class="va">intensity</span>, time <span class="op">=</span> <span class="va">time</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'intensity' not found</span>
 <span class="r-in"><span><span class="va">normalizedInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="normalizeData.html">normalizeData</a></span><span class="op">(</span><span class="va">dataInput</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'dataInput' not found</span>
 <span class="r-in"><span><span class="va">parameterVector</span> <span class="op">&lt;-</span> <span class="fu"><a href="doublesigmoidalFitFunction_h0.html">doublesigmoidalFitFunction_h0</a></span><span class="op">(</span><span class="va">normalizedInput</span>, tryCounter <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'normalizedInput' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#Check the results</span></span></span>
@@ -146,12 +142,48 @@
 <span class="r-in"><span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">intensityTheoretical</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span>   <span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'parameterVector' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">parameterVector</span><span class="op">$</span><span class="va">isThisaFit</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">parameterVector</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'parameterVector' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   finalAsymptoteIntensityRatio_N_Estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   finalAsymptoteIntensityRatio_Std_Error finalAsymptoteIntensityRatio_t_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                     NA                                   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   finalAsymptoteIntensityRatio_Pr_t maximum_N_Estimate maximum_Std_Error</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                NA                 NA                NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   maximum_t_value maximum_Pr_t slope1Param_N_Estimate slope1Param_Std_Error</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1              NA           NA                     NA                    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   slope1Param_t_value slope1Param_Pr_t midPoint1Param_N_Estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  NA               NA                        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   midPoint1Param_Std_Error midPoint1Param_t_value midPoint1Param_Pr_t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       NA                     NA                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   slope2Param_N_Estimate slope2Param_Std_Error slope2Param_t_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     NA                    NA                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   slope2Param_Pr_t midPointDistanceParam_N_Estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               NA                               NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   midPointDistanceParam_Std_Error midPointDistanceParam_t_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                              NA                            NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   midPointDistanceParam_Pr_t h0_N_Estimate h0_Std_Error h0_t_value h0_Pr_t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                         NA            NA           NA         NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   residual_Sum_of_Squares log_likelihood AIC_value BIC_value isThisaFit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     Inf             NA        NA        NA      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   startVector.finalAsymptoteIntensityRatio startVector.maximum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                0.8263765            1.212448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   startVector.slope1Param startVector.midPoint1Param startVector.slope2Param</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                60.23864                   1.117404                170.5268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   startVector.midPointDistanceParam startVector.h0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                         0.3406274      0.1160207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dataScalingParameters.timeRange dataScalingParameters.intensityMin</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                              24                         0.09236819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dataScalingParameters.intensityMax dataScalingParameters.intensityRange</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                           4.191094                             4.098726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             model finalAsymptoteIntensityRatio_Estimate maximum_Estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 doublesigmoidal                                    NA               NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   slope1Param_Estimate midPoint1Param_Estimate slope2Param_Estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                   NA                      NA                   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   midPointDistanceParam_Estimate h0_Estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                             NA          NA</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

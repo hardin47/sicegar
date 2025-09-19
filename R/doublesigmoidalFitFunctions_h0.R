@@ -24,7 +24,7 @@
 #'                                      midPoint1Param = 7,
 #'                                      slope2Param = 1,
 #'                                      midPointDistanceParam = 8,
-#'                                      h0 = 5)
+#'                                      h0 = 0)
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
@@ -63,21 +63,21 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
                                                       midPoint1Param = 0.33,
                                                       slope2Param = 1,
                                                       midPointDistanceParam = 0.29,
-                                                      h0 = 0.1), # added
+                                                      h0 = 0.1),
                                        lowerBounds=c(finalAsymptoteIntensityRatio = 0,
                                                      maximum = 0.3,
                                                      slope1Param = .01,
                                                      midPoint1Param = -0.52,
                                                      slope2Param = .01,
                                                      midPointDistanceParam = 0.04,
-                                                     h0 =  0), # added
+                                                     h0 =  0),
                                        upperBounds=c(finalAsymptoteIntensityRatio = 1,
                                                      maximum = 1.5,
                                                      slope1Param = 180,
                                                      midPoint1Param = 1.15,
                                                      slope2Param = 180,
                                                      midPointDistanceParam = 0.63,
-                                                     h0 = 0.3), # added
+                                                     h0 = 0.3),
                                        min_Factor = 1/2^20,
                                        n_iterations = 1000)
 {
@@ -102,20 +102,20 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
                              "midPoint1Param",
                              "slope2Param",
                              "midPointDistanceParam",
-                             "h0") # added
+                             "h0")
     counterDependentStartVector <- randomVector * (upperBounds - lowerBounds) + lowerBounds
     counterDependentStartList <- as.list(counterDependentStartVector)
   }
 
 
-  theFitResult <- try(minpack.lm::nlsLM(intensity ~ doublesigmoidalFitFormula_h0(time, # changed
+  theFitResult <- try(minpack.lm::nlsLM(intensity ~ doublesigmoidalFitFormula_h0(time,
                                                                                        finalAsymptoteIntensityRatio,
                                                                                        maximum,
                                                                                        slope1Param,
                                                                                        midPoint1Param,
                                                                                        slope2Param,
                                                                                        midPointDistanceParam,
-                                                                                       h0), # added
+                                                                                       h0),
                                         dataFrameInput,
                                         start = counterDependentStartList,
                                         control = list(maxiter = n_iterations, minFactor = min_Factor),
@@ -155,13 +155,13 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
 
     parameterDf <- as.data.frame(parameterList)
     #Renormalize Parameters
-    parameterDf <- doublesigmoidalRenormalizeParameters_h0(parameterDf, isalist) # changed
+    parameterDf <- doublesigmoidalRenormalizeParameters_h0(parameterDf, isalist)
 
   }
 
   if(inherits(theFitResult, "try-error"))
   {
-    parameterVector <- rep(NA, 28) # changed 24 -> 28
+    parameterVector <- rep(NA, 28)
     names(parameterVector) <- c("finalAsymptoteIntensityRatio_N_Estimate", "finalAsymptoteIntensityRatio_Std_Error", "finalAsymptoteIntensityRatio_t_value", "finalAsymptoteIntensityRatio_Pr_t",
                                 "maximum_N_Estimate", "maximum_Std_Error", "maximum_t_value", "maximum_Pr_t",
                                 "slope1Param_N_Estimate", "slope1Param_Std_Error", "slope1Param_t_value", "slope1Param_Pr_t",
@@ -187,7 +187,7 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
 
     parameterDf <- as.data.frame(parameterList)
     #Renormalize Parameters
-    parameterDf <- doublesigmoidalRenormalizeParameters_h0(parameterDf, isalist) # changed
+    parameterDf <- doublesigmoidalRenormalizeParameters_h0(parameterDf, isalist)
 
   }
 
@@ -224,7 +224,8 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
 #'                                       slope1Param = 1,
 #'                                       midPoint1Param = 7,
 #'                                       slope2Param = 1,
-#'                                       midPointDistanceParam = 8)
+#'                                       midPointDistanceParam = 8,
+#'                                       h0 = 0)
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
@@ -325,7 +326,7 @@ doublesigmoidalFitFormula_h0 <- function(x,
 #     f1 <- function (x, B1, M1, B2, L) {
 #       log((1 / ( ( 1 + exp(-B1 * (x - M1)) ) * ( 1 + exp(B2 * (x - (M1 + L))) ) )))
 #     }
-f2_h0 <- function (x, A2, Ka, B1, M1, B2, L, const, argument, h0){ # changed
+f2_h0 <- function (x, A2, Ka, B1, M1, B2, L, const, argument, h0){
   fBasics::Heaviside(x - argument) * (f0(x, B1, M1, B2, L) * ((Ka - A2 * Ka)/(const)) + A2 * Ka) +
     (1 - fBasics::Heaviside(x - argument)) * (f0(x, B1, M1, B2, L) * ((Ka - h0)/(const)) + h0)
 }
@@ -373,7 +374,7 @@ f2_h0 <- function (x, A2, Ka, B1, M1, B2, L, const, argument, h0){ # changed
 # # with in the range of [0, dataScalingParameters.timeRange]
 # maximum_x = f_argmax_doublesigmoidal_h0(parameterDf)
 #
-f_argmax_doublesigmoidal_h0 <- function(parameterVector){ # changed
+f_argmax_doublesigmoidal_h0 <- function(parameterVector){
 
   slope1Param <- parameterVector$slope1Param_N_Estimate
   slope2Param <- parameterVector$slope2Param_N_Estimate

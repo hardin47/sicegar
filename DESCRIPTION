@@ -83,6 +83,7 @@ Collate:
     'sigmoidalFitFunctions.R'
     'sigmoidalFitFunctions_h0.R'
     'doublesigmoidalFitFunctions.R'
+    'doublesigmoidalFitFunctions_h0.R'
     'normalizationFunction.R'
     'sicegar.R'
     'dataInputCheck.R'

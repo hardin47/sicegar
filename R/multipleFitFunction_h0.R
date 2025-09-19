@@ -24,7 +24,7 @@
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
-#'normalizedInput <- normalizeData_h0(dataInput, dataInputName = "sample001")
+#'normalizedInput <- normalizeData(dataInput, dataInputName = "sample001")
 #'parameterVector <- multipleFitFunction_h0(dataInput = normalizedInput,
 #'                                       model = "sigmoidal",
 #'                                       n_runs_min = 20,
@@ -73,7 +73,7 @@
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
-#'normalizedInput <- normalizeData_h0(dataInput)
+#'normalizedInput <- normalizeData(dataInput)
 #'parameterVector <- multipleFitFunction_h0(dataInput = normalizedInput,
 #'                            dataInputName="sample001",
 #'                            model = "doublesigmoidal",

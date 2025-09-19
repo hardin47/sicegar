@@ -34,7 +34,7 @@
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
-#'normalizedInput <- sicegar::normalizeData_h0(dataInput,
+#'normalizedInput <- sicegar::normalizeData(dataInput,
 #'                                          dataInputName = "sample001")
 #'
 #'
@@ -152,7 +152,7 @@ categorize_h0 <- # changed
                                                          maximum = parameterVectorSigmoidal$maximum_y,
                                                          slopeParam = parameterVectorSigmoidal$slopeParam_Estimate,
                                                          midPoint = parameterVectorSigmoidal$midPoint_Estimate,
-                                                         h0 = parameterVectorSigmoidal$h0_Estimate) # from phineus: changed but don't know if it works yet
+                                                         h0 = parameterVectorSigmoidal$h0_Estimate)
 
     decisionList$sm_tmax_IntensityRatio <- sm_intensity_at_tmax / parameterVectorSigmoidal$maximum_y
     decisionList$threshold_sm_tmax_IntensityRatio <- threshold_sm_tmax_IntensityRatio
@@ -167,7 +167,7 @@ categorize_h0 <- # changed
                                                                 midPoint1Param = parameterVectorDoubleSigmoidal$midPoint1Param_Estimate,
                                                                 slope2Param = parameterVectorDoubleSigmoidal$slope2Param_Estimate,
                                                                 midPointDistanceParam = parameterVectorDoubleSigmoidal$midPointDistanceParam_Estimate,
-                                                                h0 = parameterVectorDoubleSigmoidal$h0_Estimate) # from phineus: changed but don't know if it works yet
+                                                                h0 = parameterVectorDoubleSigmoidal$h0_Estimate)
 
     decisionList$dsm_tmax_IntensityRatio <- dsm_intensity_at_tmax/parameterVectorDoubleSigmoidal$maximum_y
     decisionList$threshold_dsm_tmax_IntensityRatio <- threshold_dsm_tmax_IntensityRatio
@@ -184,7 +184,7 @@ categorize_h0 <- # changed
                                                                    maximum = parameterVectorSigmoidal$maximum_y,
                                                                    slopeParam = parameterVectorSigmoidal$slopeParam_Estimate,
                                                                    midPoint = parameterVectorSigmoidal$midPoint_Estimate,
-                                                                   h0 = parameterVectorSigmoidal$h0_Estimate) # from phineus: changed but don't know if it works yet
+                                                                   h0 = parameterVectorSigmoidal$h0_Estimate)
     decisionList$threshold_t0_max_int <- threshold_t0_max_int
     decisionList$test.sm_startIntensity <- decisionList$sm_startIntensity < threshold_t0_max_int
 
@@ -195,7 +195,7 @@ categorize_h0 <- # changed
                                                                           midPoint1Param = parameterVectorDoubleSigmoidal$midPoint1Param_Estimate,
                                                                           slope2Param = parameterVectorDoubleSigmoidal$slope2Param_Estimate,
                                                                           midPointDistanceParam = parameterVectorDoubleSigmoidal$midPointDistanceParam_Estimate,
-                                                                          parameterVectorDoubleSigmoidal$h0_Estimate) # from phineus: changed but don't know if it works yet
+                                                                          h0 = parameterVectorDoubleSigmoidal$h0_Estimate)
     decisionList$test.dsm_startIntensity <- decisionList$dsm_startIntensity < threshold_t0_max_int
 
 
@@ -359,116 +359,119 @@ categorize_h0 <- # changed
 
 #************************************************
 
-#' @title Checks for signal in the data.
-#'
-#' @param normalizedInput is the output of the sicegar::normalizeData_h0() function.
-#' @param threshold_intensity_range  minimum for intensity range, i.e. it is the lower limit for the allowed difference between the maximum and minimum of the intensities (Default is 0.1, and the values are based on actual, not the rescaled data.).
-#' @param threshold_minimum_for_intensity_maximum minimum allowed value for intensity maximum. (Default is 0.3, and the values are based on actual, not the rescaled data.).
-#'
-#'
-#' @return Function returns a brief decision list that includes information about the decision process. Post important part of this information is decisionList$decisionwhich might be either "no_signal" or "not_no_signal".
-#' @description Checks if the signal is present in the data. Often a high percentage of high through-put data does not contain a signal. Checking if data does not contain signal before doing a sigmoidal or double sigmoidal fit can make the analysis of data from high-throughput experiments much faster.
-#' @export
-#'
-#' @examples
-#'# Example 1 with double sigmoidal data
-#'
-#'time=seq(3, 24, 0.1)
-#'
-#'#simulate intensity data and add noise
-#'noise_parameter = 0.2
-#'intensity_noise = runif(n = length(time), min = 0, max = 1) * noise_parameter
-#'intensity = sicegar::doublesigmoidalFitFormula_h0(time,
-#'                                               finalAsymptoteIntensityRatio = .3,
-#'                                               maximum = 4,
-#'                                               slope1Param = 1,
-#'                                               midPoint1Param = 7,
-#'                                               slope2Param = 1,
-#'                                               midPointDistanceParam = 8,
-#'                                               h0 = 0)
-#'intensity <- intensity + intensity_noise
-#'
-#'dataInput <- data.frame(intensity = intensity, time = time)
-#'normalizedInput <- sicegar::normalizeData_h0(dataInput, dataInputName = "sample001")
-#'isThis_nosignal <- sicegar::preCategorize_h0(normalizedInput = normalizedInput)
-#'
-#'
-#'
-#'# Example 2 with no_signal data
-#'
-#'time <- seq(3, 24, 0.1)
-#'
-#'#simulate intensity data and add noise
-#'noise_parameter <- 0.05
-#'intensity_noise <- runif(n = length(time), min = 0, max = 1) * noise_parameter * 2e-04
-#'intensity <- sicegar::doublesigmoidalFitFormula_h0(time,
-#'                                                finalAsymptoteIntensityRatio = .3,
-#'                                                maximum = 2e-04,
-#'                                                slope1Param = 1,
-#'                                                midPoint1Param = 7,
-#'                                                slope2Param = 1,
-#'                                                midPointDistanceParam = 8,
-#'                                                h0 = 0)
-#'intensity <- intensity + intensity_noise
-#'
-#'dataInput <- data.frame(intensity=intensity, time=time)
-#'normalizedInput <- sicegar::normalizeData_h0(dataInput,dataInputName = "sample001")
-#'isThis_nosignal <- sicegar::preCategorize_h0(normalizedInput = normalizedInput)
-#'
+# The function preCategorize() has not changed and is available in categorize.R
 
-
-preCategorize_h0 <-
-  function(normalizedInput,
-           threshold_intensity_range = 0.1,
-           threshold_minimum_for_intensity_maximum = 0.3)
-  {
-    #************************************************
-    # Define the crismas tree
-    decisionList <- list()
-    decisionList$dataInputName <- normalizedInput$dataInputName
-
-    # minimum for intensity maximum test
-    decisionList$intensityMaximum <- normalizedInput$dataScalingParameters[["intensityMax"]]
-    decisionList$threshold_minimum_for_intensity_maximum <- threshold_minimum_for_intensity_maximum
-    decisionList$test.minimum_for_intensity_maximum <- threshold_minimum_for_intensity_maximum < decisionList$intensityMaximum
-
-    # Intensity range test
-    decisionList$intensityRange <- normalizedInput$dataScalingParameters[["intensityRange"]]
-    decisionList$threshold_intensity_range <- threshold_intensity_range
-    decisionList$test.intensity_range <- threshold_intensity_range < decisionList$intensityRange
-
-
-    # Overal Decision Process
-    choices <- c("no_signal", "sigmoidal", "double_sigmoidal", "ambiguous")
-    decisonSteps <- c();
-
-    # no signal tests
-    # 1a. Observed intensity maximum must be bigger than "threshold_minimum_for_intensity_maximum", otherwise "no_signal"
-    if(!decisionList$test.minimum_for_intensity_maximum)
-    {
-      decisonSteps <- c(decisonSteps, "1a");
-    }
-
-    # 1b. "intensity_max, intensity_min difference" must be greater than "threshold_intensity_range", otherwise "no_signal"
-    if(!decisionList$test.minimum_for_intensity_maximum)
-    {
-      decisonSteps <- c(decisonSteps, "1b");
-    }
-
-    # 1c. If at this point it is not "no_signal" that it can not be "no signal"
-    if(!setequal(choices, c("no_signal")))
-    {
-      decisonSteps <- c(decisonSteps, "1c");
-    }
-
-    # Write the decision steps
-    decisionList$decisonSteps <- paste0(decisonSteps, collapse = "_")
-
-    # Overal Decision
-    decisionList$decision <- ifelse(decisionList$test.minimum_for_intensity_maximum & decisionList$test.intensity_range,
-                                  "not_no_signal", "no_signal")
-
-    # Return
-    return(decisionList)
-    #************************************************
-  }
+#    #' @title Checks for signal in the data.
+#    #'
+#    #' @param normalizedInput is the output of the sicegar::normalizeData() function.
+#    #' @param threshold_intensity_range  minimum for intensity range, i.e. it is the lower limit for the allowed difference between the maximum and minimum of the intensities (Default is 0.1, and the values are based on actual, not the rescaled data.).
+#    #' @param threshold_minimum_for_intensity_maximum minimum allowed value for intensity maximum. (Default is 0.3, and the values are based on actual, not the rescaled data.).
+#    #'
+#    #'
+#    #' @return Function returns a brief decision list that includes information about the decision process. Post important part of this information is decisionList$decisionwhich might be either "no_signal" or "not_no_signal".
+#    #' @description Checks if the signal is present in the data. Often a high percentage of high through-put data does not contain a signal. Checking if data does not contain signal before doing a sigmoidal or double sigmoidal fit can make the analysis of data from high-throughput experiments much faster.
+#    #' @export
+#    #'
+#    #' @examples
+#    #'# Example 1 with double sigmoidal data
+#    #'
+#    #'time=seq(3, 24, 0.1)
+#    #'
+#    #'#simulate intensity data and add noise
+#    #'noise_parameter = 0.2
+#    #'intensity_noise = runif(n = length(time), min = 0, max = 1) * noise_parameter
+#    #'intensity = sicegar::doublesigmoidalFitFormula_h0(time,
+#    #'                                               finalAsymptoteIntensityRatio = .3,
+#    #'                                               maximum = 4,
+#    #'                                               slope1Param = 1,
+#    #'                                               midPoint1Param = 7,
+#    #'                                               slope2Param = 1,
+#    #'                                               midPointDistanceParam = 8,
+#    #'                                               h0 = 0)
+#    #'intensity <- intensity + intensity_noise
+#    #'
+#    #'dataInput <- data.frame(intensity = intensity, time = time)
+#    #'normalizedInput <- sicegar::normalizeData(dataInput, dataInputName = "sample001")
+#    #'isThis_nosignal <- sicegar::preCategorize_h0(normalizedInput = normalizedInput)
+#    #'
+#    #'
+#    #'
+#    #'# Example 2 with no_signal data
+#    #'
+#    #'time <- seq(3, 24, 0.1)
+#    #'
+#    #'#simulate intensity data and add noise
+#    #'noise_parameter <- 0.05
+#    #'intensity_noise <- runif(n = length(time), min = 0, max = 1) * noise_parameter * 2e-04
+#    #'intensity <- sicegar::doublesigmoidalFitFormula_h0(time,
+#    #'                                                finalAsymptoteIntensityRatio = .3,
+#    #'                                                maximum = 2e-04,
+#    #'                                                slope1Param = 1,
+#    #'                                                midPoint1Param = 7,
+#    #'                                                slope2Param = 1,
+#    #'                                                midPointDistanceParam = 8,
+#    #'                                                h0 = 0)
+#    #'intensity <- intensity + intensity_noise
+#    #'
+#    #'dataInput <- data.frame(intensity=intensity, time=time)
+#    #'normalizedInput <- sicegar::normalizeData(dataInput,dataInputName = "sample001")
+#    #'isThis_nosignal <- sicegar::preCategorize_h0(normalizedInput = normalizedInput)
+#    #'
+#
+#
+#    preCategorize <-
+#      function(normalizedInput,
+#               threshold_intensity_range = 0.1,
+#               threshold_minimum_for_intensity_maximum = 0.3)
+#      {
+#        #************************************************
+#        # Define the crismas tree
+#        decisionList <- list()
+#        decisionList$dataInputName <- normalizedInput$dataInputName
+#
+#        # minimum for intensity maximum test
+#        decisionList$intensityMaximum <- normalizedInput$dataScalingParameters[["intensityMax"]]
+#        decisionList$threshold_minimum_for_intensity_maximum <- threshold_minimum_for_intensity_maximum
+#        decisionList$test.minimum_for_intensity_maximum <- threshold_minimum_for_intensity_maximum < decisionList$intensityMaximum
+#
+#        # Intensity range test
+#        decisionList$intensityRange <- normalizedInput$dataScalingParameters[["intensityRange"]]
+#        decisionList$threshold_intensity_range <- threshold_intensity_range
+#        decisionList$test.intensity_range <- threshold_intensity_range < decisionList$intensityRange
+#
+#
+#        # Overal Decision Process
+#        choices <- c("no_signal", "sigmoidal", "double_sigmoidal", "ambiguous")
+#        decisonSteps <- c();
+#
+#        # no signal tests
+#        # 1a. Observed intensity maximum must be bigger than "threshold_minimum_for_intensity_maximum", otherwise "no_signal"
+#        if(!decisionList$test.minimum_for_intensity_maximum)
+#        {
+#          decisonSteps <- c(decisonSteps, "1a");
+#        }
+#
+#        # 1b. "intensity_max, intensity_min difference" must be greater than "threshold_intensity_range", otherwise "no_signal"
+#        if(!decisionList$test.minimum_for_intensity_maximum)
+#        {
+#          decisonSteps <- c(decisonSteps, "1b");
+#        }
+#
+#        # 1c. If at this point it is not "no_signal" that it can not be "no signal"
+#        if(!setequal(choices, c("no_signal")))
+#        {
+#          decisonSteps <- c(decisonSteps, "1c");
+#        }
+#
+#        # Write the decision steps
+#        decisionList$decisonSteps <- paste0(decisonSteps, collapse = "_")
+#
+#        # Overal Decision
+#        decisionList$decision <- ifelse(decisionList$test.minimum_for_intensity_maximum & decisionList$test.intensity_range,
+#                                      "not_no_signal", "no_signal")
+#
+#        # Return
+#        return(decisionList)
+#        #************************************************
+#      }
+#

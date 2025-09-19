@@ -62,7 +62,7 @@ intensity <- sicegar::doublesigmoidalFitFormula_h0(time,
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)
-normalizedInput <- sicegar::normalizeData_h0(dataInput,
+normalizedInput <- sicegar::normalizeData(dataInput,
                                          dataInputName = "sample001")
 
 

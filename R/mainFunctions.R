@@ -242,9 +242,9 @@ fitAndCategorize <-
 
     }else{
 
-      normalizedInput = sicegar::normalizeData_h0(dataInput = dataInput,
+      normalizedInput = sicegar::normalizeData(dataInput = dataInput,
                                                   dataInputName = dataInputName)
-      preDecisionProcess = sicegar::preCategorize_h0(normalizedInput = normalizedInput,
+      preDecisionProcess = sicegar::preCategorize(normalizedInput = normalizedInput,
                                                   threshold_intensity_range = threshold_intensity_range,
                                                   threshold_minimum_for_intensity_maximum = threshold_minimum_for_intensity_maximum)
 

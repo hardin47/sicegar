@@ -24,7 +24,7 @@
 #'intensity <- intensity+intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
-#'normalizedInput <- sicegar::normalizeData_h0(dataInput)
+#'normalizedInput <- sicegar::normalizeData(dataInput)
 #'parameterVector <- sicegar::multipleFitFunction_h0(dataInput = normalizedInput,
 #'                                             dataInputName = "sample01",
 #'                                             model = "doublesigmoidal",

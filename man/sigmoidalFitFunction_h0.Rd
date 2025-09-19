@@ -45,7 +45,7 @@ intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint 
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)
-normalizedInput <- normalizeData_h0(dataInput)
+normalizedInput <- normalizeData(dataInput)
 parameterVector <- sigmoidalFitFunction_h0(normalizedInput, tryCounter = 2)
 
 #Check the results

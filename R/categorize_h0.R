@@ -63,7 +63,7 @@
 #'utils::str(outputCluster)
 #'
 
-categorize_h0 <- # changed
+categorize_h0 <-
   function(parameterVectorSigmoidal,
            parameterVectorDoubleSigmoidal,
            threshold_intensity_range = 0.1,

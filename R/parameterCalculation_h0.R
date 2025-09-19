@@ -81,7 +81,7 @@ parameterCalculation_h0<-function(parameterVector, stepSize=0.00001){
 
     # calculate  midpoint1 (the time that function reaches half of maximum)
     parameterVector$midPoint1_x <- f_mid1_doublesigmoidal(parameterVector)
-    parameterVector$midPoint1_y <- doublesigmoidalFitFormula(x = parameterVector$midPoint1_x,
+    parameterVector$midPoint1_y <- doublesigmoidalFitFormula_h0(x = parameterVector$midPoint1_x,
                                                              finalAsymptoteIntensityRatio = parameterVector$finalAsymptoteIntensityRatio_Estimate,
                                                              maximum = parameterVector$maximum_y,
                                                              slope1Param = parameterVector$slope1Param_Estimate,

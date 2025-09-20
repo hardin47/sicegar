@@ -31,7 +31,7 @@
 #'                                            maximum = parameterVector$maximum_Estimate,
 #'                                            slopeParam = parameterVector$slopeParam_Estimate,
 #'                                            midPoint = parameterVector$midPoint_Estimate,
-#'                                            h0 = h0_estimate)
+#'                                            h0 = h0_Estimate)
 #'
 #'comparisonData <- cbind(dataInput, intensityTheoretical)
 #'

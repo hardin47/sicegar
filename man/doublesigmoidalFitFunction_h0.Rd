@@ -62,7 +62,7 @@ parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 2
 #Check the results
 if(parameterVector$isThisaFit){
     intensityTheoretical <-
-         doublesigmoidalFitFormula(
+         doublesigmoidalFitFormula_h0(
              time,
              finalAsymptoteIntensityRatio = parameterVector$finalAsymptoteIntensityRatio_Estimate,
              maximum = parameterVector$maximum_Estimate,

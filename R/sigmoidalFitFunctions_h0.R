@@ -1,10 +1,10 @@
 #' @title Sigmoidal fit function with h0 estimation
 #'
-#' @param dataInput A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
+#' @param dataInput A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
 #' @param tryCounter  A counter that shows the number of times the data was fit via maximum likelihood function.
-#' @param startList The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1, midPoint = 0.33, and h0 = 0. The numbers are in normalized time intensity scale.
-#' @param lowerBounds The lower bounds for the randomly generated start parameters.  The vector composes of three elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = 0. The numbers are in normalized time intensity scale.
-#' @param upperBounds The upper bounds for the randomly generated start parameters.  The vector composes of three elements; 'maximum', 'slopeParam','midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.
+#' @param startList A vector containing the initial set of parameters that the algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1, midPoint = 0.33, and h0 = 0. The numbers are in normalized time intensity scale.
+#' @param lowerBounds The lower bounds for the randomly generated start parameters.  The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = 0. The numbers are in normalized time intensity scale.
+#' @param upperBounds The upper bounds for the randomly generated start parameters.  The vector composes of four elements; 'maximum', 'slopeParam','midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.
 #' @param min_Factor Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.
 #' @param n_iterations Defines maximum number of iterations used by the fitting algorithm. Default is 1000
 #'
@@ -158,11 +158,11 @@ sigmoidalFitFunction_h0 <- function(dataInput,
 #'
 #' @param x  the "time" (time) column of the dataframe.
 #' @param maximum the maximum intensity that the sigmoidal function can reach while time approaches infinity.
-#' @param slopeParam  the slope parameter of the sigmoidal function at the steppest point.
-#' @param midPoint  the x axis value of the steppest point in the function.
+#' @param slopeParam  the slope parameter of the sigmoidal function at the steepest point.
+#' @param midPoint  the x axis value of the steepest point in the function.
 #' @param h0 the lower asymptote (baseline) intensity
 #'
-#' @description Calculates intesities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, midpoint, and h0).
+#' @description Calculates intensities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, midpoint, and h0).
 #' @return Returns the predicted intensities for given time points with the given sigmoidal fit parameters.
 #'
 #' @examples
@@ -218,9 +218,9 @@ sigmoidalFitFormula_h0 <- function(x, maximum, slopeParam, midPoint, h0){
 #        *slopeParam_N_Estimate (normalzied Slope Parameter Estimate)
 #        *midPoint_N_Estimate (normalized Midpoint Estimate)
 #        *h0_N_Estimate (normalized h0 Estimate)
-#        *dataScalingParameters.intensityRange the range of initial unnormalized intensity. Provieded if the data is normalized
-#        *parameterDF$dataScalingParameters.intensityMin the minimum of unnormalized intensity. Provieded if the data is normalized
-#        *parameterDF$dataScalingParameters.timeRange tha maximum time that the experiment reach. Provieded if the data is normalized
+#        *dataScalingParameters.intensityRange the range of initial unnormalized intensity. Provided if the data is normalized
+#        *parameterDF$dataScalingParameters.intensityMin the minimum of unnormalized intensity. Provided if the data is normalized
+#        *parameterDF$dataScalingParameters.timeRange th maximum time that the experiment reach. Provided if the data is normalized
 # @param isalist defines if the input is provided as a list (i.e normalized) or as a data frame (i.e not normalized)
 # @details If the fit was done in normalized data frame then the found fit parameters will belong to normalized data.
 #          This function generates unnormalized counterparts of those parameters.

@@ -1,6 +1,6 @@
 #' @title multiple fit function h0.
 #'
-#' @param dataInput A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
+#' @param dataInput A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
 #' @param model Type of fit model that will be used. Can be "sigmoidal", or "double_sigmoidal".
 #' @param n_runs_max This number indicates the upper limit of the fitting attempts. Default is 500.
 #' @param n_runs_min This number indicates the lower limit of the successful fitting attempts. It should be smaller than the upper limit of the fitting attempts (n_runs_max). Default is 20.

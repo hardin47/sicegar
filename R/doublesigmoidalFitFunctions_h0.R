@@ -1,10 +1,10 @@
-#' @title Double sigmoidal fit function.
+#' @title Double sigmoidal fit function with h0.
 #'
-#' @param dataInput A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
+#' @param dataInput A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
 #' @param tryCounter A counter that shows the number of times the data was fit via maximum likelihood function.
-#' @param startList The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of six elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', and 'midPointDistanceParam'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, and midPointDistanceParam=0.29. The numbers are in normalized time intensity scale.
-#' @param lowerBounds The lower bounds for the randomly generated start parameters.  The vector composes of six elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', and 'midPointDistanceParam'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, and midPointDistanceParam = 0.04. The numbers are in normalized time intensity scale.
-#' @param upperBounds The upper bounds for the randomly generated start parameters.  The vector composes of six elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', and 'midPointDistanceParam'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, and midPointDistanceParam = 0.63. The numbers are in normalized time intensity scale.
+#' @param startList The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, and h0 = 0.1. The numbers are in normalized time intensity scale.
+#' @param lowerBounds The lower bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = 0. The numbers are in normalized time intensity scale.
+#' @param upperBounds The upper bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.
 #' @param min_Factor Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.
 #' @param n_iterations Define maximum number of iterations used by the fitting algorithm. Default is 1000
 #'
@@ -198,15 +198,15 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
 
 
 #**************************************
-#' @title Double Sigmoidal Formula
+#' @title Double Sigmoidal Formula with h0
 #'
 #' @param x the "time" (time) column of the dataframe
 #' @param finalAsymptoteIntensityRatio This is the ratio between asymptote intensity and maximum intensity of the fitted curve.
 #' @param maximum the maximum intensity that the double sigmoidal function reach.
-#' @param slope1Param the slope parameter of the sigmoidal function at the steppest point in the exponential phase of the viral production.
-#' @param midPoint1Param the x axis value of the steppest point in the function.
-#' @param slope2Param the slope parameter of the sigmoidal function at the steppest point in the lysis phase. i.e when the intensity is decreasing.
-#' @param midPointDistanceParam the distance between the time of steppest increase and steppest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.
+#' @param slope1Param the slope parameter of the sigmoidal function at the steepest point in the exponential phase of the viral production.
+#' @param midPoint1Param the x axis value of the steepest point in the function.
+#' @param slope2Param the slope parameter of the sigmoidal function at the steepest point in the lysis phase. i.e when the intensity is decreasing.
+#' @param midPointDistanceParam the distance between the time of steepest increase and steepest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.
 #' @param h0 the lower asymptote (baseline) intensity
 #'
 #' @description Calculates intensities using the double-sigmoidal model fit and the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and mid point distance).
@@ -339,7 +339,7 @@ f2_h0 <- function (x, A2, Ka, B1, M1, B2, L, const, argument, h0){
 #**************************************
 # @title f_argmax_doublesigmoidal_h0
 #
-# @param parameterDf is a dataFrame that includes columns with names:
+# @param parameterVector is a dataFrame that includes columns with names:
 #
 # *"dataScalingParameters.timeRange" that represents maximum time of intensity measurements,
 #

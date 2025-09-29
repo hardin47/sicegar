@@ -356,7 +356,7 @@ figureModelCurves <- function(dataInput,
         startPoint_y <- sigmoidalFitVector$startPoint_y
         reachMaximum_x <- sigmoidalFitVector$reachMaximum_x
         reachMaximum_y <- sigmoidalFitVector$reachMaximum_y
-        h0 <- sigmoidalFitVetor$h0_Estimate
+        h0 <- sigmoidalFitVector$h0_Estimate
 
         # Generate the Time Series for Fitted Data
         if (is.na(fittedXmax)){

@@ -22,7 +22,7 @@ test_that('sigmoidal fit function with free h0', {
   time <- seq(1, 50, 1)
   intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 1)
   expect_equal(max(intensity), 4) # maximum is 4
-  expect_equal(intensity[8], 2) # midpoint is at time = 8
+  expect_equal(intensity[8], 2.5) # midpoint is at time = 8
 })
 
 test_that('double-sigmoidal fit function with free h0', {

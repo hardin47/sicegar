@@ -124,7 +124,7 @@
 <span class="r-in"><span>                                               midPoint1Param <span class="op">=</span> <span class="fl">7</span>,</span></span>
 <span class="r-in"><span>                                               slope2Param <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>                                               midPointDistanceParam <span class="op">=</span> <span class="fl">8</span>,</span></span>
-<span class="r-in"><span>                                               h0 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                                               h0 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">intensity</span> <span class="op">&lt;-</span> <span class="va">intensity</span> <span class="op">+</span> <span class="va">intensity_noise</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dataInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>intensity <span class="op">=</span> <span class="va">intensity</span>, time <span class="op">=</span> <span class="va">time</span><span class="op">)</span></span></span>
@@ -164,7 +164,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ intensityMaximum                        : num 4.18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ threshold_minimum_for_intensity_maximum : num 0.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.minimum_for_intensity_maximum      : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ intensityRange                          : num 4.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ intensityRange                          : num 3.09</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ threshold_intensity_range               : num 0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.intensity_range                    : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.sigmoidalFit                       : logi TRUE</span>
@@ -172,9 +172,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.sigmoidalAdditionalParameters      : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.doublesigmoidalAdditionalParameters: logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ threshold_AIC                           : num -10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sigmoidalAIC                            : num 25.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sigmoidalAIC                            : num 148</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.sigmoidalAIC                       : logi FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ doublesigmoidalAIC                      : num -1179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ doublesigmoidalAIC                      : num -1068</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.doublesigmoidalAIC                 : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ dsm_maximum_x                           : num 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ timeRange                               : num 24</span>
@@ -185,14 +185,14 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ dsm_tmax_IntensityRatio                 : num 0.317</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ threshold_dsm_tmax_IntensityRatio       : num 0.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.dsm_tmax_IntensityRatio            : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sm_startPoint_x                         : num 5.22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sm_startPoint_x                         : num 5.03</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.sm_startPoint_x                    : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dsm_startPoint_x                        : num 4.92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dsm_startPoint_x                        : num 4.21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.dsm_startPoint_x                   : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sm_startIntensity                       : num 0.297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sm_startIntensity                       : num 1.23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ threshold_t0_max_int                    : num 1e+10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.sm_startIntensity                  : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dsm_startIntensity                      : num 0.12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dsm_startIntensity                      : num 1.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ test.dsm_startIntensity                 : logi TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ decisonSteps                            : chr "1c_3a_8"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ decision                                : chr "double_sigmoidal"</span>

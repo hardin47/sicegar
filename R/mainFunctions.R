@@ -1,6 +1,6 @@
 #' @title Fit and categorize.
 #'
-#' @param dataInput Un_normalized input data that will be fitted transferred into related functions
+#' @param dataInput Unnormalized input data that will be fitted transferred into related functions
 #' @param n_runs_max_sm This number indicates the upper limit of the fitting attempts for sigmoidal model. Default is 500
 #' @param n_runs_min_sm This number indicates the lower limit of the successful fitting attempts for sigmoidal model. It should be smaller than the upper limit of the fitting attempts (n_runs_max_sm). Default is 20
 #' @param n_runs_max_dsm This number indicates the upper limit of the fitting attempts for sigmoidal model for double sigmoidal model. Default is 500
@@ -25,6 +25,12 @@
 #' @param stepSize Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.
 #' @param showDetails Logical if TRUE prints details of intermediate steps of individual fits (Default is FALSE).
 #' @param dataInputName Name of data set (Default is 'NA').
+#' @param startList_sm_h0 The initial set of parameters vector that sigmoidal fit algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1 and, midPoint = 0.33, h0 = 0. The numbers are in normalized time intensity scale.
+#' @param lowerBounds_sm_h0 The lower bounds for the randomly generated start parameters for the sigmoidal fit. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = -0.1. The numbers are in normalized time intensity scale.
+#' @param upperBounds_sm_h0 The upper bounds for the randomly generated start parameters for the sigmoidal fit. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.
+#' @param startList_dsm_h0 The initial set of parameters vector that double sigmoidal fit algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, h0 = 0. The numbers are in normalized time intensity scale.
+#' @param lowerBounds_dsm_h0 The lower bounds for the randomly generated start parameters for double sigmoidal fit.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = -0.1. The numbers are in normalized time intensity scale.
+#' @param upperBounds_dsm_h0 The upper bounds for the randomly generated start parameters for double sigmoidal fit.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.
 #' @param use_h0 Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)
 #' @param ... All other arguments that model functions ("sigmoidalFitFunction" and, "doublesigmoidalFitFunction") may need.
 #'
@@ -93,6 +99,30 @@ fitAndCategorize <-
            threshold_AIC = -10,
            threshold_t0_max_int = 1E10,
            stepSize = 0.00001,
+           startList_sm_h0 = list(maximum = 1, slopeParam = 1, midPoint = 0.33, h0 = 0),
+           lowerBounds_sm_h0 = c(maximum = 0.3, slopeParam = 0.01,  midPoint = -0.52, h0 = -0.1),
+           upperBounds_sm_h0 = c(maximum = 1.5, slopeParam = 180,  midPoint = 1.15, h0 = 0.3),
+           startList_dsm_h0 = list(finalAsymptoteIntensityRatio = 0,
+                                   maximum = 1,
+                                   slope1Param = 1,
+                                   midPoint1Param = 0.33,
+                                   slope2Param = 1,
+                                   midPointDistanceParam = 0.29,
+                                   h0 = 0),
+           lowerBounds_dsm_h0 = c(finalAsymptoteIntensityRatio = 0,
+                                  maximum = 0.3,
+                                  slope1Param = .01,
+                                  midPoint1Param = -0.52,
+                                  slope2Param = .01,
+                                  midPointDistanceParam = 0.04,
+                                  h0 = -0.1),
+           upperBounds_dsm_h0 = c(finalAsymptoteIntensityRatio = 1,
+                                  maximum = 1.5,
+                                  slope1Param = 180,
+                                  midPoint1Param = 1.15,
+                                  slope2Param = 180,
+                                  midPointDistanceParam = 0.63,
+                                  h0 = 0.3),
            use_h0 = FALSE,
            ...){
 
@@ -282,9 +312,9 @@ fitAndCategorize <-
                                                        n_runs_min = n_runs_min_sm,
                                                        n_runs_max = n_runs_max_sm,
                                                        showDetails = showDetails,
-                                                       startList = startList_sm,
-                                                       lowerBounds = lowerBounds_sm,
-                                                       upperBounds = upperBounds_sm,
+                                                       startList = startList_sm_h0,
+                                                       lowerBounds = lowerBounds_sm_h0,
+                                                       upperBounds = upperBounds_sm_h0,
                                                        min_Factor = min_Factor_sm,
                                                        n_iterations = n_iterations_sm)
 
@@ -294,9 +324,9 @@ fitAndCategorize <-
                                                              n_runs_min = n_runs_min_dsm,
                                                              n_runs_max = n_runs_max_dsm,
                                                              showDetails = showDetails,
-                                                             startList = startList_dsm,
-                                                             lowerBounds = lowerBounds_dsm,
-                                                             upperBounds = upperBounds_dsm,
+                                                             startList = startList_dsm_h0,
+                                                             lowerBounds = lowerBounds_dsm_h0,
+                                                             upperBounds = upperBounds_dsm_h0,
                                                              min_Factor = min_Factor_dsm,
                                                              n_iterations = n_iterations_dsm)
 

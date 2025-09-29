@@ -15,7 +15,7 @@ multipleFitFunction_h0(
 )
 }
 \arguments{
-\item{dataInput}{A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
+\item{dataInput}{A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
 
 \item{dataInputName}{Name of data set (Default is 'NA').}
 
@@ -42,7 +42,7 @@ time <- seq(3, 24, 0.5)
 #simulate intensity data and add noise
 noise_parameter <- 2.5
 intensity_noise <- stats::runif(n = length(time), min = 0, max = 1) * noise_parameter
-intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 0)
+intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 1)
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)
@@ -90,7 +90,7 @@ intensity <- doublesigmoidalFitFormula_h0(time,
                                       midPoint1Param = 7,
                                       slope2Param = 1,
                                       midPointDistanceParam = 8,
-                                      h0 = 0)
+                                      h0 = 1)
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)

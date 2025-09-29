@@ -2,8 +2,8 @@
 #'
 #' @param dataInput A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.
 #' @param tryCounter A counter that shows the number of times the data was fit via maximum likelihood function.
-#' @param startList The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, and h0 = 0.1. The numbers are in normalized time intensity scale.
-#' @param lowerBounds The lower bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = 0. The numbers are in normalized time intensity scale.
+#' @param startList The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, and h0 = 0. The numbers are in normalized time intensity scale.
+#' @param lowerBounds The lower bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = -0.1. The numbers are in normalized time intensity scale.
 #' @param upperBounds The upper bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.
 #' @param min_Factor Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.
 #' @param n_iterations Define maximum number of iterations used by the fitting algorithm. Default is 1000
@@ -24,15 +24,17 @@
 #'                                      midPoint1Param = 7,
 #'                                      slope2Param = 1,
 #'                                      midPointDistanceParam = 8,
-#'                                      h0 = 0)
+#'                                      h0 = 1)
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
 #'normalizedInput <- normalizeData(dataInput)
-#'parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 2)
+#'parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 1)
 #'
 #'
 #'#Check the results
+#'# doublesigmoidalFitFunction_h0() is run on the startList param values (because 'tryCounter = 1')
+#'# use multipleFitFunction() for multiple random starts in order to optimize
 #'if(parameterVector$isThisaFit){
 #'     intensityTheoretical <-
 #'          doublesigmoidalFitFormula_h0(
@@ -225,15 +227,17 @@ doublesigmoidalFitFunction_h0 <- function(dataInput,
 #'                                       midPoint1Param = 7,
 #'                                       slope2Param = 1,
 #'                                       midPointDistanceParam = 8,
-#'                                       h0 = 0)
+#'                                       h0 = 1)
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
 #'normalizedInput <- normalizeData(dataInput)
-#'parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 2)
+#'parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 1)
 #'
 #'
 #'#Check the results
+#'# doublesigmoidalFitFunction_h0() is run on the startList param values (because 'tryCounter = 1')
+#'# use multipleFitFunction() for multiple random starts in order to optimize
 #'if(parameterVector$isThisaFit){
 #'  intensityTheoretical <-
 #'        doublesigmoidalFitFormula_h0(

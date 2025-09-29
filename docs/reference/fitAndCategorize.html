@@ -75,6 +75,17 @@
 <span>  threshold_AIC <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>,</span>
 <span>  threshold_t0_max_int <span class="op">=</span> <span class="fl">1e+10</span>,</span>
 <span>  stepSize <span class="op">=</span> <span class="fl">1e-05</span>,</span>
+<span>  startList_sm_h0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">1</span>, slopeParam <span class="op">=</span> <span class="fl">1</span>, midPoint <span class="op">=</span> <span class="fl">0.33</span>, h0 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  lowerBounds_sm_h0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">0.3</span>, slopeParam <span class="op">=</span> <span class="fl">0.01</span>, midPoint <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span>, h0 <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  upperBounds_sm_h0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>maximum <span class="op">=</span> <span class="fl">1.5</span>, slopeParam <span class="op">=</span> <span class="fl">180</span>, midPoint <span class="op">=</span> <span class="fl">1.15</span>, h0 <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>  startList_dsm_h0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">1</span>, slope1Param <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    midPoint1Param <span class="op">=</span> <span class="fl">0.33</span>, slope2Param <span class="op">=</span> <span class="fl">1</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.29</span>, h0 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  lowerBounds_dsm_h0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">0</span>, maximum <span class="op">=</span> <span class="fl">0.3</span>, slope1Param <span class="op">=</span></span>
+<span>    <span class="fl">0.01</span>, midPoint1Param <span class="op">=</span> <span class="op">-</span><span class="fl">0.52</span>, slope2Param <span class="op">=</span> <span class="fl">0.01</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.04</span>, h0 <span class="op">=</span></span>
+<span>    <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  upperBounds_dsm_h0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">1</span>, maximum <span class="op">=</span> <span class="fl">1.5</span>, slope1Param <span class="op">=</span></span>
+<span>    <span class="fl">180</span>, midPoint1Param <span class="op">=</span> <span class="fl">1.15</span>, slope2Param <span class="op">=</span> <span class="fl">180</span>, midPointDistanceParam <span class="op">=</span> <span class="fl">0.63</span>, h0 <span class="op">=</span></span>
+<span>    <span class="fl">0.3</span><span class="op">)</span>,</span>
 <span>  use_h0 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -85,7 +96,7 @@
 
 
 <dl><dt id="arg-datainput">dataInput<a class="anchor" aria-label="anchor" href="#arg-datainput"></a></dt>
-<dd><p>Un_normalized input data that will be fitted transferred into related functions</p></dd>
+<dd><p>Unnormalized input data that will be fitted transferred into related functions</p></dd>
 
 
 <dt id="arg-datainputname">dataInputName<a class="anchor" aria-label="anchor" href="#arg-datainputname"></a></dt>
@@ -182,6 +193,30 @@
 
 <dt id="arg-stepsize">stepSize<a class="anchor" aria-label="anchor" href="#arg-stepsize"></a></dt>
 <dd><p>Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.</p></dd>
+
+
+<dt id="arg-startlist-sm-h-">startList_sm_h0<a class="anchor" aria-label="anchor" href="#arg-startlist-sm-h-"></a></dt>
+<dd><p>The initial set of parameters vector that sigmoidal fit algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1 and, midPoint = 0.33, h0 = 0. The numbers are in normalized time intensity scale.</p></dd>
+
+
+<dt id="arg-lowerbounds-sm-h-">lowerBounds_sm_h0<a class="anchor" aria-label="anchor" href="#arg-lowerbounds-sm-h-"></a></dt>
+<dd><p>The lower bounds for the randomly generated start parameters for the sigmoidal fit. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = -0.1. The numbers are in normalized time intensity scale.</p></dd>
+
+
+<dt id="arg-upperbounds-sm-h-">upperBounds_sm_h0<a class="anchor" aria-label="anchor" href="#arg-upperbounds-sm-h-"></a></dt>
+<dd><p>The upper bounds for the randomly generated start parameters for the sigmoidal fit. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.</p></dd>
+
+
+<dt id="arg-startlist-dsm-h-">startList_dsm_h0<a class="anchor" aria-label="anchor" href="#arg-startlist-dsm-h-"></a></dt>
+<dd><p>The initial set of parameters vector that double sigmoidal fit algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, h0 = 0. The numbers are in normalized time intensity scale.</p></dd>
+
+
+<dt id="arg-lowerbounds-dsm-h-">lowerBounds_dsm_h0<a class="anchor" aria-label="anchor" href="#arg-lowerbounds-dsm-h-"></a></dt>
+<dd><p>The lower bounds for the randomly generated start parameters for double sigmoidal fit.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = -0.1. The numbers are in normalized time intensity scale.</p></dd>
+
+
+<dt id="arg-upperbounds-dsm-h-">upperBounds_dsm_h0<a class="anchor" aria-label="anchor" href="#arg-upperbounds-dsm-h-"></a></dt>
+<dd><p>The upper bounds for the randomly generated start parameters for double sigmoidal fit.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.</p></dd>
 
 
 <dt id="arg-use-h-">use_h0<a class="anchor" aria-label="anchor" href="#arg-use-h-"></a></dt>

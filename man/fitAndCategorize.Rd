@@ -33,12 +33,23 @@ fitAndCategorize(
   threshold_AIC = -10,
   threshold_t0_max_int = 1e+10,
   stepSize = 1e-05,
+  startList_sm_h0 = list(maximum = 1, slopeParam = 1, midPoint = 0.33, h0 = 0),
+  lowerBounds_sm_h0 = c(maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, h0 = -0.1),
+  upperBounds_sm_h0 = c(maximum = 1.5, slopeParam = 180, midPoint = 1.15, h0 = 0.3),
+  startList_dsm_h0 = list(finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1,
+    midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam = 0.29, h0 = 0),
+  lowerBounds_dsm_h0 = c(finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param =
+    0.01, midPoint1Param = -0.52, slope2Param = 0.01, midPointDistanceParam = 0.04, h0 =
+    -0.1),
+  upperBounds_dsm_h0 = c(finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param =
+    180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, h0 =
+    0.3),
   use_h0 = FALSE,
   ...
 )
 }
 \arguments{
-\item{dataInput}{Un_normalized input data that will be fitted transferred into related functions}
+\item{dataInput}{Unnormalized input data that will be fitted transferred into related functions}
 
 \item{dataInputName}{Name of data set (Default is 'NA').}
 
@@ -87,6 +98,18 @@ fitAndCategorize(
 \item{threshold_t0_max_int}{Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).}
 
 \item{stepSize}{Step size used by the fitting algorithm. Smaller numbers gave more accurate results than larger numbers, and larger numbers gave the results faster than small numbers. The default value is 0.00001.}
+
+\item{startList_sm_h0}{The initial set of parameters vector that sigmoidal fit algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1 and, midPoint = 0.33, h0 = 0. The numbers are in normalized time intensity scale.}
+
+\item{lowerBounds_sm_h0}{The lower bounds for the randomly generated start parameters for the sigmoidal fit. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = -0.1. The numbers are in normalized time intensity scale.}
+
+\item{upperBounds_sm_h0}{The upper bounds for the randomly generated start parameters for the sigmoidal fit. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.}
+
+\item{startList_dsm_h0}{The initial set of parameters vector that double sigmoidal fit algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, h0 = 0. The numbers are in normalized time intensity scale.}
+
+\item{lowerBounds_dsm_h0}{The lower bounds for the randomly generated start parameters for double sigmoidal fit.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = -0.1. The numbers are in normalized time intensity scale.}
+
+\item{upperBounds_dsm_h0}{The upper bounds for the randomly generated start parameters for double sigmoidal fit.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.}
 
 \item{use_h0}{Boolean which decides whether to fix the lower asymptote of h0 at 0 (FALSE, default) or to freely estimate h0 (TRUE)}
 

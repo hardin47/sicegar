@@ -2,7 +2,7 @@
 % Please edit documentation in R/doublesigmoidalFitFunctions_h0.R
 \name{doublesigmoidalFitFormula_h0}
 \alias{doublesigmoidalFitFormula_h0}
-\title{Double Sigmoidal Formula}
+\title{Double Sigmoidal Formula with h0}
 \usage{
 doublesigmoidalFitFormula_h0(
   x,
@@ -22,13 +22,13 @@ doublesigmoidalFitFormula_h0(
 
 \item{maximum}{the maximum intensity that the double sigmoidal function reach.}
 
-\item{slope1Param}{the slope parameter of the sigmoidal function at the steppest point in the exponential phase of the viral production.}
+\item{slope1Param}{the slope parameter of the sigmoidal function at the steepest point in the exponential phase of the viral production.}
 
-\item{midPoint1Param}{the x axis value of the steppest point in the function.}
+\item{midPoint1Param}{the x axis value of the steepest point in the function.}
 
-\item{slope2Param}{the slope parameter of the sigmoidal function at the steppest point in the lysis phase. i.e when the intensity is decreasing.}
+\item{slope2Param}{the slope parameter of the sigmoidal function at the steepest point in the lysis phase. i.e when the intensity is decreasing.}
 
-\item{midPointDistanceParam}{the distance between the time of steppest increase and steppest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.}
+\item{midPointDistanceParam}{the distance between the time of steepest increase and steepest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.}
 
 \item{h0}{the lower asymptote (baseline) intensity}
 }
@@ -51,15 +51,17 @@ intensity <- doublesigmoidalFitFormula_h0(time,
                                       midPoint1Param = 7,
                                       slope2Param = 1,
                                       midPointDistanceParam = 8,
-                                      h0 = 0)
+                                      h0 = 1)
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)
 normalizedInput <- normalizeData(dataInput)
-parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 2)
+parameterVector <- doublesigmoidalFitFunction_h0(normalizedInput, tryCounter = 1)
 
 
 #Check the results
+# doublesigmoidalFitFunction_h0() is run on the startList param values (because 'tryCounter = 1')
+# use multipleFitFunction() for multiple random starts in order to optimize
 if(parameterVector$isThisaFit){
  intensityTheoretical <-
        doublesigmoidalFitFormula_h0(

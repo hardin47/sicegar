@@ -11,9 +11,9 @@ sigmoidalFitFormula_h0(x, maximum, slopeParam, midPoint, h0)
 
 \item{maximum}{the maximum intensity that the sigmoidal function can reach while time approaches infinity.}
 
-\item{slopeParam}{the slope parameter of the sigmoidal function at the steppest point.}
+\item{slopeParam}{the slope parameter of the sigmoidal function at the steepest point.}
 
-\item{midPoint}{the x axis value of the steppest point in the function.}
+\item{midPoint}{the x axis value of the steepest point in the function.}
 
 \item{h0}{the lower asymptote (baseline) intensity}
 }
@@ -21,7 +21,7 @@ sigmoidalFitFormula_h0(x, maximum, slopeParam, midPoint, h0)
 Returns the predicted intensities for given time points with the given sigmoidal fit parameters.
 }
 \description{
-Calculates intesities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, midpoint, and h0).
+Calculates intensities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, midpoint, and h0).
 }
 \examples{
 
@@ -30,14 +30,16 @@ time <- seq(3, 24, 0.5)
 #simulate intensity data and add noise
 noise_parameter <- 0.1
 intensity_noise <- stats::runif(n = length(time), min = 0, max = 1) * noise_parameter
-intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 0)
+intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 1)
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)
 normalizedInput <- normalizeData(dataInput)
-parameterVector <- sigmoidalFitFunction_h0(normalizedInput, tryCounter = 2)
+parameterVector <- sigmoidalFitFunction_h0(normalizedInput, tryCounter = 1)
 
 #Check the results
+# sigmoidalFitFunction_h0() is run on the startList param values (because 'tryCounter = 1')
+# use multipleFitFunction() for multiple random starts in order to optimize
 if(parameterVector$isThisaFit){
  intensityTheoretical <- sigmoidalFitFormula_h0(time,
                                              maximum = parameterVector$maximum_Estimate,

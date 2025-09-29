@@ -20,7 +20,7 @@
 #'#simulate intensity data and add noise
 #'noise_parameter <- 2.5
 #'intensity_noise <- stats::runif(n = length(time), min = 0, max = 1) * noise_parameter
-#'intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 0)
+#'intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 1)
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)
@@ -69,7 +69,7 @@
 #'                                       midPoint1Param = 7,
 #'                                       slope2Param = 1,
 #'                                       midPointDistanceParam = 8,
-#'                                       h0 = 0)
+#'                                       h0 = 1)
 #'intensity <- intensity + intensity_noise
 #'
 #'dataInput <- data.frame(intensity = intensity, time = time)

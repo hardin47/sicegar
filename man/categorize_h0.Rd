@@ -58,7 +58,7 @@ intensity <- sicegar::doublesigmoidalFitFormula_h0(time,
                                                midPoint1Param = 7,
                                                slope2Param = 1,
                                                midPointDistanceParam = 8,
-                                               h0 = 0)
+                                               h0 = 1)
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)

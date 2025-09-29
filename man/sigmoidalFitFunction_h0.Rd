@@ -8,22 +8,22 @@ sigmoidalFitFunction_h0(
   dataInput,
   tryCounter,
   startList = list(maximum = 1, slopeParam = 1, midPoint = 0.33, h0 = 0),
-  lowerBounds = c(maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, h0 = 0),
+  lowerBounds = c(maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, h0 = -0.1),
   upperBounds = c(maximum = 1.5, slopeParam = 180, midPoint = 1.15, h0 = 0.3),
   min_Factor = 1/2^20,
   n_iterations = 1000
 )
 }
 \arguments{
-\item{dataInput}{A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
+\item{dataInput}{A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
 
 \item{tryCounter}{A counter that shows the number of times the data was fit via maximum likelihood function.}
 
-\item{startList}{The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1, midPoint = 0.33, and h0 = 0. The numbers are in normalized time intensity scale.}
+\item{startList}{A vector containing the initial set of parameters that the algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1, midPoint = 0.33, and h0 = 0. The numbers are in normalized time intensity scale.}
 
-\item{lowerBounds}{The lower bounds for the randomly generated start parameters.  The vector composes of three elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = 0. The numbers are in normalized time intensity scale.}
+\item{lowerBounds}{The lower bounds for the randomly generated start parameters.  The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = -0.1. The numbers are in normalized time intensity scale.}
 
-\item{upperBounds}{The upper bounds for the randomly generated start parameters.  The vector composes of three elements; 'maximum', 'slopeParam','midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.}
+\item{upperBounds}{The upper bounds for the randomly generated start parameters.  The vector composes of four elements; 'maximum', 'slopeParam','midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.}
 
 \item{min_Factor}{Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.}
 
@@ -41,14 +41,16 @@ time <- seq(3, 24, 0.5)
 #simulate intensity data and add noise
 noise_parameter <- 0.1
 intensity_noise <- stats::runif(n = length(time), min = 0, max = 1) * noise_parameter
-intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 0)
+intensity <- sigmoidalFitFormula_h0(time, maximum = 4, slopeParam = 1, midPoint = 8, h0 = 1)
 intensity <- intensity + intensity_noise
 
 dataInput <- data.frame(intensity = intensity, time = time)
 normalizedInput <- normalizeData(dataInput)
-parameterVector <- sigmoidalFitFunction_h0(normalizedInput, tryCounter = 2)
+parameterVector <- sigmoidalFitFunction_h0(normalizedInput, tryCounter = 1)
 
 #Check the results
+# sigmoidalFitFunction_h0() is run on the startList param values (because 'tryCounter = 1')
+# use multipleFitFunction() for multiple random starts in order to optimize
 if(parameterVector$isThisaFit){
 intensityTheoretical <- sigmoidalFitFormula_h0(time,
                                            maximum = parameterVector$maximum_Estimate,

@@ -15,7 +15,7 @@ multipleFitFunction(
 )
 }
 \arguments{
-\item{dataInput}{A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
+\item{dataInput}{A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
 
 \item{dataInputName}{Name of data set (Default is 'NA').}
 

@@ -428,7 +428,7 @@ figureModelCurves <- function(dataInput,
         endDeclinePoint_x <- doubleSigmoidalFitVector$endDeclinePoint_x
         endDeclinePoint_y <- doubleSigmoidalFitVector$endDeclinePoint_y
 
-        h0 <- doubleSigmoidalFitVector$h0_Estiamte
+        h0 <- doubleSigmoidalFitVector$h0_Estimate
 
         # Generate the Time Series for Fitted Data
         if(is.na(fittedXmax)){

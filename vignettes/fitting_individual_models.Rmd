@@ -13,8 +13,12 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Sometimes it can be useful to fit only specific models to a dataset rather than fit multiple models and run the decision algorithm. For this purpose, **sicegar** provides the function `multipleFitFunction()`. This function fits a chosen model to the input dataset. It calls the fitting algorithm multiple times with different, randomly generated start parameters, to guarantee robust and reliable fitting.  
-
+Sometimes it can be useful to fit only specific models to a dataset rather than fit multiple models and run the decision algorithm. 
+For this purpose, **sicegar** provides the function `multipleFitFunction()`. 
+This function fits a chosen model to the input dataset. 
+It calls the fitting algorithm multiple times with different, randomly generated start parameters, to guarantee robust and reliable fitting.  
+The default functions assume that the lower asymptote, $h_0$, (when x is at negative infinity) is zero.
+If the data are better fit using a model that estimates the lower asymptote, `multipleFitFunction_h0()` function can be used.
 
 ```{r install packages, echo=FALSE, warning=FALSE, results='hide',message=FALSE}
 

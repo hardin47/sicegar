@@ -34,8 +34,10 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/additional_parameters.html">Calculation of additional parameters of interest</a></li>
+    <li><a class="dropdown-item" href="../articles/adjusting_data.html">Adjusting data to use with Sicegar</a></li>
     <li><a class="dropdown-item" href="../articles/categorizing_fits.html">Identifying the best-fitting model category</a></li>
     <li><a class="dropdown-item" href="../articles/fitting_individual_models.html">Fitting individual models</a></li>
+    <li><a class="dropdown-item" href="../articles/h0_functions.html">Allowing the lower asymptote parameter to vary freely</a></li>
     <li><a class="dropdown-item" href="../articles/introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="../articles/plotting_fitted_models.html">Plotting the fitted models</a></li>
   </ul>
@@ -63,7 +65,7 @@
                         <h4 data-toc-skip class="author">Umut Caglar,
 Claus O. Wilke</h4>
             
-            <h4 data-toc-skip class="date">2025-09-29</h4>
+            <h4 data-toc-skip class="date">2025-09-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/categorizing_fits.Rmd" class="external-link"><code>vignettes/categorizing_fits.Rmd</code></a></small>
       <div class="d-none name"><code>categorizing_fits.Rmd</code></div>
@@ -76,8 +78,13 @@ given dataset represents a sigmoidal curve, a double-sigmoidal curve, or
 neither. In these cases, we need to fit multiple different models to the
 data and then determine which model fits the best. This process is
 normally done automatically by the function
-<code><a href="../reference/fitAndCategorize.html">sicegar::fitAndCategorize()</a></code>. In this vignette, we describe
-how this process works and how it can be done manually.</p>
+<code><a href="../reference/fitAndCategorize.html">sicegar::fitAndCategorize()</a></code>. The default function assumes
+that the lower asymptote,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>0</mn></msub><annotation encoding="application/x-tex">h_0</annotation></semantics></math>,
+(when x is at negative infinity) is zero, but the argument
+<code>use_h0 = TRUE</code> can be used to estimate the lower asymptote.
+In this vignette, we describe how this process works and how it can be
+done manually.</p>
 <p>We will demonstrate this process for an artificial dataset
 representing a double-sigmoidal function. We first generate the
 data:</p>

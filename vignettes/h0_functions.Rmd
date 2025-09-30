@@ -1,6 +1,6 @@
 ---
 title: "Allowing the lower asymptote parameter to vary freely"
-author: "Thomas Matheis, Phineus Choi, Sam Butler, Jo Hardin"
+author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Jo Hardin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 There may be situations where we want to estimate the lower asymptote of $h_0$ freely in our model rather than assuming it always starts at zero, which is what **sicegar** assumes by default. 
 For this purpose, the functions `fitAndCategorize()` and `figureModelCurves()` contain the argument `use_h0` (which has a default value set to `FALSE`). 
-Setting the argument to `TRUE` results in the same process as usual, but utilizing functions ending in `_h0` instead of their default counterparts.
+Setting the argument to `TRUE` results in the same process as usual, using functions ending in `_h0` instead of their default counterparts.
 For example, the functions `multipleFitFunction()`, `doublesigmoidalFitFormula()`, `parameterCalculation()`, and `normalizeData()` have `_h0` counterparts, `multipleFitFunction_h0()`, `doublesigmoidalFitFormula_h0()`, `parameterCalculation_h0()`, and `normalizeData_h0()`.
 
 ```{r install_packages, echo=FALSE, warning=FALSE, results='hide',message=FALSE}
@@ -115,7 +115,7 @@ doubleSigmoidalModel_free <- multipleFitFunction_h0(dataInput=normalizedInput_fr
 doubleSigmoidalModel_free <- parameterCalculation_h0(doubleSigmoidalModel_free)
 ```
 
-Now that we have obtained a fit, we can use `figureModelCurves()` to plot it:
+Now that we have obtained a fit, we can use `figureModelCurves()` to plot:
 
 ```{r plot_raw_fit, echo=TRUE, message=FALSE, warning=FALSE, comment=FALSE, fig.height=4, fig.width=6}
 # double-sigmoidal fit

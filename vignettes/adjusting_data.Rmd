@@ -1,6 +1,6 @@
 ---
 title: "Adjusting data to use with Sicegar"
-author: "Thomas Matheis, Phineus Choi, Sam Butler, Jo Hardin"
+author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Jo Hardin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -13,7 +13,11 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are often cases where data must be manipulated before using with **sicegar**. Two common situations in which adjustments are needed is when the data has too few time points, and when it appears to have a decreasing, or negative, trend. While **sicegar** does not have built-in functions to perform the necessary corrections, the required operations are fairly simple.
+# Adjusting the data structure
+
+There are sometimes cases where data must be adjusted before using **sicegar**. 
+Two common situations in which adjustments are needed is when the data have too few time points, and when there appears to be a decreasing, or negative, trend. 
+While **sicegar** does not have built-in functions to perform the necessary corrections, the required operations are fairly straightforward.
 
 ```{r install_packages, echo=FALSE, warning=FALSE, results='hide',message=FALSE}
 
@@ -31,7 +35,11 @@ require("cowplot")
 ###*****************************
 ```
 
-We will first demonstrate how to adjust data with too few time points. More specifically, if sigmoidal data has five or fewer time points (six or fewer for double sigmoidal data), **sicegar** will fail to find a fit. This is a result of the sigmoidal and double sigmoidal models having six and seven parameters respectively.
+## Too few time points / observations
+
+We will first demonstrate how to adjust data with too few time points. 
+More specifically, if the sigmoidal data has on the order of five or fewer time points (six or fewer for double sigmoidal data), **sicegar** will usually fail to find a fit. 
+This is a result of the sigmoidal and double sigmoidal models having six and seven parameters respectively.
 
 ```{r generate_data}
 time <- seq(1, 24, 4)
@@ -53,7 +61,7 @@ ggplot(dataInput, aes(time, intensity)) +
   theme_bw()
 ```
 
-The easiest remedy is to add a small jitter in the x-direction, artificially creating many more time points for **sicegar** to work with.
+If there are multiple reps at each time point, a small jitter in the x-direction (time) can artificially create more time points for the **sicegar** estimation.
 
 ```{r}
 dataInput_jitter <- dataInput |>
@@ -67,7 +75,8 @@ ggplot(dataInput, aes(time, intensity)) +
   theme_bw()
 ```
 
-Now we use our data with `fitAndCategorize` as usual, finding a fit for our model and plot using `figureModelCurves()`:
+`fitAndCategorize` is used as usual, finding a fit for the model. 
+Data are plotted using `figureModelCurves()`:
 
 ```{r}
 fitObj_jittered <- fitAndCategorize(dataInput,
@@ -82,7 +91,11 @@ figureModelCurves(dataInput = fitObj_jittered$normalizedInput,
                   use_h0 = TRUE)
 ```
 
-Next, we will show the process for correcting sigmoidal and double sigmoidal data that appears to have a decreasing/negative trend, or in other words, data that appears to be flipped.
+## Decreasing trend
+
+Next, we will show the process for correcting sigmoidal and double sigmoidal data that appear to have a decreasing/negative trend. 
+The solution is to reverse the time points (subtract `time` from `max(time)`) and fit the model in the flipped space. 
+Then flip the model back (e.g., the $t1$ parameter can be estimated in the flipped space and then unflipped to get the original onseet time).
 
 ```{r}
 time <- seq(1, 24, 0.5)
@@ -104,7 +117,8 @@ ggplot(dataInput, aes(time, intensity)) +
   theme_bw()
 ```
 
-The most straightforward method is to simply reverse the x-axis, resulting in the last time value to become the first time value, etc.
+The most straightforward method to deal with decreasing trends is to reverse the x-axis, resulting in the last time value to becoming the first time value, etc.
+The new time is calculated as `max(time) - time`.
 
 ```{r}
 dataInput <- dataInput |>
@@ -116,7 +130,7 @@ ggplot(dataInput, aes(time, intensity)) +
   theme_bw()
 ```
 
-Now that the data is corrected, we can again use our data with `fitAndCategorize` as usual to find a fit for our model and plot using `figureModelCurves()`:
+Now that the data have an increasing trend, we can apply `fitAndCategorize` as usual to find a fit for our model and plot using `figureModelCurves()`:
 
 ```{r}
 fitObj_flipped <- fitAndCategorize(dataInput,

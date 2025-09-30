@@ -13,7 +13,12 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The overarching aim of this package is to fit both a sigmoidal and a double-sigmoidal curve to time--intensity data and then determine which of the two models fit the data best. The sigmoidal model is assumed to start at zero and rise to an asymptotic value. The double-sigmoidal model first increases from 0 to a maximum intensity and the decreases to a final asymptotic intensity. After calculating the best candidate curves for both of models a decision algorithm determines which of the two candidates (if any) fits the data best. Finally, the package calculates key parameters that quantify the time--intensity data with respect to the best-fitting model. 
+The overarching aim of this package is to fit both a sigmoidal and a double-sigmoidal curve to time--intensity data and then determine which of the two models fit the data best. 
+The sigmoidal model is assumed to start at zero and rise to an asymptotic value. 
+The double-sigmoidal model first increases from 0 to a maximum intensity and the decreases to a final asymptotic intensity. 
+For both the sigmoid and double-sigmoid models, we provide an option to let the lower asymptote ($h_0$) freely vary.
+After calculating the best candidate curves for both of models a decision algorithm determines which of the two candidates (if any) fits the data best. 
+Finally, the package calculates key parameters that quantify the time--intensity data with respect to the best-fitting model. 
 
 For the sigmoidal model, key parameters describing the curve are: 
 

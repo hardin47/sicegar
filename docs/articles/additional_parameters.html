@@ -34,8 +34,10 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/additional_parameters.html">Calculation of additional parameters of interest</a></li>
+    <li><a class="dropdown-item" href="../articles/adjusting_data.html">Adjusting data to use with Sicegar</a></li>
     <li><a class="dropdown-item" href="../articles/categorizing_fits.html">Identifying the best-fitting model category</a></li>
     <li><a class="dropdown-item" href="../articles/fitting_individual_models.html">Fitting individual models</a></li>
+    <li><a class="dropdown-item" href="../articles/h0_functions.html">Allowing the lower asymptote parameter to vary freely</a></li>
     <li><a class="dropdown-item" href="../articles/introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="../articles/plotting_fitted_models.html">Plotting the fitted models</a></li>
   </ul>
@@ -63,7 +65,7 @@
                         <h4 data-toc-skip class="author">Umut Caglar,
 Claus O. Wilke</h4>
             
-            <h4 data-toc-skip class="date">2025-09-29</h4>
+            <h4 data-toc-skip class="date">2025-09-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/additional_parameters.Rmd" class="external-link"><code>vignettes/additional_parameters.Rmd</code></a></small>
       <div class="d-none name"><code>additional_parameters.Rmd</code></div>
@@ -78,7 +80,13 @@ the curve and the slope at the midpoint. This information can be
 calculated with the function <code><a href="../reference/parameterCalculation.html">parameterCalculation()</a></code>. It is
 called automatically by the top-level interface
 <code><a href="../reference/fitAndCategorize.html">fitAndCategorize()</a></code>, but it needs to be called manually if
-we fit curves with <code><a href="../reference/multipleFitFunction.html">multipleFitFunction()</a></code>.</p>
+we fit curves with <code><a href="../reference/multipleFitFunction.html">multipleFitFunction()</a></code>. The default
+functions assume that the lower asymptote,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>0</mn></msub><annotation encoding="application/x-tex">h_0</annotation></semantics></math>,
+(when x is at negative infinity) is zero. If the data are better fit
+using a model that estimates the lower asymptote,
+<code><a href="../reference/parameterCalculation_h0.html">parameterCalculation_h0()</a></code> and
+<code><a href="../reference/multipleFitFunction_h0.html">multipleFitFunction_h0()</a></code> functions can be used.</p>
 <p>Assume we have fitted a sigmoidal or double-sigmoidal model using
 <code><a href="../reference/multipleFitFunction.html">sicegar::multipleFitFunction()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">

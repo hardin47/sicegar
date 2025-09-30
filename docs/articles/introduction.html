@@ -34,8 +34,10 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/additional_parameters.html">Calculation of additional parameters of interest</a></li>
+    <li><a class="dropdown-item" href="../articles/adjusting_data.html">Adjusting data to use with Sicegar</a></li>
     <li><a class="dropdown-item" href="../articles/categorizing_fits.html">Identifying the best-fitting model category</a></li>
     <li><a class="dropdown-item" href="../articles/fitting_individual_models.html">Fitting individual models</a></li>
+    <li><a class="dropdown-item" href="../articles/h0_functions.html">Allowing the lower asymptote parameter to vary freely</a></li>
     <li><a class="dropdown-item" href="../articles/introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="../articles/plotting_fitted_models.html">Plotting the fitted models</a></li>
   </ul>
@@ -63,7 +65,7 @@
                         <h4 data-toc-skip class="author">Umut Caglar,
 Claus O. Wilke</h4>
             
-            <h4 data-toc-skip class="date">2025-09-29</h4>
+            <h4 data-toc-skip class="date">2025-09-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/introduction.Rmd" class="external-link"><code>vignettes/introduction.Rmd</code></a></small>
       <div class="d-none name"><code>introduction.Rmd</code></div>
@@ -76,11 +78,14 @@ double-sigmoidal curve to time–intensity data and then determine which
 of the two models fit the data best. The sigmoidal model is assumed to
 start at zero and rise to an asymptotic value. The double-sigmoidal
 model first increases from 0 to a maximum intensity and the decreases to
-a final asymptotic intensity. After calculating the best candidate
-curves for both of models a decision algorithm determines which of the
-two candidates (if any) fits the data best. Finally, the package
-calculates key parameters that quantify the time–intensity data with
-respect to the best-fitting model.</p>
+a final asymptotic intensity. For both the sigmoid and double-sigmoid
+models, we provide an option to let the lower asymptote
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>0</mn></msub><annotation encoding="application/x-tex">h_0</annotation></semantics></math>)
+freely vary. After calculating the best candidate curves for both of
+models a decision algorithm determines which of the two candidates (if
+any) fits the data best. Finally, the package calculates key parameters
+that quantify the time–intensity data with respect to the best-fitting
+model.</p>
 <p>For the sigmoidal model, key parameters describing the curve are:</p>
 <ul>
 <li>maximum: The maximum asymptotic intensity.</li>

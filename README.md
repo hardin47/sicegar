@@ -14,3 +14,5 @@ CRAN: https://cran.r-project.org/package=sicegar
 
 Source: https://github.com/hardin47/sicegar
 
+Vignettes: https://hardin47.github.io/sicegar
+

@@ -289,19 +289,20 @@ categorize_h0 <-
       choices <- setdiff(choices, c("double_sigmoidal"))
     }
 
-    # 5a Sigmoidal startIntensity must be smaller than "threshold_t0_max_int", otherwise it is not "sigmoidal"
-    if(!decisionList$test.sm_startIntensity)
-    {
-      decisonSteps <- c(decisonSteps, "5a");
-      choices <- setdiff(choices, c("sigmoidal"))
-    }
+   # # 5a and 5b are commented out because the initial intensity can be substantially above zero when h0 is free
+   # # 5a Sigmoidal startIntensity must be smaller than "threshold_t0_max_int", otherwise it is not "sigmoidal"
+   # if(!decisionList$test.sm_startIntensity)
+   # {
+   #   decisonSteps <- c(decisonSteps, "5a");
+   #   choices <- setdiff(choices, c("sigmoidal"))
+   # }
 
-    # 5b Double-sigmoidal startIntensity must be smaller than "threshold_t0_max_int", otherwise it is not "double_sigmoidal"
-    if(!decisionList$test.dsm_startIntensity)
-    {
-      decisonSteps <- c(decisonSteps, "5b");
-      choices <- setdiff(choices, c("double_sigmoidal"))
-    }
+   # # 5b Double-sigmoidal startIntensity must be smaller than "threshold_t0_max_int", otherwise it is not "double_sigmoidal"
+   # if(!decisionList$test.dsm_startIntensity)
+   # {
+   #   decisonSteps <- c(decisonSteps, "5b");
+   #   choices <- setdiff(choices, c("double_sigmoidal"))
+   # }
 
     # 6. Double-sigmoidal intensity at tmax must be at most "threshold_dsm_tmax_IntensityRatio" of maximum_y, otherwise it is not "double_sigmoidal"
     if(!decisionList$test.dsm_tmax_IntensityRatio)
@@ -380,19 +381,18 @@ categorize_h0 <-
 #    #'#simulate intensity data and add noise
 #    #'noise_parameter = 0.2
 #    #'intensity_noise = runif(n = length(time), min = 0, max = 1) * noise_parameter
-#    #'intensity = sicegar::doublesigmoidalFitFormula_h0(time,
+#    #'intensity = sicegar::doublesigmoidalFitFormula(time,
 #    #'                                               finalAsymptoteIntensityRatio = .3,
 #    #'                                               maximum = 4,
 #    #'                                               slope1Param = 1,
 #    #'                                               midPoint1Param = 7,
 #    #'                                               slope2Param = 1,
-#    #'                                               midPointDistanceParam = 8,
-#    #'                                               h0 = 1)
+#    #'                                               midPointDistanceParam = 8)
 #    #'intensity <- intensity + intensity_noise
 #    #'
 #    #'dataInput <- data.frame(intensity = intensity, time = time)
 #    #'normalizedInput <- sicegar::normalizeData(dataInput, dataInputName = "sample001")
-#    #'isThis_nosignal <- sicegar::preCategorize_h0(normalizedInput = normalizedInput)
+#    #'isThis_nosignal <- sicegar::preCategorize(normalizedInput = normalizedInput)
 #    #'
 #    #'
 #    #'
@@ -403,19 +403,18 @@ categorize_h0 <-
 #    #'#simulate intensity data and add noise
 #    #'noise_parameter <- 0.05
 #    #'intensity_noise <- runif(n = length(time), min = 0, max = 1) * noise_parameter * 2e-04
-#    #'intensity <- sicegar::doublesigmoidalFitFormula_h0(time,
+#    #'intensity <- sicegar::doublesigmoidalFitFormula(time,
 #    #'                                                finalAsymptoteIntensityRatio = .3,
 #    #'                                                maximum = 2e-04,
 #    #'                                                slope1Param = 1,
 #    #'                                                midPoint1Param = 7,
 #    #'                                                slope2Param = 1,
-#    #'                                                midPointDistanceParam = 8,
-#    #'                                                h0 = 1)
+#    #'                                                midPointDistanceParam = 8)
 #    #'intensity <- intensity + intensity_noise
 #    #'
 #    #'dataInput <- data.frame(intensity=intensity, time=time)
 #    #'normalizedInput <- sicegar::normalizeData(dataInput,dataInputName = "sample001")
-#    #'isThis_nosignal <- sicegar::preCategorize_h0(normalizedInput = normalizedInput)
+#    #'isThis_nosignal <- sicegar::preCategorize(normalizedInput = normalizedInput)
 #    #'
 #
 #

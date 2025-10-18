@@ -282,12 +282,12 @@ doublesigmoidalFitFormula_h0 <- function(x,
   if(midPointDistanceParam < 0){
     stop("midPointDistanceParam should be a positive number. It is the distance between two steppest points of exponential phase and lysis")
   }
-#  if(finalAsymptoteIntensityRatio < 0 | finalAsymptoteIntensityRatio > 1){
-#    stop("finalAsymptoteIntensityRatio should be a number between 0 and 1")
-#  }
-#  if(maximum < 0){
-#    stop("maximum should be a positive number")
-#  }
+  if(finalAsymptoteIntensityRatio < 0 | finalAsymptoteIntensityRatio > 1){
+    stop("finalAsymptoteIntensityRatio should be a number between 0 and 1")
+  }
+  if(maximum < 0){
+    stop("maximum should be a positive number")
+  }
 
   optimizeIntervalMin <- midPoint1Param - 2 * midPointDistanceParam
   optimizeIntervalMax <- midPoint1Param + 3 * midPointDistanceParam
@@ -397,12 +397,12 @@ f_argmax_doublesigmoidal_h0 <- function(parameterVector){
   if(midPointDistanceParam < 0){
     stop("midPointDistanceParam should be a positive number. It is the distance between two steppest points of exponential phase and lysis")
   }
-  #if(finalAsymptoteIntensityRatio < 0 | finalAsymptoteIntensityRatio > 1){
-  #  stop("finalAsymptoteIntensityRatio should be a number between 0 and 1")
-  #}
-  #if(maximum < 0){
-  #  stop("maximum should be a positive number")
-  #}
+  if(finalAsymptoteIntensityRatio < 0 | finalAsymptoteIntensityRatio > 1){
+    stop("finalAsymptoteIntensityRatio should be a number between 0 and 1")
+  }
+  if(maximum < 0){
+    stop("maximum should be a positive number")
+  }
 
   optimizeIntervalMin <- midPoint1Param - 2 * midPointDistanceParam
   optimizeIntervalMax <- midPoint1Param + 3 * midPointDistanceParam

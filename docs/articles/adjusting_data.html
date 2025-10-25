@@ -30,18 +30,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/additional_parameters.html">Calculation of additional parameters of interest</a></li>
-    <li><a class="dropdown-item" href="../articles/adjusting_data.html">Adjusting data to use with Sicegar</a></li>
-    <li><a class="dropdown-item" href="../articles/categorizing_fits.html">Identifying the best-fitting model category</a></li>
-    <li><a class="dropdown-item" href="../articles/fitting_individual_models.html">Fitting individual models</a></li>
-    <li><a class="dropdown-item" href="../articles/h0_functions.html">Allowing the lower asymptote parameter to vary freely</a></li>
-    <li><a class="dropdown-item" href="../articles/introduction.html">Introduction</a></li>
-    <li><a class="dropdown-item" href="../articles/plotting_fitted_models.html">Plotting the fitted models</a></li>
-  </ul>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -63,9 +52,9 @@
 
       <h1>Adjusting data to use with Sicegar</h1>
                         <h4 data-toc-skip class="author">Thomas Matheis,
-Phineus Choi, Sam Butler, Mira Terdiman, Jo Hardin</h4>
+Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin</h4>
             
-            <h4 data-toc-skip class="date">2025-10-17</h4>
+            <h4 data-toc-skip class="date">2025-10-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/adjusting_data.Rmd" class="external-link"><code>vignettes/adjusting_data.Rmd</code></a></small>
       <div class="d-none name"><code>adjusting_data.Rmd</code></div>
@@ -137,20 +126,6 @@ model. Data are plotted using <code><a href="../reference/figureModelCurves.html
 <span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_jittered</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span>,</span>
 <span>                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  use_h0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: `aes_()` was deprecated in ggplot2 3.0.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">sicegar</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://hardin47.github.io/sicegar/issues&gt;</span>.</span></span>
-<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">sicegar</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://hardin47.github.io/sicegar/issues&gt;</span>.</span></span>
-<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <p><img src="adjusting_data_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -164,7 +139,7 @@ flip the model back (e.g., the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">t1</annotation></semantics></math>
 parameter can be estimated in the flipped space and then unflipped to
 get the original onseet time).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">24</span>, <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">noise_parameter</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
 <span><span class="va">intensity_noise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="va">noise_parameter</span></span>
@@ -187,7 +162,7 @@ get the original onseet time).</p>
 reverse the x-axis, resulting in the last time value to becoming the
 first time value, etc. The new time is calculated as
 <code>max(time) - time</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataInput</span> <span class="op">&lt;-</span> <span class="va">dataInput</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span><span class="op">)</span></span>
 <span></span>
@@ -199,7 +174,7 @@ first time value, etc. The new time is calculated as
 <p>Now that the data have an increasing trend, we can apply
 <code>fitAndCategorize</code> as usual to find a fit for our model and
 plot using <code><a href="../reference/figureModelCurves.html">figureModelCurves()</a></code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitObj_flipped</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fitAndCategorize.html">fitAndCategorize</a></span><span class="op">(</span><span class="va">dataInput</span>,</span>
 <span>                           threshold_minimum_for_intensity_maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>                           threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>

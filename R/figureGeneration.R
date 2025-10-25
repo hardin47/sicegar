@@ -201,7 +201,7 @@ figureModelCurves <- function(dataInput,
   }
 
   output <- ggplot2::ggplot(dataFrameInput) +
-    ggplot2::geom_point(ggplot2::aes_(x=~time, y=~intensity)) +
+    ggplot2::geom_point(ggplot2::aes(x = time, y = intensity)) +
     ggplot2::expand_limits(x = 0, y = 0) +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.minor = ggplot2::element_blank()) +
@@ -220,21 +220,21 @@ figureModelCurves <- function(dataInput,
 
           # Lines related with the sigmoidal fit line
           output <- output +
-            ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+            ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
             ggplot2::geom_hline(yintercept = maximum_y,
-                                colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
             ggplot2::geom_segment(x = startPoint_x,
                                   y = startPoint_y,
                                   xend = reachMaximum_x,
                                   yend = reachMaximum_y,
-                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash")
+                                  colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash")
         }
       }
 
       output <- output +
-        ggplot2::geom_point(data = dataFrameInput, ggplot2::aes_(x = ~time, y = ~intensity)) +
+        ggplot2::geom_point(data = dataFrameInput, ggplot2::aes(x = time, y = intensity)) +
         ggplot2::geom_line(data = intensityTheoreticalSigmoidalDf,
-                           ggplot2::aes_(x = ~time, y = ~intensityTheoreticalSigmoidal), color = "orange", size = 1.5)
+                           ggplot2::aes(x = time, y = intensityTheoreticalSigmoidal), color = "orange", linewidth = 1.5)
 
       if(showParameterRelatedLines){
 
@@ -264,31 +264,31 @@ figureModelCurves <- function(dataInput,
 
           # Lines related with the double sigmoidal fit line (with numerical correction)
           output <- output +
-            ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+            ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
             ggplot2::geom_hline(yintercept = maximum_y,
-                                colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
             ggplot2::geom_segment(x = maximum_x,
                                   y = finalAsymptoteIntensity,
                                   xend = Inf,
                                   yend = finalAsymptoteIntensity,
-                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                  colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
             ggplot2::geom_segment(x = startPoint_x,
                                   y = startPoint_y,
                                   xend = reachMaximum_x,
                                   yend = reachMaximum_y,
-                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                  colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
             ggplot2::geom_segment(x = startDeclinePoint_x,
                                   y = startDeclinePoint_y,
                                   xend = endDeclinePoint_x,
                                   yend = endDeclinePoint_y,
-                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash")
+                                  colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash")
         }
       }
 
       output <- output +
-        ggplot2::geom_point(data = dataFrameInput, ggplot2::aes_(x = ~time, y = ~intensity)) +
+        ggplot2::geom_point(data = dataFrameInput, ggplot2::aes(x = time, y = intensity)) +
         ggplot2::geom_line(data = intensityTheoreticalDoubleSigmoidalDf,
-                           ggplot2::aes_(x = ~time, y = ~intensityTheoreticalDoubleSigmoidal), color = "orange", size = 1.5)
+                           ggplot2::aes(x = time, y = intensityTheoreticalDoubleSigmoidal), color = "orange", linewidth = 1.5)
 
       if(showParameterRelatedLines){
 
@@ -461,7 +461,7 @@ figureModelCurves <- function(dataInput,
     }
 
     output <- ggplot2::ggplot(dataFrameInput) +
-      ggplot2::geom_point(ggplot2::aes_(x=~time, y=~intensity)) +
+      ggplot2::geom_point(ggplot2::aes(x = time, y = intensity)) +
       ggplot2::expand_limits(x = 0, y = 0) +
       ggplot2::theme_bw() +
       ggplot2::theme(panel.grid.minor = ggplot2::element_blank()) +
@@ -480,21 +480,21 @@ figureModelCurves <- function(dataInput,
 
             # Lines related with the sigmoidal fit line
             output <- output +
-              ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
               ggplot2::geom_hline(yintercept = maximum_y,
-                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                  colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
               ggplot2::geom_segment(x = startPoint_x,
                                     y = startPoint_y,
                                     xend = reachMaximum_x,
                                     yend = reachMaximum_y,
-                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash")
+                                    colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash")
           }
         }
 
         output <- output +
-          ggplot2::geom_point(data = dataFrameInput, ggplot2::aes_(x = ~time, y = ~intensity)) +
+          ggplot2::geom_point(data = dataFrameInput, ggplot2::aes(x = time, y = intensity)) +
           ggplot2::geom_line(data = intensityTheoreticalSigmoidalDf,
-                             ggplot2::aes_(x = ~time, y = ~intensityTheoreticalSigmoidal), color = "orange", size = 1.5)
+                             ggplot2::aes(x = time, y = intensityTheoreticalSigmoidal), color = "orange", linewidth = 1.5)
 
         if(showParameterRelatedLines){
 
@@ -524,31 +524,31 @@ figureModelCurves <- function(dataInput,
 
             # Lines related with the double sigmoidal fit line (with numerical correction)
             output <- output +
-              ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+              ggplot2::geom_hline(yintercept = 0, colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
               ggplot2::geom_hline(yintercept = maximum_y,
-                                  colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                  colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
               ggplot2::geom_segment(x = maximum_x,
                                     y = finalAsymptoteIntensity,
                                     xend = Inf,
                                     yend = finalAsymptoteIntensity,
-                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                    colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
               ggplot2::geom_segment(x = startPoint_x,
                                     y = startPoint_y,
                                     xend = reachMaximum_x,
                                     yend = reachMaximum_y,
-                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash") +
+                                    colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash") +
               ggplot2::geom_segment(x = startDeclinePoint_x,
                                     y = startDeclinePoint_y,
                                     xend = endDeclinePoint_x,
                                     yend = endDeclinePoint_y,
-                                    colour = "#bdbdbd", size = 0.5, linetype = "longdash")
+                                    colour = "#bdbdbd", linewidth = 0.5, linetype = "longdash")
           }
         }
 
         output <- output +
-          ggplot2::geom_point(data = dataFrameInput, ggplot2::aes_(x = ~time, y = ~intensity)) +
+          ggplot2::geom_point(data = dataFrameInput, ggplot2::aes(x = time, y = intensity)) +
           ggplot2::geom_line(data = intensityTheoreticalDoubleSigmoidalDf,
-                             ggplot2::aes_(x = ~time, y = ~intensityTheoreticalDoubleSigmoidal), color = "orange", size = 1.5)
+                             ggplot2::aes(x = time, y = intensityTheoreticalDoubleSigmoidal), color = "orange", linewidth = 1.5)
 
         if(showParameterRelatedLines){
 

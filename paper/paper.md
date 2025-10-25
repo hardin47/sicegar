@@ -39,9 +39,8 @@ $t_1$ is the onset time, the midpoint between $h_0$ and $h_1$.
 $a$ determines the magnitude of the slope of the sigmoidal curve.
 $h_1$ is the upper asymptote (as $x$ approaches positive infinity).
 
-\begin{equation}
-I(x) = h_0 + \frac{h_1-h_0}{1 + e^{-a(x - t_1)}}
-\end{equation}
+
+$I(x) = h_0 + \frac{h_1-h_0}{1 + e^{-a(x - t_1)}}$
 
 A similar, but slightly more complicated, formula for the double sigmoidal function is also used for parameter estimation in **sicegar**.
 In the original implementation of **sicegar**, the parameter $h_0$ is set to zero for both the sigmoidal and double-sigmoidal models.

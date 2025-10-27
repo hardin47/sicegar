@@ -66,13 +66,13 @@ ggplot(dataInput, aes(time, intensity)) +
 fitObj_zero <- fitAndCategorize(dataInput,
                            threshold_minimum_for_intensity_maximum = 0.3,
                            threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
+                           threshold_t0_max_int = 1E10,
                            use_h0 = FALSE)   # Default
 
 fitObj_free <- fitAndCategorize(dataInput,
                            threshold_minimum_for_intensity_maximum = 0.3,
                            threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
+                           threshold_t0_max_int = 1E10,
                            use_h0 = TRUE)
 ```
 

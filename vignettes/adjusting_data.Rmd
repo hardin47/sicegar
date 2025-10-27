@@ -82,7 +82,7 @@ Data are plotted using `figureModelCurves()`:
 fitObj_jittered <- fitAndCategorize(dataInput,
                            threshold_minimum_for_intensity_maximum = 0.3,
                            threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
+                           threshold_t0_max_int = 1E10,
                            use_h0 = TRUE)
 
 figureModelCurves(dataInput = fitObj_jittered$normalizedInput,
@@ -136,7 +136,7 @@ Now that the data have an increasing trend, we can apply `fitAndCategorize` as u
 fitObj_flipped <- fitAndCategorize(dataInput,
                            threshold_minimum_for_intensity_maximum = 0.3,
                            threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
+                           threshold_t0_max_int = 1E10,
                            use_h0 = TRUE)
 
 figureModelCurves(dataInput = fitObj_flipped$normalizedInput,

@@ -3,17 +3,17 @@
 #' @param parameterVectorSigmoidal Output of the sigmoidalFitFunction.
 #' @param parameterVectorDoubleSigmoidal Output of the doublesigmoidalFitFunction.
 #' @param threshold_intensity_range Minimum for intensity range, i.e. it is the lower limit for the allowed difference between the maximum and minimum of the intensities (Default is 0.1, and the values are based on actual, not the rescaled data.).
-#' @param threshold_minimum_for_intensity_maximum Minimum allowed value for intensity maximum. (Default is 0.3, and the values are based on actual, not the rescaled data.).
-#' @param threshold_t0_max_int Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the rescaled data.).
+#' @param threshold_minimum_for_intensity_maximum Minimum allowed value for intensity maximum. (Default is 0.3, and the values are based on actual, not the normalized data.).
+#' @param threshold_t0_max_int Maximum allowed intensity of the fitted curve at time is equal to zero (t=0). (Default is 1E10, and the values are based on actual, not the normalized data.).
 #' @param threshold_bonus_sigmoidal_AIC Bonus AIC points for sigmoidal fit. Negative values help the sigmoidal model to win. Only helps in competition between sigmoidal and double sigmoidal fit at decision step "9", i.e. if none of the models fail in any of the tests and stay as a candidate until the last step (Default is 0).
-#' @param threshold_sm_tmax_IntensityRatio The threshold for the minimum intensity ratio between the last observed time points intensity and theoretical maximum intensity of the sigmoidal curve. If the value is below the threshold, then the data can not be represented with the sigmoidal model. (Default is 0.85)
-#' @param threshold_dsm_tmax_IntensityRatio The threshold for the minimum intensity ratio between the last observed time points intensity and maximum intensity of the double sigmoidal curve.  If the value is above the threshold, then the data can not be represented with the double sigmoidal model. (Default is 0.75)
+#' @param threshold_sm_tmax_IntensityRatio The threshold for the minimum intensity ratio between the intensity at the last observed time points and the theoretical maximum intensity of the sigmoidal curve. If the value is below the threshold, then the data can not be represented with the sigmoidal model. (Default is 0.85)
+#' @param threshold_dsm_tmax_IntensityRatio The threshold for the minimum intensity ratio between the intensity at the last observed time points and the maximum intensity of the double sigmoidal curve.  If the value is above the threshold, then the data can not be represented with the double sigmoidal model. (Default is 0.75)
 #' @param threshold_AIC Maximum AIC values in order to have a meaningful fit (Default is -10).
-#' @param showDetails Logical to chose if we want to see details or not. Default is "FALSE"
+#' @param showDetails Logical to choose if we want to see details or not. Default is "FALSE"
 #'
 #'
-#' @return The returned object contains extensive information about the decision process, but the key component is the decision variable. The decision variable can be one of the following four; "no_signal", "infection","infection&lysis" or "ambugious".
-#' @description Catagorizes the input data using the results of two model fitsand chosen thresholds.
+#' @return The returned object contains extensive information about the decision process, but the key component is the decision variable. The decision variable can be one of the following four; "no_signal", "sigmoidal","double sigmoidal" or "ambiguous".
+#' @description Categorizes the input data using the results of two model fits and chosen thresholds.
 #' @export
 #'
 #' @examples
@@ -78,10 +78,9 @@ categorize_h0 <-
 
     # Generation of decisionList
     #************************************************
-    # Define the crismas tree
     decisionList <- list()
 
-    # Do both models came from same source & have same name
+    # Do both models come from same source & have same name
     if ((!is.na(parameterVectorSigmoidal$dataInputName)) & (!is.na(parameterVectorDoubleSigmoidal$dataInputName)))
     {
       decisionList$test.name <- parameterVectorSigmoidal$dataInputName == parameterVectorDoubleSigmoidal$dataInputName
@@ -116,7 +115,7 @@ categorize_h0 <-
     decisionList$test.dataScalingParameters <-
       test.timeRange & test.intensityMin & test.intensityMax & test.intensityRange
 
-    # minimum for intensity maximum test
+    # Minimum for intensity maximum test
     decisionList$intensityMaximum <- intensityMax
     decisionList$threshold_minimum_for_intensity_maximum <- threshold_minimum_for_intensity_maximum
     decisionList$test.minimum_for_intensity_maximum <- threshold_minimum_for_intensity_maximum < intensityMax
@@ -326,7 +325,6 @@ categorize_h0 <-
     }
 
     # 9. if at this point we have both "sigmoidal" or "double_sigmoidal", then we will choose with the help of AIC scores
-    # decisionList$threshold_bonus_sigmoidal_AIC ?? threshold_bonus_sigmoidal_AIC
     if(length(intersect(choices, c("sigmoidal", "double_sigmoidal"))) == 2)
     {
       decisonSteps <- c(decisonSteps, "9");

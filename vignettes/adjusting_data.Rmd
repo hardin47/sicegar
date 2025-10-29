@@ -1,6 +1,6 @@
 ---
 title: "Adjusting data to use with Sicegar"
-author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Jo Hardin"
+author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

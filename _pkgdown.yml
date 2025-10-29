@@ -11,3 +11,18 @@ description: Aims to quantify time intensity data by using sigmoidal and
 url: https://hardin47.github.io/sicegar/
 template:
   bootstrap: 5
+
+articles:
+  - title: "Basics of sicegar"
+    contents:
+      - introduction
+      - fitting_individual_models
+      - additional_parameters
+      - categorizing_fits
+  - title: "Visualizing data"
+    contents:
+      - plotting_fitted_models
+  - title: "Letting h0 vary freely"
+    contents:
+      - h0_functions
+      - adjusting_data

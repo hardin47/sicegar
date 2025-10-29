@@ -30,18 +30,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/additional_parameters.html">Calculation of additional parameters of interest</a></li>
-    <li><a class="dropdown-item" href="../articles/adjusting_data.html">Adjusting data to use with Sicegar</a></li>
-    <li><a class="dropdown-item" href="../articles/categorizing_fits.html">Identifying the best-fitting model category</a></li>
-    <li><a class="dropdown-item" href="../articles/fitting_individual_models.html">Fitting individual models</a></li>
-    <li><a class="dropdown-item" href="../articles/h0_functions.html">Allowing the lower asymptote parameter to vary freely</a></li>
-    <li><a class="dropdown-item" href="../articles/introduction.html">Introduction</a></li>
-    <li><a class="dropdown-item" href="../articles/plotting_fitted_models.html">Plotting the fitted models</a></li>
-  </ul>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -65,7 +54,7 @@
                         <h4 data-toc-skip class="author">Umut Caglar,
 Claus O. Wilke</h4>
             
-            <h4 data-toc-skip class="date">2025-10-17</h4>
+            <h4 data-toc-skip class="date">2025-10-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/plotting_fitted_models.Rmd" class="external-link"><code>vignettes/plotting_fitted_models.Rmd</code></a></small>
       <div class="d-none name"><code>plotting_fitted_models.Rmd</code></div>
@@ -117,38 +106,31 @@ or displayed directly. The function has several different options.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sigmoidal raw data only</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_sm</span><span class="op">$</span><span class="va">normalizedInput</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: `aes_()` was deprecated in ggplot2 3.0.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">sicegar</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://hardin47.github.io/sicegar/issues&gt;</span>.</span></span>
-<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <p><img src="plotting_fitted_models_files/figure-html/plot%20raw%20data-1.png" width="576"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># double-sigmoidal raw data only</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_dsm</span><span class="op">$</span><span class="va">normalizedInput</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_fitted_models_files/figure-html/plot%20raw%20data-2.png" width="576"></p>
 <p>Second, we can plot the input data with the fitted lines.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sigmoidal fit</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_sm</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
 <span>                  sigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_sm</span><span class="op">$</span><span class="va">sigmoidalModel</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_fitted_models_files/figure-html/plot%20raw%20data%20and%20fit-1.png" width="576"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># double-sigmoidal fit</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_dsm</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
 <span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_dsm</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_fitted_models_files/figure-html/plot%20raw%20data%20and%20fit-2.png" width="576"></p>
 <p>Third, we can additionally visualize the parameter estimates, by
 setting <code>showParameterRelatedLines = TRUE</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sigmoidal fit with parameter related lines</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_sm</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
 <span>                  sigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_sm</span><span class="op">$</span><span class="va">sigmoidalModel</span>,</span>
 <span>                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_fitted_models_files/figure-html/plot%20raw%20data%20and%20fit%20with%20parameter%20related%20lines-1.png" width="576"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># double-sigmoidal fit with parameter related lines</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_dsm</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
 <span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_dsm</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span>,</span>

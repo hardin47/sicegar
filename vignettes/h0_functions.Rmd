@@ -1,6 +1,6 @@
 ---
 title: "Allowing the lower asymptote parameter to vary freely"
-author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Jo Hardin"
+author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -96,7 +96,7 @@ plot_grid(fig_a, fig_b, ncol = 2) # function from the cowplot package
 
 It is clear that in this situation, using the default arguments result in a worse fit than when $h_0$ is allowed to be estimated freely.
 
-## Model fitting components ($h_0$ free)
+## Model fitting components (h0 free)
 
 To fit and plot individual models using a freely estimated $h_0$, we must directly call the `_h0` counterparts of each **sicegar** function. We have already generated the data (with $h_0 = 2$), so now we can normalize the data.
 

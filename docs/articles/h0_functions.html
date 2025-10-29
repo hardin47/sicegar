@@ -30,18 +30,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/additional_parameters.html">Calculation of additional parameters of interest</a></li>
-    <li><a class="dropdown-item" href="../articles/adjusting_data.html">Adjusting data to use with Sicegar</a></li>
-    <li><a class="dropdown-item" href="../articles/categorizing_fits.html">Identifying the best-fitting model category</a></li>
-    <li><a class="dropdown-item" href="../articles/fitting_individual_models.html">Fitting individual models</a></li>
-    <li><a class="dropdown-item" href="../articles/h0_functions.html">Allowing the lower asymptote parameter to vary freely</a></li>
-    <li><a class="dropdown-item" href="../articles/introduction.html">Introduction</a></li>
-    <li><a class="dropdown-item" href="../articles/plotting_fitted_models.html">Plotting the fitted models</a></li>
-  </ul>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -63,9 +52,9 @@
 
       <h1>Allowing the lower asymptote parameter to vary freely</h1>
                         <h4 data-toc-skip class="author">Thomas Matheis,
-Phineus Choi, Sam Butler, Mira Terdiman, Jo Hardin</h4>
+Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin</h4>
             
-            <h4 data-toc-skip class="date">2025-10-17</h4>
+            <h4 data-toc-skip class="date">2025-10-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/h0_functions.Rmd" class="external-link"><code>vignettes/h0_functions.Rmd</code></a></small>
       <div class="d-none name"><code>h0_functions.Rmd</code></div>
@@ -148,23 +137,9 @@ be freely estimated.</p>
 <span><span class="va">fig_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_zero</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
 <span>                                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_zero</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span>,</span>
 <span>                                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                                  use_h0 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>   <span class="co"># Default</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: `aes_()` was deprecated in ggplot2 3.0.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">sicegar</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://hardin47.github.io/sicegar/issues&gt;</span>.</span></span>
-<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">sicegar</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://hardin47.github.io/sicegar/issues&gt;</span>.</span></span>
-<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fig_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_free</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
+<span>                                  use_h0 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>   <span class="co"># Default</span></span>
+<span></span>
+<span><span class="va">fig_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">fitObj_free</span><span class="op">$</span><span class="va">normalizedInput</span>,</span>
 <span>                                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_free</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span>,</span>
 <span>                                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                  use_h0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -177,9 +152,7 @@ result in a worse fit than when
 is allowed to be estimated freely.</p>
 </div>
 <div class="section level2">
-<h2 id="model-fitting-components-h_0-free">Model fitting components
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>0</mn></msub><annotation encoding="application/x-tex">h_0</annotation></semantics></math>
-free)<a class="anchor" aria-label="anchor" href="#model-fitting-components-h_0-free"></a>
+<h2 id="model-fitting-components-h0-free">Model fitting components (h0 free)<a class="anchor" aria-label="anchor" href="#model-fitting-components-h0-free"></a>
 </h2>
 <p>To fit and plot individual models using a freely estimated
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>0</mn></msub><annotation encoding="application/x-tex">h_0</annotation></semantics></math>,
@@ -188,7 +161,7 @@ we must directly call the <code>_h0</code> counterparts of each
 (with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mn>0</mn></msub><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">h_0 = 2</annotation></semantics></math>),
 so now we can normalize the data.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">normalizedInput_free</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeData.html">normalizeData</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">dataInput</span>, </span>
 <span>                                 dataInputName <span class="op">=</span> <span class="st">"doubleSigmoidalSample"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">normalizedInput_free</span><span class="op">$</span><span class="va">timeIntensityData</span><span class="op">)</span> <span class="co"># the normalized time and intensity data</span></span></code></pre></div>
@@ -202,7 +175,7 @@ so now we can normalize the data.</p>
 <p>We can now call <code><a href="../reference/multipleFitFunction_h0.html">multipleFitFunction_h0()</a></code> on our data to
 be fitted, calculating additional parameters using
 <code><a href="../reference/parameterCalculation_h0.html">parameterCalculation_h0()</a></code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit the double-sigmoidal model</span></span>
 <span><span class="va">doubleSigmoidalModel_free</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multipleFitFunction_h0.html">multipleFitFunction_h0</a></span><span class="op">(</span>dataInput<span class="op">=</span><span class="va">normalizedInput_free</span>,</span>
 <span>                                            model<span class="op">=</span><span class="st">"doublesigmoidal"</span><span class="op">)</span></span>
@@ -210,7 +183,7 @@ be fitted, calculating additional parameters using
 <span><span class="va">doubleSigmoidalModel_free</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parameterCalculation_h0.html">parameterCalculation_h0</a></span><span class="op">(</span><span class="va">doubleSigmoidalModel_free</span><span class="op">)</span></span></code></pre></div>
 <p>Now that we have obtained a fit, we can use
 <code><a href="../reference/figureModelCurves.html">figureModelCurves()</a></code> to plot:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># double-sigmoidal fit</span></span>
 <span><span class="fu"><a href="../reference/figureModelCurves.html">figureModelCurves</a></span><span class="op">(</span>dataInput <span class="op">=</span> <span class="va">normalizedInput_free</span>,</span>
 <span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">doubleSigmoidalModel_free</span>,</span>
@@ -233,7 +206,7 @@ parameter values are nearly identical, but models with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h_0 = 0</annotation></semantics></math>
 are fundamentally different from models with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mn>0</mn></msub><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h_0 \ne 0</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitObj_zero</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">finalAsymptoteIntensityRatio_Estimate</span>, <span class="va">maximum_Estimate</span>, <span class="va">slope1Param_Estimate</span>, <span class="va">midPoint1Param_Estimate</span>,</span>
 <span>         <span class="va">slope2Param_Estimate</span>, <span class="va">midPointDistanceParam_Estimate</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -255,7 +228,7 @@ are fundamentally different from models with
 <span><span class="co">## </span></span>
 <span><span class="co">## $midPointDistanceParam_Estimate</span></span>
 <span><span class="co">## [1] 7.976228</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitObj_free</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">finalAsymptoteIntensityRatio_Estimate</span>, <span class="va">maximum_Estimate</span>, <span class="va">slope1Param_Estimate</span>, <span class="va">midPoint1Param_Estimate</span>,</span>
 <span>         <span class="va">slope2Param_Estimate</span>, <span class="va">midPointDistanceParam_Estimate</span>, <span class="va">h0_Estimate</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>

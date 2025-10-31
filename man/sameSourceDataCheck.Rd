@@ -14,7 +14,7 @@ sameSourceDataCheck(dataInput, sigmoidalFitVector, doubleSigmoidalFitVector)
 \item{doubleSigmoidalFitVector}{is the output of double sigmoidal fit function. Default is NULL.}
 }
 \value{
-Returns TRUE if models can from same source, FALSE otherwise.
+Returns TRUE if models came from same source, FALSE otherwise.
 }
 \description{
 Checks if the provided data and models came from same source by looking to ".dataInputName" columns of the inputs.

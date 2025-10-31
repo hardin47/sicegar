@@ -39,10 +39,10 @@ categorize_h0(
 \item{showDetails}{Logical to chose if we want to see details or not. Default is "FALSE"}
 }
 \value{
-The returned object contains extensive information about the decision process, but the key component is the decision variable. The decision variable can be one of the following four; "no_signal", "infection","infection&lysis" or "ambugious".
+The returned object contains extensive information about the decision process, but the key component is the decision variable. The decision variable can be one of the following four; "no_signal", "infection","infection&lysis" or "ambiguous".
 }
 \description{
-Catagorizes the input data using the results of two model fitsand chosen thresholds.
+Categorizes the input data using the results of two model fits and chosen thresholds.
 }
 \examples{
 # Example 1 with double sigmoidal data

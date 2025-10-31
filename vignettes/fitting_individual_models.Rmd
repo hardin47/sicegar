@@ -111,7 +111,7 @@ The calculated quantities can be grouped into several different groups of parame
 * `model`: String indicating the type of the model, `"sigmoidal"` for the sigmoidal model and `"doublesigmoidal"` for the double-sigmoidal model.
 * `isThisaFit`: A boolean that equals to `TRUE` if at least one fit was successful and `FALSE` otherwise.
 * `betterFit`: The number of times that the minimum AIC score improved with a subsequent fitting attempt. In other words, this counts the number of times the multiple fit attempts increased fit quality.
-* `correctFit`: The total number of successfull fits.
+* `correctFit`: The total number of successful fits.
 * `totalFit`: The total number of fit attempts.
 
 

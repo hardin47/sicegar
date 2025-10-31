@@ -18,7 +18,7 @@ preCategorize(
 \item{threshold_minimum_for_intensity_maximum}{minimum allowed value for intensity maximum. (Default is 0.3, and the values are based on actual, not the rescaled data.).}
 }
 \value{
-Function returns a brief decision list that includes information about the decision process. Post important part of this information is decisionList$decisionwhich might be either "no_signal" or "not_no_signal".
+Function returns a brief decision list that includes information about the decision process. Most important part of this information is decisionList$decisionwhich might be either "no_signal" or "not_no_signal".
 }
 \description{
 Checks if the signal is present in the data. Often a high percentage of high through-put data does not contain a signal. Checking if data does not contain signal before doing a sigmoidal or double sigmoidal fit can make the analysis of data from high-throughput experiments much faster.

@@ -21,13 +21,13 @@ doublesigmoidalFitFormula(
 
 \item{maximum}{the maximum intensity that the double sigmoidal function reach.}
 
-\item{slope1Param}{the slope parameter of the sigmoidal function at the steppest point in the exponential phase of the viral production.}
+\item{slope1Param}{the slope parameter of the sigmoidal function at the steepest point in the exponential phase of the viral production.}
 
-\item{midPoint1Param}{the x axis value of the steppest point in the function.}
+\item{midPoint1Param}{the x axis value of the steepest point in the function.}
 
-\item{slope2Param}{the slope parameter of the sigmoidal function at the steppest point in the lysis phase. i.e when the intensity is decreasing.}
+\item{slope2Param}{the slope parameter of the sigmoidal function at the steepest point in the lysis phase. i.e when the intensity is decreasing.}
 
-\item{midPointDistanceParam}{the distance between the time of steppest increase and steppest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.}
+\item{midPointDistanceParam}{the distance between the time of steepest increase and steepest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.}
 }
 \value{
 Returns the predicted intensities for the given time points with the double-sigmoidal fitted parameters for the double sigmoidal fit.

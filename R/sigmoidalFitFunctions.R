@@ -8,7 +8,7 @@
 #' @param min_Factor Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.
 #' @param n_iterations Defines maximum number of iterations used by the fitting algorithm. Default is 1000
 #'
-#' @description The function fits a sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, slopeParam, midPoint, and h0) describing the double-sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
+#' @description The function fits a sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, slopeParam, midPoint, and h0) describing the sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
 #' @return Returns fitted parameters for the sigmoidal model.
 #' @export
 #'

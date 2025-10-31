@@ -261,7 +261,7 @@ doublesigmoidalFitFormula <- function(x,
     stop("slope2Param should be a positive number. It is the absolute value of the second slopeParam")
     }
   if(midPointDistanceParam < 0){
-    stop("midPointDistanceParam should be a positive number. It is the distance between two steppest points of exponential phase and lysis")
+    stop("midPointDistanceParam should be a positive number. It is the distance between two steepest points of exponential phase and lysis")
     }
   if(finalAsymptoteIntensityRatio < 0 | finalAsymptoteIntensityRatio > 1){
     stop("finalAsymptoteIntensityRatio should be a number between 0 and 1")
@@ -373,7 +373,7 @@ f_argmax_doublesigmoidal <- function(parameterVector){
     stop("slope2Param should be a positive number. It is the absolute value of the slope2Param")
     }
   if(midPointDistanceParam < 0){
-    stop("midPointDistanceParam should be a positive number. It is the distance between two steppest points of exponential phase and lysis")
+    stop("midPointDistanceParam should be a positive number. It is the distance between two steepest points of exponential phase and lysis")
     }
   if(finalAsymptoteIntensityRatio < 0 | finalAsymptoteIntensityRatio > 1){
     stop("finalAsymptoteIntensityRatio should be a number between 0 and 1")
@@ -593,7 +593,7 @@ f_mid2_doublesigmoidal <- function(parameterDf){
 # @param timeStep is the time step for the derivative calculation increment "h". Default value is 0.00001
 #
 #
-# @description The function calculates the numerical slope of double sigmoidal function with given parameters by using 5 points derivative. It is designed to compansate for the small discrepancy in numerical parameters in the double sigmoidal model. The function is called by numericalReCalculation.
+# @description The function calculates the numerical slope of double sigmoidal function with given parameters by using 5 points derivative. It is designed to compensate for the small discrepancy in numerical parameters in the double sigmoidal model. The function is called by numericalReCalculation.
 # @return return the numerical slope of double sigmoidal for the given x value.
 # @export
 #

@@ -98,7 +98,7 @@ If they choose to allow the function to estimate $h_0$, it will follow the same 
 
 ### Novel Contributions
 
-Each function in **sicegar** was rewritten to include the parameter $h_0$ in addition to a some small technical changes to the functions. 
+Each function in **sicegar** was rewritten to include the parameter $h_0$ in addition to some small technical changes to the functions. 
 Our new version is outlined in the right-hand branch of **Figure 1**.
 
 **Figure 2** Structure of the `fitAndCategorize` function.

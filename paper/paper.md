@@ -72,6 +72,17 @@ Through simulations, with varying levels of noise, generating parameters, and bo
 Though the categorization of the model as sigmoidal or double-sigmoidal is hugely important, it is not the only important aspect of the **sicegar** modeling.
 Our updated implementation, which includes the estimation of the lower asymptote, is prevailingly important, and thus our adjustments fit the needs of current research. 
 
+As previously mentioned, **sicegar** fits time-intensity data to single and double sigmoid curves, which allows users to extract key parameters including the onset time of RNA expression in specific genes [@caglar2018]. 
+To better contextualize the relevance of sigmoid parameters to onset time, we can map the parameters described in equation $I(x)$ to a plot of a typical single-sigmoid function:
+
+**Figure 1** Visualization of the sigmoidal curve and related parameter values.
+
+![Sigmoidal curve](images/sigmoidal_curve.png)
+
+As you can see, $t_1$ marks both the inflection point of the single-sigmoid curve as well as the midpoint between $h_0$ and $h_1.$ 
+Therefore, in the case of modeling RNA-seq data, extracting $t_1$ from a **sicegar** fit allows us to estimate the onset time of RNA expression.
+
+
 # Features 
 
 ### Core Functions
@@ -90,103 +101,21 @@ If they choose to allow the function to estimate $h_0$, it will follow the same 
 Each function in **sicegar** was rewritten to include the parameter $h_0$ in addition to a some small technical changes to the functions. 
 Our new version is outlined in the right-hand branch of **Figure 1**.
 
-**Figure 1** Structure of the `fitAndCategorize` function.
+**Figure 2** Structure of the `fitAndCategorize` function.
 
-![Structure of the `fitAndCategorize` function](images/JOSS_Graphic.png)
+![Structure of the `fitAndCategorize` function](images/h0_alg.png)
 
 # Example
 
-I'm open to feedback here for sure.
-Totally fine if you don't like it and take it out!
-And the code I've included isn't sufficient, because maybe we need pictures like in the vignette.
-But... I'm thinking we might be able to run a mini-version of the example at the bottom of the new vignette?
-https://hardin47.github.io/sicegar/articles/h0_functions.html
+We need a little more here...
 
-(We will have to run the code in R / qmd, save the image(s) if needed, and then copy over the code into this md file.
-That is, the paper is all text in a markdown file.)
+**Figure 3**
 
-I'm including some code here. 
-What do you think? 
-Also, I think Tommy is going to change the example, so probably all this will need to change.
+![Structure of the `fitAndCategorize` function](images/param_est.png)
 
-```r
-time <- seq(1, 24, 0.5)
-noise_parameter <- 0.2
-intensity_noise <- runif(n = length(time), min = 0, max = 1) * noise_parameter
-intensity <- doubleSigmoidalFitFormula_h0(time,
-                                       finalAsymptoteIntensityRatio = .3,
-                                       maximum = 10,
-                                       slope1Param = 1,
-                                       midPoint1Param = 7,
-                                       slope2Param = 1,
-                                       midPointDistanceParam = 8,
-                                       h0 = 2)
-intensity <- intensity + intensity_noise
-dataInput <- data.frame(time, intensity)
-```
-
-Recall that the original model parameters (which generated the data) are given as `finalAsymptoteIntensityRatio = 0.3`, `maximum = 10`, `slope1Param = 1`, `midPoint1Param = 7`, `slope2Param = 1`, `midPointDistanceParam = 8`, `h0 = 2`.
-
-```r
-fitObj_zero <- fitAndCategorize(dataInput,
-                           threshold_minimum_for_intensity_maximum = 0.3,
-                           threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
-                           use_h0 = FALSE)   # Default
-```
-
-```
-$finalAsymptoteIntensityRatio_Estimate
-[1] 0.1264636
-
-$maximum_Estimate
-[1] 10.13
-
-$slope1Param_Estimate
-[1] 1.007482
-
-$midPoint1Param_Estimate
-[1] 7.006687
-
-$slope2Param_Estimate
-[1] 1.021521
-
-$midPointDistanceParam_Estimate
-[1] 7.976228
-```
-
-```r
-fitObj_free <- fitAndCategorize(dataInput,
-                           threshold_minimum_for_intensity_maximum = 0.3,
-                           threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
-                           use_h0 = TRUE)
-```
-
-```
-$finalAsymptoteIntensityRatio_Estimate
-[1] 0.3080899
-
-$maximum_Estimate
-[1] 10.13
-
-$slope1Param_Estimate
-[1] 1.007482
-
-$midPoint1Param_Estimate
-[1] 7.006687
-
-$slope2Param_Estimate
-[1] 1.021521
-
-$midPointDistanceParam_Estimate
-[1] 7.976228
-
-$h0_Estimate
-[1] 2.106237
-```
-
-
+For each of 200 simulated sigmoidal datasets, Figure 3 shows the parameter estimates for each of four parameters.
+It should be noted that allowing $h_0$ to be freely estimated provides both more accurate parameter estimations — notably for $t_1$ — and better categorizations of the model (as "sigmoidal" rather than "ambiguous").
+Similar results occur when the package is run on simulated data with more noise, as well as on data simulated from the double sigmoidal model. 
 
 # Availability
 

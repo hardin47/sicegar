@@ -21,7 +21,7 @@ authors:
 affiliations:
  - name: Pomona College, United States
    index: 1
-date: 13 August 2025
+date: 10 November 2025
 bibliography: paper.bib
 ---
 
@@ -41,6 +41,13 @@ $h_1$ is the upper asymptote (as $x$ approaches positive infinity).
 
 
 $I(x) = h_0 + \frac{h_1-h_0}{1 + e^{-a(x - t_1)}}$
+
+**Figure 1** Visualization of the sigmoidal curve and related parameter values.
+
+![Sigmoidal curve.](images/sigmoidal_curve.png)
+
+The parameter $t_1$ marks both the inflection point of the single-sigmoid curve as well as the midpoint between $h_0$ and $h_1.$ 
+For example, in the setting of modeling RNA-seq data, extracting $t_1$ from a **sicegar** fit allows us to estimate the onset time of RNA expression.
 
 A similar, but slightly more complicated, formula for the double sigmoidal function is also used for parameter estimation in **sicegar**.
 In the original implementation of **sicegar**, the parameter $h_0$ is set to zero for both the sigmoidal and double-sigmoidal models.
@@ -72,6 +79,10 @@ Through simulations, with varying levels of noise, generating parameters, and bo
 Though the categorization of the model as sigmoidal or double-sigmoidal is hugely important, it is not the only important aspect of the **sicegar** modeling.
 Our updated implementation, which includes the estimation of the lower asymptote, is prevailingly important, and thus our adjustments fit the needs of current research. 
 
+As previously mentioned, **sicegar** fits time-intensity data to single and double sigmoid curves, which allows users to extract key parameters including the onset time of RNA expression in specific genes [@caglar2018]. 
+To better contextualize the relevance of sigmoid parameters to onset time, we can map the parameters described in equation $I(x)$ to a plot of a typical single-sigmoid function:
+
+
 # Features 
 
 ### Core Functions
@@ -90,103 +101,34 @@ If they choose to allow the function to estimate $h_0$, it will follow the same 
 Each function in **sicegar** was rewritten to include the parameter $h_0$ in addition to a some small technical changes to the functions. 
 Our new version is outlined in the right-hand branch of **Figure 1**.
 
-**Figure 1** Structure of the `fitAndCategorize` function.
+**Figure 2** Structure of the `fitAndCategorize` function.
 
-![Structure of the `fitAndCategorize` function](images/JOSS_Graphic.png)
+![Structure of the `fitAndCategorize` function.](images/h0_alg.png)
 
 # Example
 
-I'm open to feedback here for sure.
-Totally fine if you don't like it and take it out!
-And the code I've included isn't sufficient, because maybe we need pictures like in the vignette.
-But... I'm thinking we might be able to run a mini-version of the example at the bottom of the new vignette?
-https://hardin47.github.io/sicegar/articles/h0_functions.html
+To demonstrate the difference between the functionality when $h_0 = 0$ versus when $h_0$ is freely estimated, we present a small simulation.
+The data were simulated by using a base sigmoidal function given by $I(x)$ and visualized in **Figure 1**.
+The parameters in our simulation are $h_0 = $, $h_1 = $, $a = $, and $t_1 = $.
+At each of *somenumber* of time points on the x-axis, we have *somenumber* of replicates around the sigmoidal model with normal noise that has a standard deviation of *somenumber*.
+Our simulation does not prove that estimating $h_0$ freely is always preferable, but it does indicate that there are circumstances in which estimating $h_0$ is important for full approximation of the model.
 
-(We will have to run the code in R / qmd, save the image(s) if needed, and then copy over the code into this md file.
-That is, the paper is all text in a markdown file.)
+**Figure 3** Sicegar fit for one simulation
 
-I'm including some code here. 
-What do you think? 
-Also, I think Tommy is going to change the example, so probably all this will need to change.
+![Sicegar fit for one simulation.](images/param_est.png)
 
-```r
-time <- seq(1, 24, 0.5)
-noise_parameter <- 0.2
-intensity_noise <- runif(n = length(time), min = 0, max = 1) * noise_parameter
-intensity <- doubleSigmoidalFitFormula_h0(time,
-                                       finalAsymptoteIntensityRatio = .3,
-                                       maximum = 10,
-                                       slope1Param = 1,
-                                       midPoint1Param = 7,
-                                       slope2Param = 1,
-                                       midPointDistanceParam = 8,
-                                       h0 = 2)
-intensity <- intensity + intensity_noise
-dataInput <- data.frame(time, intensity)
-```
+**Figure 3** shows a single simulated dataset with two different sigmoidal fits.
+The left image requires $h_0 = 0$ and the rest of the function follows from that restriction.
+The right image allows $h_0$ to be freely estimated, and the other parameters are correspondingly estimated.
 
-Recall that the original model parameters (which generated the data) are given as `finalAsymptoteIntensityRatio = 0.3`, `maximum = 10`, `slope1Param = 1`, `midPoint1Param = 7`, `slope2Param = 1`, `midPointDistanceParam = 8`, `h0 = 2`.
+**Figure 4** Parameter estimates from simulated data.
 
-```r
-fitObj_zero <- fitAndCategorize(dataInput,
-                           threshold_minimum_for_intensity_maximum = 0.3,
-                           threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
-                           use_h0 = FALSE)   # Default
-```
+![Parameter estimates from simulated data.](images/param_est.png)
 
-```
-$finalAsymptoteIntensityRatio_Estimate
-[1] 0.1264636
-
-$maximum_Estimate
-[1] 10.13
-
-$slope1Param_Estimate
-[1] 1.007482
-
-$midPoint1Param_Estimate
-[1] 7.006687
-
-$slope2Param_Estimate
-[1] 1.021521
-
-$midPointDistanceParam_Estimate
-[1] 7.976228
-```
-
-```r
-fitObj_free <- fitAndCategorize(dataInput,
-                           threshold_minimum_for_intensity_maximum = 0.3,
-                           threshold_intensity_range = 0.1,
-                           threshold_t0_max_int = 0.05,
-                           use_h0 = TRUE)
-```
-
-```
-$finalAsymptoteIntensityRatio_Estimate
-[1] 0.3080899
-
-$maximum_Estimate
-[1] 10.13
-
-$slope1Param_Estimate
-[1] 1.007482
-
-$midPoint1Param_Estimate
-[1] 7.006687
-
-$slope2Param_Estimate
-[1] 1.021521
-
-$midPointDistanceParam_Estimate
-[1] 7.976228
-
-$h0_Estimate
-[1] 2.106237
-```
-
-
+For each of 200 simulated sigmoidal datasets, **Figure 4** shows the parameter estimates for each of the four parameters given in $I(x)$ and seen in **Figure 1**.
+The red vertical line indicates the value of the parameter used for data generation.
+It should be noted that allowing $h_0$ to be freely estimated provides both more accurate parameter estimations — notably for $t_1$ — and better categorizations of the model (as "sigmoidal" rather than "ambiguous").
+Similar results occur when the package is run on simulated data with more noise, as well as on data simulated from the double sigmoidal model. 
 
 # Availability
 

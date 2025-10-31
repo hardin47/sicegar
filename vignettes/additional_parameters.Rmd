@@ -176,7 +176,7 @@ print(t(doubleSigmoidalModel))
 * `incrementTime`: The time interval from when the first slope tangent intersects with the horizontal line defined by `y = 0` until it intersects with the horizontal line defined by `y = maximum_y`. Its value is equal to `maximum_y / slope`.
 * `startPoint_x`: The x value (i.e., time) of the start point. The start point is defined as the point where the first slope tangent intersects with `y = 0`. It approximately represents the moment in time when the intensity signal first appears. Its value is equal to `midPoint1_x - (incrementTime/2)`.
 * `startPoint_y`: The intensity of the start point. Equals to zero by definition.
-* `reachMaximum_x`:  The x value (i.e., time) of the reach maximum point. The reach maximum point is defined as the point where the fist slope tangent intersects with `y = maximum_y`. It approximately represents the moment in time when the intensity signal reaches its maximum. Its value is equal to `midPoint_x + (incrementTime/2)`.
+* `reachMaximum_x`:  The x value (i.e., time) of the reach maximum point. The reach maximum point is defined as the point where the first slope tangent intersects with `y = maximum_y`. It approximately represents the moment in time when the intensity signal reaches its maximum. Its value is equal to `midPoint_x + (incrementTime/2)`.
 * `reachMaximum_y`: The intensity of the reach maximum point. Equals to `maximum_y` by definition.
 
 7\. Parameters related to the second slope tangent, which is the tangent line that passes through the second midpoint of the curve.

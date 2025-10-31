@@ -49,7 +49,7 @@ fitAndCategorize(
 )
 }
 \arguments{
-\item{dataInput}{Unnormalized input data that will be fitted transferred into related functions}
+\item{dataInput}{Unnormalized input data that will be fitted and transferred into related functions}
 
 \item{dataInputName}{Name of data set (Default is 'NA').}
 

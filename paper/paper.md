@@ -21,7 +21,7 @@ authors:
 affiliations:
  - name: Pomona College, United States
    index: 1
-date: 13 August 2025
+date: 10 November 2025
 bibliography: paper.bib
 ---
 
@@ -41,6 +41,13 @@ $h_1$ is the upper asymptote (as $x$ approaches positive infinity).
 
 
 $I(x) = h_0 + \frac{h_1-h_0}{1 + e^{-a(x - t_1)}}$
+
+**Figure 1** Visualization of the sigmoidal curve and related parameter values.
+
+![Sigmoidal curve.](images/sigmoidal_curve.png)
+
+The parameter $t_1$ marks both the inflection point of the single-sigmoid curve as well as the midpoint between $h_0$ and $h_1.$ 
+For example, in the setting of modeling RNA-seq data, extracting $t_1$ from a **sicegar** fit allows us to estimate the onset time of RNA expression.
 
 A similar, but slightly more complicated, formula for the double sigmoidal function is also used for parameter estimation in **sicegar**.
 In the original implementation of **sicegar**, the parameter $h_0$ is set to zero for both the sigmoidal and double-sigmoidal models.
@@ -75,13 +82,6 @@ Our updated implementation, which includes the estimation of the lower asymptote
 As previously mentioned, **sicegar** fits time-intensity data to single and double sigmoid curves, which allows users to extract key parameters including the onset time of RNA expression in specific genes [@caglar2018]. 
 To better contextualize the relevance of sigmoid parameters to onset time, we can map the parameters described in equation $I(x)$ to a plot of a typical single-sigmoid function:
 
-**Figure 1** Visualization of the sigmoidal curve and related parameter values.
-
-![Sigmoidal curve](images/sigmoidal_curve.png)
-
-As you can see, $t_1$ marks both the inflection point of the single-sigmoid curve as well as the midpoint between $h_0$ and $h_1.$ 
-Therefore, in the case of modeling RNA-seq data, extracting $t_1$ from a **sicegar** fit allows us to estimate the onset time of RNA expression.
-
 
 # Features 
 
@@ -103,17 +103,30 @@ Our new version is outlined in the right-hand branch of **Figure 1**.
 
 **Figure 2** Structure of the `fitAndCategorize` function.
 
-![Structure of the `fitAndCategorize` function](images/h0_alg.png)
+![Structure of the `fitAndCategorize` function.](images/h0_alg.png)
 
 # Example
 
-We need a little more here...
+To demonstrate the difference between the functionality when $h_0 = 0$ versus when $h_0$ is freely estimated, we present a small simulation.
+The data were simulated by using a base sigmoidal function given by $I(x)$ and visualized in **Figure 1**.
+The parameters in our simulation are $h_0 = $, $h_1 = $, $a = $, and $t_1 = $.
+At each of *somenumber* of time points on the x-axis, we have *somenumber* of replicates around the sigmoidal model with normal noise that has a standard deviation of *somenumber*.
+Our simulation does not prove that estimating $h_0$ freely is always preferable, but it does indicate that there are circumstances in which estimating $h_0$ is important for full approximation of the model.
 
-**Figure 3**
+**Figure 3** Sicegar fit for one simulation
 
-![Structure of the `fitAndCategorize` function](images/param_est.png)
+![Sicegar fit for one simulation.](images/param_est.png)
 
-For each of 200 simulated sigmoidal datasets, Figure 3 shows the parameter estimates for each of four parameters.
+**Figure 3** shows a single simulated dataset with two different sigmoidal fits.
+The left image requires $h_0 = 0$ and the rest of the function follows from that restriction.
+The right image allows $h_0$ to be freely estimated, and the other parameters are correspondingly estimated.
+
+**Figure 4** Parameter estimates from simulated data.
+
+![Parameter estimates from simulated data.](images/param_est.png)
+
+For each of 200 simulated sigmoidal datasets, **Figure 4** shows the parameter estimates for each of the four parameters given in $I(x)$ and seen in **Figure 1**.
+The red vertical line indicates the value of the parameter used for data generation.
 It should be noted that allowing $h_0$ to be freely estimated provides both more accurate parameter estimations — notably for $t_1$ — and better categorizations of the model (as "sigmoidal" rather than "ambiguous").
 Similar results occur when the package is run on simulated data with more noise, as well as on data simulated from the double sigmoidal model. 
 

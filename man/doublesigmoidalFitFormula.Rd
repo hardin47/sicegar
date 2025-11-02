@@ -15,25 +15,25 @@ doublesigmoidalFitFormula(
 )
 }
 \arguments{
-\item{x}{the "time" (time) column of the dataframe}
+\item{x}{the "time" column of the dataframe}
 
-\item{finalAsymptoteIntensityRatio}{This is the ratio between asymptote intensity and maximum intensity of the fitted curve.}
+\item{finalAsymptoteIntensityRatio}{this is the ratio between the final asymptote intensity and maximum intensity of the fitted curve.}
 
-\item{maximum}{the maximum intensity that the double sigmoidal function reach.}
+\item{maximum}{the maximum intensity that the double sigmoidal function reaches.}
 
-\item{slope1Param}{the slope parameter of the sigmoidal function at the steppest point in the exponential phase of the viral production.}
+\item{slope1Param}{the slope parameter of the sigmoidal function at the steepest point in the exponential phase of the viral production.}
 
-\item{midPoint1Param}{the x axis value of the steppest point in the function.}
+\item{midPoint1Param}{the x axis value of the steepest point in the function.}
 
-\item{slope2Param}{the slope parameter of the sigmoidal function at the steppest point in the lysis phase. i.e when the intensity is decreasing.}
+\item{slope2Param}{the slope parameter of the sigmoidal function at the steepest point in the lysis phase. i.e when the intensity is decreasing.}
 
-\item{midPointDistanceParam}{the distance between the time of steppest increase and steppest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.}
+\item{midPointDistanceParam}{the distance between the time of steepest increase and steepest decrease in the intensity data. In other words the distance between the x axis values of arguments of slope1Param and slope2Param.}
 }
 \value{
-Returns the predicted intensities for the given time points with the double-sigmoidal fitted parameters for the double sigmoidal fit.
+Returns the predicted intensities for the given time points with the double sigmoidal fitted parameters for the double sigmoidal fit.
 }
 \description{
-Calculates intensities using the double-sigmoidal model fit and the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and mid point distance).
+Calculates intensities using the double sigmoidal model fit and the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and midpoint distance).
 }
 \examples{
 time <- seq(3, 24, 0.1)

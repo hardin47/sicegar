@@ -1,5 +1,5 @@
 ---
-title: "Adjusting data to use with Sicegar"
+title: "Adjusting data to use with sicegar"
 author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -144,4 +144,3 @@ figureModelCurves(dataInput = fitObj_flipped$normalizedInput,
                   showParameterRelatedLines = TRUE,
                   use_h0 = TRUE)
 ```
-

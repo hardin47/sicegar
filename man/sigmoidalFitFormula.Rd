@@ -7,19 +7,19 @@
 sigmoidalFitFormula(x, maximum, slopeParam, midPoint)
 }
 \arguments{
-\item{x}{the "time" (time) column of the dataframe.}
+\item{x}{the "time" column of the dataframe.}
 
-\item{maximum}{the maximum intensity that the sigmoidal function can reach while time approaches infinity.}
+\item{maximum}{the maximum intensity that the sigmoidal function can reach as time approaches infinity.}
 
-\item{slopeParam}{the slope parameter of the sigmoidal function at the steppest point.}
+\item{slopeParam}{the slope parameter of the sigmoidal function at the steepest point.}
 
-\item{midPoint}{the x axis value of the steppest point in the function.}
+\item{midPoint}{the x axis value of the steepest point in the function.}
 }
 \value{
 Returns the predicted intensities for given time points with the given sigmoidal fit parameters.
 }
 \description{
-Calculates intesities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, and midpoint).
+Calculates intensities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, and midpoint).
 }
 \examples{
 

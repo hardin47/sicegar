@@ -18,25 +18,25 @@ doublesigmoidalFitFunction_h0(
 )
 }
 \arguments{
-\item{dataInput}{A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
+\item{dataInput}{A dataframe or a list containing the dataframe. The dataframe should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before being imported into this function.}
 
 \item{tryCounter}{A counter that shows the number of times the data was fit via maximum likelihood function.}
 
-\item{startList}{The initial set of parameters vector that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, and h0 = 0. The numbers are in normalized time intensity scale.}
+\item{startList}{The vector containing the initial set of parameters that algorithm tries for the first fit attempt for the relevant parameters. The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are  finalAsymptoteIntensityRatio = 0, maximum = 1, slope1Param = 1, midPoint1Param = 0.33, slope2Param = 1, midPointDistanceParam=0.29, and h0 = 0. The numbers are in normalized time intensity scale.}
 
-\item{lowerBounds}{The lower bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = -0.1. The numbers are in normalized time intensity scale.}
+\item{lowerBounds}{The lower bounds for the randomly generated start parameters. The vector is composed of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 0, maximum = 0.3, slope1Param = .01, midPoint1Param = -0.52, slope2Param = .01, midPointDistanceParam = 0.04, and h0 = -0.1. The numbers are in normalized time intensity scale.}
 
-\item{upperBounds}{The upper bounds for the randomly generated start parameters.  The vector composes of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.}
+\item{upperBounds}{The upper bounds for the randomly generated start parameters. The vector is composed of seven elements; 'finalAsymptoteIntensityRatio', 'maximum', 'slope1Param', 'midPoint1Param' , 'slope2Param', 'midPointDistanceParam', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are finalAsymptoteIntensityRatio = 1, maximum = 1.5, slope1Param = 180, midPoint1Param = 1.15, slope2Param = 180, midPointDistanceParam = 0.63, and h0 = 0.3. The numbers are in normalized time intensity scale.}
 
 \item{min_Factor}{Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.}
 
-\item{n_iterations}{Define maximum number of iterations used by the fitting algorithm. Default is 1000}
+\item{n_iterations}{Defines maximum number of iterations used by the fitting algorithm. Default is 1000.}
 }
 \value{
 Returns the fitted parameters and goodness of fit metrics.
 }
 \description{
-The function fits a double sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and midpoint distance) describing the double-sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
+The function fits a double sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and midpoint distance) describing the double sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
 }
 \examples{
 time=seq(3, 24, 0.1)

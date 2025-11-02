@@ -39,23 +39,23 @@ require("cowplot")
 We will demonstrate the differences between letting $h_0$ be estimated freely and assuming it is fixed at zero, first generating data where $h_0$ is not zero:
 
 ```{r generate_data}
-time <- rep(seq(1, 24, 0.5), 5)
-noise_parameter <- 1.5
-mean_vals <- doublesigmoidalFitFormula_h0(time,
+time <- seq(3, 24, 3)
+noise_parameter <- 3
+reps <- 5
+intensity_noise <- runif(n = length(time)*reps, min = 0, max = 1) * noise_parameter
+intensity <- rep(doublesigmoidalFitFormula_h0(time,
                                        finalAsymptoteIntensityRatio = .3,
                                        maximum = 10,
                                        slope1Param = 1,
                                        midPoint1Param = 7,
                                        slope2Param = 1,
                                        midPointDistanceParam = 8,
-                                       h0 = 2)
-
-intensity <- rnorm(n = length(mean_vals), mean = mean_vals, sd = rep(noise_parameter, length(mean_vals)))
-
+                                       h0 = 2), reps)
+intensity <- intensity + intensity_noise
 dataInput <- data.frame(time, intensity)
 ggplot(dataInput, aes(time, intensity)) + 
   geom_point() + 
-  scale_y_continuous(limits = c(-4, 14), expand = expansion(mult = c(0, 0))) + 
+  scale_y_continuous(limits = c(0, 12), expand = expansion(mult = c(0, 0))) + 
   theme_bw()
 ```
 
@@ -132,7 +132,7 @@ Recall that the original model parameters (which generated the data) are given a
 
 We can recover the parameter estimates from both of the `doubleSigmoidalModel` objects created above.
 `fitObj_zero` does not return a value for $h_0$ (because it is not part of the estimation process).
-The rest of the parameter values are nearly identical, but models with $h_0 = 0$ are fundamentally different from models with $h_0 \ne 0$.
+When $h_0$ is allowed to vary freely, the full set of parameters are estimated to be much closer to the data generating parameters (as opposed to when $h_0 = 0$ is forced).
 
 ```{r}
 fitObj_zero$doubleSigmoidalModel |>

@@ -7,15 +7,15 @@
 normalizeData(dataInput, dataInputName = NA)
 }
 \arguments{
-\item{dataInput}{A data frame or a list contatining the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity.}
+\item{dataInput}{A dataframe or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity.}
 
 \item{dataInputName}{experiment name (Default is 'NA').}
 }
 \value{
-Function returns a new data frame, scaling factors and scaling constants that connects initial data frame to new one. The new data frame includes 2 columns one is for normalized time and the other is for noralized intensity. The whole time is distributed between 0 and 1 and similarly the whole intensity is distributed between 0 and 1. The time and intensity constants and scaling factors are the parameters to transform data from unnormalized data frame to normalized data frame.
+Function returns a new dataframe, scaling factors and scaling constants that connects the initial data frame to the new one. The new data frame includes 2 columns: normalized time and normalized intensity. The time and intensity constants and scaling factors are the parameters to transform data from the unnormalized dataframe to normalized data frame.
 }
 \description{
-Maps the given time-intensity data into a rescaled data frame where time is scaled to between 0 and 1, and intensity is scaled to between 0 and 1.
+Maps the given time-intensity data into a rescaled dataframe where time is scaled to between 0 and 1, and intensity is scaled to be between 0 and 1.
 }
 \examples{
 # generateRandomData

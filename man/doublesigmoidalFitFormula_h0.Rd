@@ -16,11 +16,11 @@ doublesigmoidalFitFormula_h0(
 )
 }
 \arguments{
-\item{x}{the "time" (time) column of the dataframe}
+\item{x}{the "time" column of the dataframe}
 
-\item{finalAsymptoteIntensityRatio}{This is the ratio between asymptote intensity and maximum intensity of the fitted curve.}
+\item{finalAsymptoteIntensityRatio}{this is the ratio between the final asymptote intensity and maximum intensity of the fitted curve.}
 
-\item{maximum}{the maximum intensity that the double sigmoidal function reach.}
+\item{maximum}{the maximum intensity that the double sigmoidal function reaches.}
 
 \item{slope1Param}{the slope parameter of the sigmoidal function at the steepest point in the exponential phase of the viral production.}
 
@@ -33,10 +33,10 @@ doublesigmoidalFitFormula_h0(
 \item{h0}{the lower asymptote (baseline) intensity}
 }
 \value{
-Returns the predicted intensities for the given time points with the double-sigmoidal fitted parameters for the double sigmoidal fit.
+Returns the predicted intensities for the given time points with the double sigmoidal fitted parameters for the double sigmoidal fit.
 }
 \description{
-Calculates intensities using the double-sigmoidal model fit and the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and mid point distance).
+Calculates intensities using the double sigmoidal model fit and the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and midpoint distance).
 }
 \examples{
 time <- seq(3, 24, 0.1)

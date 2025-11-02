@@ -7,7 +7,7 @@
 sigmoidalFitFormula_h0(x, maximum, slopeParam, midPoint, h0)
 }
 \arguments{
-\item{x}{the "time" (time) column of the dataframe.}
+\item{x}{the "time" column of the dataframe.}
 
 \item{maximum}{the maximum intensity that the sigmoidal function can reach while time approaches infinity.}
 

@@ -15,15 +15,15 @@ sigmoidalFitFunction_h0(
 )
 }
 \arguments{
-\item{dataInput}{A data frame or a list containing the dataframe. The data frame should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before imported into this function.}
+\item{dataInput}{A dataframe or a list containing the dataframe. The dataframe should be composed of at least two columns. One represents time, and the other represents intensity. The data should be normalized with the normalize data function sicegar::normalizeData() before being imported into this function.}
 
 \item{tryCounter}{A counter that shows the number of times the data was fit via maximum likelihood function.}
 
-\item{startList}{A vector containing the initial set of parameters that the algorithm tries for the first fit attempt for the relevant parameters. The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1, midPoint = 0.33, and h0 = 0. The numbers are in normalized time intensity scale.}
+\item{startList}{A vector containing the initial set of parameters that the algorithm tries for the first fit attempt for the relevant parameters. The vector is composed of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'.  Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1, slopeParam = 1, midPoint = 0.33, and h0 = 0. The numbers are in normalized time intensity scale.}
 
-\item{lowerBounds}{The lower bounds for the randomly generated start parameters.  The vector composes of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = -0.1. The numbers are in normalized time intensity scale.}
+\item{lowerBounds}{The lower bounds for the randomly generated start parameters. The vector is composed of four elements; 'maximum', 'slopeParam', 'midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 0.3, slopeParam = 0.01, midPoint = -0.52, and h0 = -0.1. The numbers are in normalized time intensity scale.}
 
-\item{upperBounds}{The upper bounds for the randomly generated start parameters.  The vector composes of four elements; 'maximum', 'slopeParam','midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.}
+\item{upperBounds}{The upper bounds for the randomly generated start parameters. The vector is composed of four elements; 'maximum', 'slopeParam','midPoint', and 'h0'. Detailed explanations of those parameters can be found in vignettes. Defaults are maximum = 1.5, slopeParam = 180, midPoint = 1.15, and h0 = 0.3. The numbers are in normalized time intensity scale.}
 
 \item{min_Factor}{Defines the minimum step size used by the fitting algorithm. Default is 1/2^20.}
 
@@ -33,7 +33,7 @@ sigmoidalFitFunction_h0(
 Returns fitted parameters for the sigmoidal model.
 }
 \description{
-The function fits a sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, slopeParam, midPoint, and h0) describing the double-sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
+The function fits a sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, slopeParam, midPoint, and h0) describing the sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
 }
 \examples{
 time <- seq(3, 24, 0.5)

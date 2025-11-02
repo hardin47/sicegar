@@ -17,6 +17,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/wilkelab/sicegar/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -47,14 +48,14 @@
 
 
 <dl><dt id="arg-datainput">dataInput<a class="anchor" aria-label="anchor" href="#arg-datainput"></a></dt>
-<dd><p>a list file composes of two parts
-First part is the data that will be unnormalized, which is a data frame composed of two columns. One is for time and the other is for intensity
-Second part is the scaling parameters of the data which is a vector that has three components. The first one of them is related with time and last two of them are related with intensity. The second value represents the min value of the intensity set. First and third values represent the difference between max and min value in the relevant column.</p></dd>
+<dd><p>a list file composed of two parts
+First part is the data that will be unnormalized, which is a dataframe composed of two columns. One is for time and the other is for intensity
+Second part is the scaling parameters of the data which is a vector that has three components. The first is related with time and second two are related with intensity. The second value represents the min value of the intensity set. First and third values represent the difference between max and min value in the relevant column.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Returns a data frame, scaling factors and scaling constants for time and intensity. The other data frame includes 2 columns one is for normalized time and the other is for noralized intensity. The whole time is distributed between 0 and 1 and similarly the whole intensity is distributed between 0 and 1. The time and intensity constants and scaling factors are the parameters to transform data from given set to scaled set.</p>
+    <p>Returns a dataframe, scaling factors, and scaling constants for time and intensity. The other data frame includes 2 columns: normalized time and normalized intensity. The time and intensity constants and scaling factors are the parameters to transform data from given set to scaled set.</p>
     </div>
 
     <div class="section level2">

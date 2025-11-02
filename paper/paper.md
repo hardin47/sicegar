@@ -28,7 +28,7 @@ bibliography: paper.bib
 # Summary
 
 The R package **sicegar** aims to quantify time intensity data by using sigmoidal and double sigmoidal curves.
-It fits straight lines, sigmoidal, and double sigmoidal curves on to time vs intensity data.
+**sicegar** fits sigmoidal and double sigmoidal curves on intensity vs time data.
 Each of the fits are used to make a decision on which model best describes the data. 
 The method was originally developed in the context of single-cell viral growth analysis (for details, see @caglar2018), and the package name stands for "SIngle CEll Growth Analysis in R". 
 Beyond **sicegar**'s ability to categorize fits, it also provides parameter estimations for each curve which can also provide important information to researchers. 

@@ -55,7 +55,7 @@ intensity <- intensity + intensity_noise
 dataInput <- data.frame(time, intensity)
 ggplot(dataInput, aes(time, intensity)) + 
   geom_point() + 
-  scale_y_continuous(limits = c(0, 12), expand = expansion(mult = c(0, 0))) + 
+  scale_y_continuous(limits = c(0, 15), expand = expansion(mult = c(0, 0))) + 
   theme_bw()
 ```
 

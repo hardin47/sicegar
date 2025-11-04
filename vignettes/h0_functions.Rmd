@@ -39,23 +39,23 @@ require("cowplot")
 We will demonstrate the differences between letting $h_0$ be estimated freely and assuming it is fixed at zero, first generating data where $h_0$ is not zero:
 
 ```{r generate_data}
-time <- seq(3, 24, 3)
-noise_parameter <- 3
+noise_parameter <- 1
 reps <- 5
-intensity_noise <- runif(n = length(time)*reps, min = 0, max = 1) * noise_parameter
-intensity <- rep(doublesigmoidalFitFormula_h0(time,
+time <- rep(seq(3, 24, 3), reps)
+mean_values <- doublesigmoidalFitFormula_h0(time,
                                        finalAsymptoteIntensityRatio = .3,
                                        maximum = 10,
                                        slope1Param = 1,
                                        midPoint1Param = 7,
                                        slope2Param = 1,
                                        midPointDistanceParam = 8,
-                                       h0 = 2), reps)
-intensity <- intensity + intensity_noise
+                                       h0 = 3)
+intensity <- rnorm(n = length(mean_values), mean = mean_values, sd = rep(noise_parameter, length(mean_values)))
+
 dataInput <- data.frame(time, intensity)
 ggplot(dataInput, aes(time, intensity)) + 
   geom_point() + 
-  scale_y_continuous(limits = c(0, 15), expand = expansion(mult = c(0, 0))) + 
+  scale_y_continuous(limits = c(-1, 13), expand = expansion(mult = c(0, 0))) + 
   theme_bw()
 ```
 

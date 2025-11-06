@@ -4,7 +4,7 @@ author: "Thomas Matheis, Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Adjusting data to use with Sicegar}
+  %\VignetteIndexEntry{Adjusting data to use with sicegar}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

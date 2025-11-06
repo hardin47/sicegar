@@ -24,6 +24,9 @@ Function returns a brief decision list that includes information about the decis
 Checks if the signal is present in the data. Often a high percentage of high through-put data does not contain a signal. Checking if data does not contain signal before doing a sigmoidal or double sigmoidal fit can make the analysis of data from high-throughput experiments much faster.
 }
 \examples{
+# runif() is used here for consistency with previous versions of the sicegar package. However,
+# rnorm() will generate symmetric errors, which will produce less biased numerical estimates of the parameters.
+# We recommend errors generated with rnorm() for any simulation studies on sicegar.
 # Example 1 with double sigmoidal data
 
 time=seq(3, 24, 0.1)

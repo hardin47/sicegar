@@ -24,7 +24,9 @@ Returns the predicted intensities for given time points with the given sigmoidal
 Calculates intensities for given time points (x) by using sigmoidal fit model and parameters (maximum, slopeParam, midpoint, and h0).
 }
 \examples{
-
+# runif() is used here for consistency with previous versions of the sicegar package. However,
+# rnorm() will generate symmetric errors, which will produce less biased numerical estimates of the parameters.
+# We recommend errors generated with rnorm() for any simulation studies on sicegar.
 time <- seq(3, 24, 0.5)
 
 #simulate intensity data and add noise

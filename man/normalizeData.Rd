@@ -18,6 +18,9 @@ Function returns a new dataframe, scaling factors and scaling constants that con
 Maps the given time-intensity data into a rescaled dataframe where time is scaled to between 0 and 1, and intensity is scaled to be between 0 and 1.
 }
 \examples{
+# runif() is used here for consistency with previous versions of the sicegar package. However,
+# rnorm() will generate symmetric errors, which will produce less biased numerical estimates of the parameters.
+# We recommend errors generated with rnorm() for any simulation studies on sicegar.
 # generateRandomData
 time <- seq(3, 48, 0.5)
 intensity <- runif(length(time), 3.0, 7.5)

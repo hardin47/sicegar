@@ -39,6 +39,9 @@ Returns the fitted parameters and goodness of fit metrics.
 The function fits a double sigmoidal curve to given data by using likelihood maximization (LM) algorithm and provides the parameters (maximum, final asymptote intensity, slope1Param, midpoint1Param, slope2Param, and midpoint distance) describing the double sigmoidal fit as output. It also contains information about the goodness of fits such as AIC, BIC, residual sum of squares, and log likelihood.
 }
 \examples{
+# runif() is used here for consistency with previous versions of the sicegar package. However,
+# rnorm() will generate symmetric errors, which will produce less biased numerical estimates of the parameters.
+# We recommend errors generated with rnorm() for any simulation studies on sicegar.
 time=seq(3, 24, 0.1)
 
 #simulate intensity data and add noise

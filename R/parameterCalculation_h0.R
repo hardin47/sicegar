@@ -41,7 +41,7 @@
 #'
 #'print(t(parameterVector))
 #'
-parameterCalculation_h0<-function(parameterVector, stepSize=0.00001){
+parameterCalculation_h0 <- function(parameterVector, stepSize=0.00001){
 
 
   if(parameterVector$model == "sigmoidal"){
@@ -62,7 +62,7 @@ parameterCalculation_h0<-function(parameterVector, stepSize=0.00001){
 
     # Start Point Calculations
     parameterVector$startPoint_x <- parameterVector$midPoint_x - (parameterVector$incrementTime / 2)
-    parameterVector$startPoint_y <- parameterVector$h0_y
+    parameterVector$startPoint_y <- parameterVector$h0_Estimate
 
     # Reach Maximum Point
     parameterVector$reachMaximum_x <- parameterVector$midPoint_x + (parameterVector$incrementTime / 2)

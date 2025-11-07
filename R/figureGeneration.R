@@ -96,7 +96,6 @@ figureModelCurves <- function(dataInput,
       maximum_x <- sigmoidalFitVector$maximum_x
       maximum_y <- sigmoidalFitVector$maximum_y
       midPoint_x <- sigmoidalFitVector$midPoint_x
-      midPoint_y <- sigmoidalFitVector$midPoint_y
       slope <- sigmoidalFitVector$slope
       slopeParam <- sigmoidalFitVector$slopeParam_Estimate
       incrementTime <- sigmoidalFitVector$incrementTime
@@ -104,6 +103,8 @@ figureModelCurves <- function(dataInput,
       startPoint_y <- sigmoidalFitVector$startPoint_y
       reachMaximum_x <- sigmoidalFitVector$reachMaximum_x
       reachMaximum_y <- sigmoidalFitVector$reachMaximum_y
+      midPoint_y <- sigmoidalFitFormula(midPoint_x, maximum_y,
+                                        slopeParam, midPoint_x)
 
       # Generate the Time Series for Fitted Data
       if (is.na(fittedXmax)){
@@ -351,7 +352,6 @@ figureModelCurves <- function(dataInput,
         maximum_x <- sigmoidalFitVector$maximum_x
         maximum_y <- sigmoidalFitVector$maximum_y
         midPoint_x <- sigmoidalFitVector$midPoint_x
-        midPoint_y <- sigmoidalFitVector$midPoint_y
         slope <- sigmoidalFitVector$slope
         slopeParam <- sigmoidalFitVector$slopeParam_Estimate
         incrementTime <- sigmoidalFitVector$incrementTime
@@ -360,6 +360,9 @@ figureModelCurves <- function(dataInput,
         reachMaximum_x <- sigmoidalFitVector$reachMaximum_x
         reachMaximum_y <- sigmoidalFitVector$reachMaximum_y
         h0 <- sigmoidalFitVector$h0_Estimate
+        midPoint_y <- sigmoidalFitFormula_h0(midPoint_x, maximum_y,
+                                          slopeParam, midPoint_x, h0)
+
 
         # Generate the Time Series for Fitted Data
         if (is.na(fittedXmax)){

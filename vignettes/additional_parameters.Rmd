@@ -149,8 +149,8 @@ print(t(doubleSigmoidalModel))
 
 1\. Maximum of the fitted curve.
 
-* `maximum_x`: The x value (i.e., time) at which the fitted curve reaches its maximum value. **Umut, how is the value calculated?**
-* `maximum_y`: The maximum intensity the fitted curve reaches at infinity. The value is equal to `maximum_Estimate`.  **Umut, correct?**
+* `maximum_x`: The x value (i.e., time) at which the fitted curve reaches its maximum value.  
+* `maximum_y`: The maximum intensity the fitted curve reaches at infinity. The value is equal to `maximum_Estimate`.  
 
 2\. Final asymptote intensity of the fitted model
 

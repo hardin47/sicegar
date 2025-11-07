@@ -1,8 +1,8 @@
 # R package sicegar
 
-[![R build status](https://github.com/hardin47/sicegar/workflows/R-CMD-check/badge.svg)](https://github.com/hardin47/sicegar/actions)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/sicegar)](https://CRAN.R-project.org/package=sicegar)
-[![CRAN\_Downloads\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/sicegar?color=brightgreen)](https://cranlogs.r-pkg.org/downloads/total/last-month/sicegar)
+[![R build status](https://github.com/hardin47/sicegar/workflows/R-CMD-check/badge.svg/)](https://github.com/hardin47/sicegar/actions/)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/sicegar/)](https://CRAN.R-project.org/package=sicegar/)
+[![CRAN\_Downloads\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/sicegar?color=brightgreen/)](https://cranlogs.r-pkg.org/downloads/total/last-month/sicegar/)
 
 Originally written by M. Umut Caglar and Claus O. Wilke. Updates and current maintenance by Johanna Hardin, Sam Butler, Phineus Choi, Thomas Matheis, and Mira Terdiman.
 
@@ -10,9 +10,9 @@ This package aims to quantify time intensity data by using sigmoidal and double 
 
 The package name stands for "SIngle CEll Growth Analysis in R".
 
-CRAN: https://cran.r-project.org/package=sicegar
+CRAN: https://cran.r-project.org/package=sicegar/
 
-Source: https://github.com/hardin47/sicegar
+Source: https://github.com/hardin47/sicegar/
 
-Vignettes: https://hardin47.github.io/sicegar
+Vignettes: https://hardin47.github.io/sicegar/
 

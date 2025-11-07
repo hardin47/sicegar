@@ -204,7 +204,7 @@ figureModelCurves <- function(dataInput,
   }
 
   output <- ggplot2::ggplot(dataFrameInput) +
-    ggplot2::geom_point(ggplot2::aes(x= time, y= intensity)) +
+    ggplot2::geom_point(ggplot2::aes(x = time, y = intensity)) +
     ggplot2::expand_limits(x = 0, y = 0) +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.minor = ggplot2::element_blank()) +

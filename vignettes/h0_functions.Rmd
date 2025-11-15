@@ -136,13 +136,13 @@ When $h_0$ is allowed to vary freely, the full set of parameters are estimated t
 
 ```{r}
 fitObj_zero$doubleSigmoidalModel |>
-  select(finalAsymptoteIntensityRatio_Estimate, maximum_Estimate, slope1Param_Estimate, midPoint1Param_Estimate,
+  dplyr::select(finalAsymptoteIntensityRatio_Estimate, maximum_Estimate, slope1Param_Estimate, midPoint1Param_Estimate,
          slope2Param_Estimate, midPointDistanceParam_Estimate) |> 
   c()
 
 
 fitObj_free$doubleSigmoidalModel |>
-  select(finalAsymptoteIntensityRatio_Estimate, maximum_Estimate, slope1Param_Estimate, midPoint1Param_Estimate,
+  dplyr::select(finalAsymptoteIntensityRatio_Estimate, maximum_Estimate, slope1Param_Estimate, midPoint1Param_Estimate,
          slope2Param_Estimate, midPointDistanceParam_Estimate, h0_Estimate) |> c()
 
 

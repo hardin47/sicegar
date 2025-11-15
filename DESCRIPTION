@@ -62,7 +62,8 @@ Imports:
     minpack.lm,
     fBasics,
     ggplot2,
-    stats
+    stats,
+    dplyr
 License: GPL-2 | GPL-3
 LazyData: true
 Suggests:
@@ -70,10 +71,9 @@ Suggests:
     cowplot,
     testthat,
     knitr,
-    rmarkdown,
-    dplyr
+    rmarkdown
 VignetteBuilder: knitr
-BugReports: https://hardin47.github.io/sicegar/issues/
+BugReports: https://github.com/hardin47/sicegar/issues
 Collate:
     'globals.R'
     'categorize.R'

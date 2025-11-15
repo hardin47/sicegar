@@ -37,7 +37,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/wilkelab/sicegar/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/hardin47/sicegar/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -55,9 +55,9 @@
                         <h4 data-toc-skip class="author">Thomas Matheis,
 Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin</h4>
             
-            <h4 data-toc-skip class="date">2025-11-07</h4>
+            <h4 data-toc-skip class="date">2025-11-15</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/adjusting_data.Rmd" class="external-link"><code>vignettes/adjusting_data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hardin47/sicegar/blob/HEAD/vignettes/adjusting_data.Rmd" class="external-link"><code>vignettes/adjusting_data.Rmd</code></a></small>
       <div class="d-none name"><code>adjusting_data.Rmd</code></div>
     </div>
 
@@ -68,21 +68,22 @@ Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin</h4>
 </h2>
 <p>There are sometimes cases where data must be adjusted before using
 <strong>sicegar</strong>. Two common situations in which adjustments are
-needed is when the data have too few time points, and when there appears
+needed is when the data have too few time points and when there appears
 to be a decreasing, or negative, trend. While <strong>sicegar</strong>
 does not have built-in functions to perform the necessary corrections,
-the required operations are fairly straightforward.</p>
+we provide a set of straightforward operations to mitigate the cases and
+estimate the sigmoidal parameter values.</p>
 <div class="section level3">
 <h3 id="too-few-time-points-observations">Too few time points / observations<a class="anchor" aria-label="anchor" href="#too-few-time-points-observations"></a>
 </h3>
-<p>We will first demonstrate how to adjust data with too few time
-points. More specifically, if the sigmoidal data has on the order of
-five or fewer time points (six or fewer for double sigmoidal data),
+<p>The first case happens when the data contain too few time points.
+More specifically, if the sigmoidal data has on the order of five or
+fewer time points (six or fewer for double sigmoidal data),
 <strong>sicegar</strong> will usually fail to find a fit. This is a
 result of the sigmoidal and double sigmoidal models having six and seven
 parameters respectively.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">24</span>, <span class="fl">4</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">24</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">noise_parameter</span> <span class="op">&lt;-</span> <span class="fl">0.3</span></span>
 <span><span class="va">mean_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doublesigmoidalFitFormula_h0.html">doublesigmoidalFitFormula_h0</a></span><span class="op">(</span><span class="va">time</span>,</span>
 <span>                                       finalAsymptoteIntensityRatio <span class="op">=</span> <span class="fl">.3</span>,</span>
@@ -100,24 +101,33 @@ parameters respectively.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="adjusting_data_files/figure-html/generate_data-1.png" width="700"></p>
-<p>If there are multiple reps at each time point, a small jitter in the
-x-direction (time) can artificially create more time points for the
-<strong>sicegar</strong> estimation.</p>
+<p>We can attempt to use <code><a href="../reference/fitAndCategorize.html">fitAndCategorize()</a></code> on our data,
+only to observe that the function fails to find a fit and results in an
+error:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitObj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fitAndCategorize.html">fitAndCategorize</a></span><span class="op">(</span><span class="va">dataInput</span>,</span>
+<span>                           threshold_minimum_for_intensity_maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>                           threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                           threshold_t0_max_int <span class="op">=</span> <span class="fl">1E10</span>,</span>
+<span>                           use_h0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in if (parameterVector$model == "sigmoidal") {: argument is of length zero</span></span></code></pre>
+<p>When there are multiple reps at each time point, a small jitter in
+the x-direction (time) can artificially “create more time points” for
+the <strong>sicegar</strong> estimation.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataInput_jitter</span> <span class="op">&lt;-</span> <span class="va">dataInput</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/jitter.html" class="external-link">jitter</a></span><span class="op">(</span><span class="va">time</span>, amount <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">dataInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">dataInput</span>, <span class="va">dataInput_jitter</span><span class="op">)</span></span>
 <span>  </span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataInput</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">intensity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataInput_jitter</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">intensity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adjusting_data_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<p><code>fitAndCategorize</code> is used as usual, finding a fit for the
-model. Data are plotted using <code><a href="../reference/figureModelCurves.html">figureModelCurves()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitObj_jittered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fitAndCategorize.html">fitAndCategorize</a></span><span class="op">(</span><span class="va">dataInput</span>,</span>
+<p><img src="adjusting_data_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><code>fitAndCategorize</code> is used as usual, successfully finding
+a fit for the model. Data are plotted using
+<code><a href="../reference/figureModelCurves.html">figureModelCurves()</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitObj_jittered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fitAndCategorize.html">fitAndCategorize</a></span><span class="op">(</span><span class="va">dataInput_jitter</span>,</span>
 <span>                           threshold_minimum_for_intensity_maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>                           threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>                           threshold_t0_max_int <span class="op">=</span> <span class="fl">1E10</span>,</span>
@@ -127,20 +137,19 @@ model. Data are plotted using <code><a href="../reference/figureModelCurves.html
 <span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_jittered</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span>,</span>
 <span>                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  use_h0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adjusting_data_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><img src="adjusting_data_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="decreasing-trend">Decreasing trend<a class="anchor" aria-label="anchor" href="#decreasing-trend"></a>
 </h3>
-<p>Next, we will show the process for correcting sigmoidal and double
-sigmoidal data that appear to have a decreasing/negative trend. The
-solution is to reverse the time points (subtract <code>time</code> from
-<code>max(time)</code>) and fit the model in the flipped space. Then
-flip the model back (e.g., the
+<p>The second case happens when there is a negative relationship between
+time and intensity. The solution is to reverse the time points (subtract
+<code>time</code> from <code>max(time)</code>) and fit the model in the
+flipped space. Then flip the model back (e.g., the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">t1</annotation></semantics></math>
 parameter can be estimated in the flipped space and then unflipped to
-get the original onseet time).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+get the original onset time).</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">24</span>, <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">noise_parameter</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
 <span><span class="va">mean_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doublesigmoidalFitFormula_h0.html">doublesigmoidalFitFormula_h0</a></span><span class="op">(</span><span class="va">time</span>,</span>
@@ -158,25 +167,25 @@ get the original onseet time).</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adjusting_data_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="adjusting_data_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>The most straightforward method to deal with decreasing trends is to
 reverse the x-axis, resulting in the last time value to becoming the
 first time value, etc. The new time is calculated as
 <code>max(time) - time</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dataInput</span> <span class="op">&lt;-</span> <span class="va">dataInput</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dataInput_flipped</span> <span class="op">&lt;-</span> <span class="va">dataInput</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataInput</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">intensity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataInput_flipped</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">intensity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adjusting_data_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="adjusting_data_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Now that the data have an increasing trend, we can apply
 <code>fitAndCategorize</code> as usual to find a fit for our model and
 plot using <code><a href="../reference/figureModelCurves.html">figureModelCurves()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitObj_flipped</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fitAndCategorize.html">fitAndCategorize</a></span><span class="op">(</span><span class="va">dataInput</span>,</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitObj_flipped</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fitAndCategorize.html">fitAndCategorize</a></span><span class="op">(</span><span class="va">dataInput_flipped</span>,</span>
 <span>                           threshold_minimum_for_intensity_maximum <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>                           threshold_intensity_range <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>                           threshold_t0_max_int <span class="op">=</span> <span class="fl">1E10</span>,</span>
@@ -186,7 +195,21 @@ plot using <code><a href="../reference/figureModelCurves.html">figureModelCurves
 <span>                  doubleSigmoidalFitVector <span class="op">=</span> <span class="va">fitObj_flipped</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span>,</span>
 <span>                  showParameterRelatedLines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  use_h0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adjusting_data_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="adjusting_data_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>To extract the original onset time, we convert the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">t1</annotation></semantics></math>
+parameter back to the original space, observing the final estimation on
+the original data:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">original_onset_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">dataInput</span><span class="op">$</span><span class="va">time</span><span class="op">)</span> <span class="op">-</span> <span class="va">fitObj_flipped</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span><span class="op">$</span><span class="va">midPoint1Param_Estimate</span></span>
+<span></span>
+<span><span class="va">dataInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">intensity</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataInput</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">intensity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">original_onset_time</span>, color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adjusting_data_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

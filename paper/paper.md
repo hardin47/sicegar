@@ -115,7 +115,7 @@ Our simulation does not prove that estimating $h_0$ freely is always preferable,
 
 **Figure 3** Sicegar fit for one simulation
 
-![Sicegar fit for one simulation.](images/param_est.png)
+![Sicegar fit for one simulation.](images/sicegar_fit.png)
 
 **Figure 3** shows a single simulated dataset with two different sigmoidal fits.
 The left image requires $h_0 = 0$ and the rest of the function follows from that restriction.

@@ -16,8 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 # Adjusting the data structure
 
 There are sometimes cases where data must be adjusted before using **sicegar**. 
-Two common situations in which adjustments are needed is when the data have too few time points, and when there appears to be a decreasing, or negative, trend. 
-While **sicegar** does not have built-in functions to perform the necessary corrections, the required operations are fairly straightforward.
+Two common situations in which adjustments are needed is when the data have too few time points and when there appears to be a decreasing, or negative, trend. 
+While **sicegar** does not have built-in functions to perform the necessary corrections, we provide a set of straightforward operations to mitigate the cases and estimate the sigmoidal parameter values.
 
 ```{r install_packages, echo=FALSE, warning=FALSE, results='hide',message=FALSE}
 
@@ -37,7 +37,7 @@ require("cowplot")
 
 ## Too few time points / observations
 
-We will first demonstrate how to adjust data with too few time points. 
+The first case happens when the data contain too few time points. 
 More specifically, if the sigmoidal data has on the order of five or fewer time points (six or fewer for double sigmoidal data), **sicegar** will usually fail to find a fit. 
 This is a result of the sigmoidal and double sigmoidal models having six and seven parameters respectively.
 
@@ -72,7 +72,7 @@ fitObj <- fitAndCategorize(dataInput,
                            use_h0 = TRUE)
 ```
 
-When there are multiple reps at each time point, a small jitter in the x-direction (time) can artificially create more time points for the **sicegar** estimation.
+When there are multiple reps at each time point, a small jitter in the x-direction (time) can artificially "create more time points" for the **sicegar** estimation.
 
 ```{r}
 dataInput_jitter <- dataInput |>
@@ -102,7 +102,7 @@ figureModelCurves(dataInput = fitObj_jittered$normalizedInput,
 
 ## Decreasing trend
 
-Next, we will show the process for correcting sigmoidal and double sigmoidal data that appear to have a decreasing/negative trend. 
+The second case happens when there is a negative relationship between time and intensity. 
 The solution is to reverse the time points (subtract `time` from `max(time)`) and fit the model in the flipped space. 
 Then flip the model back (e.g., the $t1$ parameter can be estimated in the flipped space and then unflipped to get the original onset time).
 
@@ -157,12 +157,12 @@ figureModelCurves(dataInput = fitObj_flipped$normalizedInput,
 To extract the original onset time, we convert the $t1$ parameter back to the original space, observing the final estimation on the original data:  
 
 ```{r}
-onset_time <- max(dataInput$time) - fitObj_flipped$doubleSigmoidalModel$midPoint1Param_Estimate
+original_onset_time <- max(dataInput$time) - fitObj_flipped$doubleSigmoidalModel$midPoint1Param_Estimate
 
 dataInput <- data.frame(time, intensity)
 ggplot(dataInput, aes(time, intensity)) + 
   geom_point() + 
-  geom_vline(xintercept = onset_time, color = "red", linetype = "dashed") +
+  geom_vline(xintercept = original_onset_time, color = "red", linetype = "dashed") +
   scale_y_continuous(limits = c(0, 12), expand = expansion(mult = c(0, 0))) + 
   theme_bw()
 ```

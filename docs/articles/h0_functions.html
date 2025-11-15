@@ -37,7 +37,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/wilkelab/sicegar/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/hardin47/sicegar/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -55,9 +55,9 @@
                         <h4 data-toc-skip class="author">Thomas Matheis,
 Phineus Choi, Sam Butler, Mira Terdiman, Johanna Hardin</h4>
             
-            <h4 data-toc-skip class="date">2025-11-07</h4>
+            <h4 data-toc-skip class="date">2025-11-15</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/sicegar/blob/HEAD/vignettes/h0_functions.Rmd" class="external-link"><code>vignettes/h0_functions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hardin47/sicegar/blob/HEAD/vignettes/h0_functions.Rmd" class="external-link"><code>vignettes/h0_functions.Rmd</code></a></small>
       <div class="d-none name"><code>h0_functions.Rmd</code></div>
     </div>
 
@@ -211,7 +211,7 @@ be much closer to the data generating parameters (as opposed to when
 is forced).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitObj_zero</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">finalAsymptoteIntensityRatio_Estimate</span>, <span class="va">maximum_Estimate</span>, <span class="va">slope1Param_Estimate</span>, <span class="va">midPoint1Param_Estimate</span>,</span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">finalAsymptoteIntensityRatio_Estimate</span>, <span class="va">maximum_Estimate</span>, <span class="va">slope1Param_Estimate</span>, <span class="va">midPoint1Param_Estimate</span>,</span>
 <span>         <span class="va">slope2Param_Estimate</span>, <span class="va">midPointDistanceParam_Estimate</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $finalAsymptoteIntensityRatio_Estimate</span></span>
@@ -233,7 +233,7 @@ is forced).</p>
 <span><span class="co">## [1] 0.96</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitObj_free</span><span class="op">$</span><span class="va">doubleSigmoidalModel</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">finalAsymptoteIntensityRatio_Estimate</span>, <span class="va">maximum_Estimate</span>, <span class="va">slope1Param_Estimate</span>, <span class="va">midPoint1Param_Estimate</span>,</span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">finalAsymptoteIntensityRatio_Estimate</span>, <span class="va">maximum_Estimate</span>, <span class="va">slope1Param_Estimate</span>, <span class="va">midPoint1Param_Estimate</span>,</span>
 <span>         <span class="va">slope2Param_Estimate</span>, <span class="va">midPointDistanceParam_Estimate</span>, <span class="va">h0_Estimate</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $finalAsymptoteIntensityRatio_Estimate</span></span>
 <span><span class="co">## [1] 0.2820507</span></span>

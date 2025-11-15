@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' # runif() is used here for consistency with previous versions of the sicegar package. However,
-#' # rnorm() will generate symmetric errors, which will produce less biased numerical estimates of the parameters.
+#' # rnorm() will generate symmetric errors, producing less biased numerical parameter estimates.
 #' # We recommend errors generated with rnorm() for any simulation studies on sicegar.
 #'time <- seq(3, 24, 0.1)
 #'

@@ -2,7 +2,7 @@
 
 [![R build status](https://github.com/hardin47/sicegar/workflows/R-CMD-check/badge.svg/)](https://github.com/hardin47/sicegar/actions/)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/sicegar)](https://CRAN.R-project.org/package=sicegar/)
-[![CRAN\_Downloads\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/sicegar?color=brightgreen/)](https://cranlogs.r-pkg.org/downloads/total/last-month/sicegar/)
+[![CRAN\_Downloads\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/sicegar?color=brightgreen/)](https://cranlogs.r-pkg.org/downloads/total/last-month/sicegar)
 
 Originally written by M. Umut Caglar and Claus O. Wilke. Updates and current maintenance by Johanna Hardin, Sam Butler, Phineus Choi, Thomas Matheis, and Mira Terdiman.
 

@@ -56,7 +56,7 @@ Accurate estimates of $t_1$ are crucial for understanding transriptional timing 
 However, @Adams observed limitations in **sicegar**'s fits, which motivated the package improvements proposed in our paper. 
 
 
-We have modified **sicegar** (our work is currently implemented on CRAN) to improve the parameter estimates for both sigmoidal and double-sigmoidal models.
+We have substantially modified **sicegar** (our work is currently implemented on CRAN) to improve the parameter estimates for both sigmoidal and double-sigmoidal models.
 Our primary update to the **sicegar** package is the inclusion and estimation of an additional parameter, $h_0$, the lower asymptote of both the sigmoidal and double-sigmoidal curves, which had previously been set equal to zero.
 Based on simulated data, the free estimation of $h_0$ provides both a better overall model fit (lower SSE) and more accurate parameter estimates than when $h_0$ is forced to be equal to zero. 
 

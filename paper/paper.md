@@ -72,7 +72,7 @@ In dozens of papers that use **sicegar** for modeling time-intensity data, resea
 @Adams extracted $t_1$ to investigate onset time of RNA expression in genes in *E. coli* undergoing stress.
 @wittemeier used **sicegar** to estimate molar carbon assimilation, using **sicegar**'s estimate of $a$ to understand maximum assimilation rate and $t_1$ to extract the point at which maximum assimilation is reached. 
 @rajarathinam also used **sicegar** to analyze carbon assimilation and to extract estimates of $a$.
-Our addition of $h_0$ to the set of estimated parameters greatly improves **sicegar**'s ability to provide accurate parameter estimates.
+Our addition of $h_0$ to the set of estimated parameters greatly improves **sicegar**'s ability to provide accurate parameter estimates (note, if one parameter is wrong it impacts the entire fit of the model).
 Though the categorization of the model as sigmoidal or double-sigmoidal is hugely important, it is not the only important aspect of the **sicegar** modeling.
 Our updated implementation, which includes the estimate of the lower asymptote, is prevailingly important, and thus our adjustments fit the needs of current research. 
 

@@ -23,6 +23,7 @@ affiliations:
    index: 1
 date: 10 November 2025
 bibliography: paper.bib
+license: GPL-3
 ---
 
 # Summary

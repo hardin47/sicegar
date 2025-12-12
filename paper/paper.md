@@ -123,6 +123,9 @@ Documentation, including vignettes and examples, is provided to facilitate adopt
 # Acknowledgements
 
 The authors gratefully acknowledge Dan Stoebel for bringing the application to our attention and Federica Domecq Lacroze for sharing her explorations of the **sicegar** package.
+PC, TM, and MT were supported by the Pomona College SURP program, and SB was supported by the Kenneth Cooke Summer Research Fellowship. 
+JH was supported in part by NIH GM112625.
+
 
 
 

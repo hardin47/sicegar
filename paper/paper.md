@@ -1,5 +1,5 @@
 ---
-title: 'Modifications to **sicegar**: Analysis of Single-Cell Viral Growth Curves'
+title: 'Modifications to sicegar: Analysis of Single-Cell Viral Growth Curves'
 tags:
   - R
   - time course data

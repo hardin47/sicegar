@@ -77,9 +77,17 @@ Our addition of $h_0$ to the set of estimated parameters greatly improves **sice
 Though the categorization of the model as sigmoidal or double-sigmoidal is hugely important, it is not the only important aspect of the **sicegar** modeling.
 Our updated implementation, which includes the estimate of the lower asymptote, is prevailingly important, and thus our adjustments fit the needs of current research. 
 
-# Features 
+# Research impact statement
 
-### Core Functions
+**sicegar** has been a useful tool which has had substantial research impact since its initial release.
+The original paper [@caglar2018] on **sicegar** has been cited more than 50 times (Google Scholar, January 2026).
+The flexibility of the sigmoidal and double-sigmoidal models make the model fitting applicable to many different types of data and systems.
+The publications which cite **sicegar** range from molecular biology [@anderson2021] to linguistics [@pouplier2024] to ecology [@ferrenberg2023].
+As detailed above, many of the publications go beyond the original intent of the package (does the model fit?) to needs for specific parameter estimates (our update to the package).
+**sicegar** has been downloaded from CRAN 35,957 times (as of January 2026).
+
+
+# Software design
 
 `fitAndCategorize`, the umbrella function in **sicegar**, takes time-intensity data as an argument and runs the data through a series of nested functions.
 The process is outlined in **Figure 2**.
@@ -119,6 +127,12 @@ Our simulation does not prove that estimating $h_0$ freely is always preferable,
 
 The **sicegar** package is available on CRAN (https://CRAN.R-project.org/package=sicegar) and GitHub (https://github.com/hardin47/sicegar).
 Documentation, including vignettes and examples, is provided to facilitate adoption.
+
+# AI usage disclosure
+
+No generative AI tools were used in the writing of this manuscript or the preparation of supporting materials.
+The original version of the software was created by @caglar2018, and we did not use generative AI in our update / expansion of the software.
+Generative AI was used to debug code and to clarify theoretical mathematical concepts along the way.
 
 # Acknowledgements
 

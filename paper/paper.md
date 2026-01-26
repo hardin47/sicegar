@@ -77,7 +77,7 @@ Our addition of $h_0$ to the set of estimated parameters greatly improves **sice
 Though the categorization of the model as sigmoidal or double-sigmoidal is hugely important, it is not the only important aspect of the **sicegar** modeling.
 Our updated implementation, which includes the estimate of the lower asymptote, is prevailingly important, and thus our adjustments fit the needs of current research. 
 
-# Research impact statement
+# Research Impact Statement
 
 **sicegar** has been a useful tool which has had substantial research impact since its initial release.
 The original paper [@caglar2018] on **sicegar** has been cited more than 50 times (Google Scholar, January 2026).
@@ -87,7 +87,7 @@ As detailed above, many of the publications go beyond the original intent of the
 **sicegar** has been downloaded from CRAN 35,957 times (as of January 2026).
 
 
-# Software design
+# Software Design
 
 `fitAndCategorize`, the umbrella function in **sicegar**, takes time-intensity data as an argument and runs the data through a series of nested functions.
 The process is outlined in **Figure 2**.

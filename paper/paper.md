@@ -53,7 +53,7 @@ In the original implementation of **sicegar**, the parameter $h_0$ is set to zer
 **sicegar**'s parameter estimation allows users to extract key model parameters, including the onset time of RNA expression in specific genes [@caglar2018].
 Onset time is defined as the time when the half-maximal abundance of RNA is reached in the cell.
 For example, @Adams uses **sicegar** to investigate the onset time of RNA expression from genes in *E. coli* undergoing stress. 
-Accurate estimates of $t_1$ are crucial for understanding transriptional timing of genes. 
+Accurate estimates of $t_1$ are crucial for understanding transcriptional timing of genes. 
 However, @Adams observed limitations in **sicegar**'s fits, which motivated the package improvements proposed in our paper. 
 
 
@@ -86,6 +86,14 @@ The publications which cite **sicegar** range from molecular biology [@anderson2
 As detailed above, many of the publications go beyond the original intent of the package (does the model fit?) to needs for specific parameter estimates (our update to the package).
 **sicegar** has been downloaded from CRAN 35,957 times (as of January 2026).
 
+# State of the Field
+
+Base R comes standard with an excellent non-linear least squares solver, `nls()` which uses Gauss-Newton optimization.
+`nls()` is good when it works, but often fails [@nash2014]; **sicegar** use the Levenberg–Marquardt algorithm which alternates between Gauss-Newton and gradient descent.
+Software exists to model logistic curves (similar to single sigmoidal curves) but not double-sigmoidal curves (e.g., **drc** [@ritz2015], **qpcR** [@ritz2008], **nplr** [@commo2025])
+Other R packages that specifically support both sigmoidal and double-sigmoidal models are no longer supported in recent versions of R; for example, consider **grofit** [@kahm2010] and **ImpulseDE2** [@chechik2009].
+**sicegar** models both sigmoidal and double-sigmoidal curves reliably.
+We have contributed to the **sicegar** package by extending the parameter space and focusing on parameter estimation, tasks that none of the existing software programs implement.
 
 # Software Design
 
@@ -117,7 +125,7 @@ At each of nine time points on the x-axis, we have five of replicates around the
 
 ![Parameter estimates from simulated data.](images/param_est.png)
 
-For each of 200 simulated sigmoidal datasets, **Figure 3** shows the parameter estimates for each of the four parameters given in $I(x)$, see **Figure 1**.
+For each of 200 simulated sigmoidal data sets, **Figure 3** shows the parameter estimates for each of the four parameters given in $I(x)$, see **Figure 1**.
 The red vertical line indicates the value of the parameter used for data generation.
 It should be noted that allowing $h_0$ to be freely estimated provides both more accurate parameter estimations — notably for $t_1$ — and better categorizations of the model (as "sigmoidal" rather than "ambiguous").
 Similar results occur when the package is run on simulated data with more noise, as well as on data simulated from the double-sigmoidal model. 
